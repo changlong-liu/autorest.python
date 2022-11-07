@@ -10,7 +10,7 @@ namespace Customizations;
 
   @client({
     name: "AdpDiscoveryClient",
-    service: "ADP"
+    service: ADP
   })
   interface Client1 {
     createOrReplace is ADP.DataManagement.Ingestion.Discoveries.Discoveries.createOrReplace;
@@ -28,7 +28,7 @@ namespace Customizations;
 
   @client({
     name: "AdpUploadClient",
-    service: "ADP"
+    service: ADP
   })
   interface Client2 {
     createOrReplace is ADP.DataManagement.Ingestion.Uploads.Uploads.createOrReplace;
