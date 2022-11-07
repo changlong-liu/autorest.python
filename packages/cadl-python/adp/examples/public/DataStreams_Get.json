@@ -1,0 +1,57 @@
+{
+  "operationId": "DataStreams_Get",
+  "title": "Get data-stream by identifier.",
+  "parameters": {
+    "measurementId": "00000000-0000-0000-0000-000000000003",
+    "dataStreamId": "jdyrrufykjtdxvceob",
+    "api-version": "2022-11-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "dataStreamId": "znahitwevmtjynfxjarjrc",
+        "resourceEndpoint": "https://some-workspace/some-resource",
+        "lineage": {
+          "producerMetadata": {
+            "key3673": "ubarvd"
+          },
+          "inputs": [
+            {
+              "sourceDataStreamId": "dyskkgbidtjjpvldsddght",
+              "channels": [
+                "ncjmpikffluh"
+              ]
+            }
+          ]
+        },
+        "tags": [
+          "uhrfrlsfoydqujwrevsgrf"
+        ],
+        "status": "Created",
+        "type": "System",
+        "rollingInformation": {
+          "strategy": "Time",
+          "unit": "Seconds",
+          "value": 23
+        },
+        "dataStreamManifestFileUri": "https://microsoft.com/adlwl",
+        "shards": [
+          {
+            "shardFolderUri": "https://microsoft.com/a",
+            "manifestFileUri": "https://microsoft.com/a"
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "string",
+          "message": "string",
+          "target": "string",
+          "details": []
+        }
+      }
+    }
+  }
+}

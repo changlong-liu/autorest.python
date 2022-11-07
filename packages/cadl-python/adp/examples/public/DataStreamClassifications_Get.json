@@ -1,0 +1,29 @@
+{
+  "operationId": "DataStreamClassifications_Get",
+  "title": "Get classification by schema name.",
+  "parameters": {
+    "measurementId": "00000000-0000-0000-0000-000000000003",
+    "dataStreamId": "uagnnhid",
+    "schemaName": "gwyxgyadhndeqynaddhkhnuzgwiqtguixavsptnbtosm",
+    "api-version": "2022-11-30-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schemaName": "svznfyrzvabqxmsobitfycwzrrwrykcisopajrrlehqdoxbuxmekpqdpscfcrqdecpceicokypzcwqgzlbgdzglpfbxmaijwcnnqwkjoywlzhvhbvgwlreqsmymfgxzhsdjlldsixicubfkdsnluuuvjntepcnidqeq",
+        "classificationObject": "wteibporkjegxyaavjglsmxfsqevjxqqhnnzwmbipiyynwisuuandlewqot",
+        "eTag": "sxevhuftzdfvkcodxomioucqhht"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "string",
+          "message": "string",
+          "target": "string",
+          "details": []
+        }
+      }
+    }
+  }
+}

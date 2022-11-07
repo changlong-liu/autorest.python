@@ -431,7 +431,7 @@ function emitResponseHeaders(program: Program, headers?: Record<string, ModelPro
     }
     for (const [key, value] of Object.entries(headers)) {
         retval.push({
-            type: emitType(program, value.type, value),
+            type: getType(program, value.type),
             restApiName: key,
         });
     }
@@ -884,7 +884,8 @@ function emitOperationGroups(program: Program, client: Client): Record<string, a
         });
     }
     const clientOperations: Record<string, any>[] = [];
-    for (const operation of listOperationsInOperationGroup(program, client)) {
+    const temp = listOperationsInOperationGroup(program, client);
+    for (const operation of temp) {
         clientOperations.push(emitOperation(program, operation, ""));
     }
     if (clientOperations.length > 0) {

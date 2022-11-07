@@ -1,0 +1,87 @@
+{
+  "operationId": "DataStreams_GetLineageGraphsByLineage",
+  "title": "Lists the data-streams by lineage graph.",
+  "parameters": {
+    "measurementId": "00000000-0000-0000-0000-000000000003",
+    "api-version": "2022-11-30-preview",
+    "body": {
+      "parameters": {
+        "processingObjects": [
+          {
+            "metadata": {
+              "key4798": "ixeqaglqvrzjayivpdlnqejhypq"
+            },
+            "id": "qjqtxmorspgguubladdqwnmzvk"
+          }
+        ],
+        "edges": [
+          {
+            "sourceId": "f",
+            "targetId": "zgqwvmzgbkzqvy"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "dataStreamsGraphs": [
+              {
+                "dataStreamByProcessingObjectId": {
+                  "key7260": {
+                    "dataStreamId": "znahitwevmtjynfxjarjrc",
+                    "resourceEndpoint": "https://some-workspace/some-resource",
+                    "lineage": {
+                      "producerMetadata": {
+                        "key3673": "ubarvd"
+                      },
+                      "inputs": [
+                        {
+                          "sourceDataStreamId": "dyskkgbidtjjpvldsddght",
+                          "channels": [
+                            "ncjmpikffluh"
+                          ]
+                        }
+                      ]
+                    },
+                    "tags": [
+                      "uhrfrlsfoydqujwrevsgrf"
+                    ],
+                    "status": "Created",
+                    "type": "System",
+                    "rollingInformation": {
+                      "strategy": "Time",
+                      "unit": "Seconds",
+                      "value": 23
+                    },
+                    "dataStreamManifestFileUri": "https://microsoft.com/adlwl",
+                    "shards": [
+                      {
+                        "shardFolderUri": "https://microsoft.com/a",
+                        "manifestFileUri": "https://microsoft.com/a"
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "string",
+          "message": "string",
+          "target": "string",
+          "details": []
+        }
+      }
+    }
+  }
+}
