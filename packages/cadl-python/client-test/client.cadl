@@ -1,0 +1,15 @@
+import "./main.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+namespace Customizations;
+
+@client({
+    name: "HelloWorldClient",
+    service: Hello
+})
+interface HelloWorldClient {
+    helloXX is Hello.world;
+}
+

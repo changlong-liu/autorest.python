@@ -1,0 +1,14 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/compiler";
+
+using Cadl.Http;
+
+@service({
+    title: "HelloWorld"
+  })
+namespace Hello;
+
+@doc("Basic Hello World Test.")
+@route("/world")
+op world(): string;
+
