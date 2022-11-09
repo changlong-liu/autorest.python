@@ -30,12 +30,12 @@ class CustomErrorResponseWithXMsErrorCodeHeader(_model_base.Model):
     All required parameters must be populated in order to send to Azure.
 
     :ivar error: The error object. Required.
-    :vartype error: ~adp.models.Error
+    :vartype error: any
     :ivar x_ms_error_code: Error code for specific error that occurred. Required.
     :vartype x_ms_error_code: str
     """
 
-    error: "_models.Error" = rest_field()
+    error: Any = rest_field()
     """The error object. Required. """
     x_ms_error_code: str = rest_field(name="x-ms-error-code")
     """Error code for specific error that occurred. Required. """
@@ -44,7 +44,7 @@ class CustomErrorResponseWithXMsErrorCodeHeader(_model_base.Model):
     def __init__(
         self,
         *,
-        error: "_models.Error",
+        error: Any,
         x_ms_error_code: str,
     ):
         ...
@@ -147,7 +147,7 @@ class DiscoveryLroResponse(_model_base.Model):
      "FinalizeFileList", and "AbortDiscovery".
     :vartype operation_type: str or ~adp.models.DiscoveryOperationType
     :ivar error: The operation error.
-    :vartype error: ~adp.models.Error
+    :vartype error: any
     """
 
     operation_id: str = rest_field(name="operationId")
@@ -156,7 +156,7 @@ class DiscoveryLroResponse(_model_base.Model):
     """The operation status. Required. Known values are: \"Created\", \"InProgress\", \"Succeeded\", \"Failed\", and \"Canceled\"."""
     operation_type: Optional[Union[str, "_models.DiscoveryOperationType"]] = rest_field(name="operationType")
     """The operation type. Known values are: \"CompleteDiscovery\", \"FinalizeFileList\", and \"AbortDiscovery\"."""
-    error: Optional["_models.Error"] = rest_field()
+    error: Optional[Any] = rest_field()
     """The operation error. """
 
     @overload
@@ -166,7 +166,7 @@ class DiscoveryLroResponse(_model_base.Model):
         operation_id: str,
         status: Union[str, "_models.LongRunningOperationStatus"],
         operation_type: Optional[Union[str, "_models.DiscoveryOperationType"]] = None,
-        error: Optional["_models.Error"] = None,
+        error: Optional[Any] = None,
     ):
         ...
 
@@ -267,129 +267,6 @@ This URI expires in 24 hours. Required. """
         super().__init__(*args, **kwargs)
 
 
-class Error(_model_base.Model):
-    """The error object.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar code: One of a server-defined set of error codes. Required.
-    :vartype code: str
-    :ivar message: A human-readable representation of the error. Required.
-    :vartype message: str
-    :ivar target: The target of the error.
-    :vartype target: str
-    :ivar details: An array of details about specific errors that led to this reported error.
-     Required.
-    :vartype details: list[~adp.models.Error]
-    :ivar innererror: An object containing more specific information than the current object about
-     the error.
-    :vartype innererror: ~adp.models.InnerError
-    """
-
-    code: str = rest_field()
-    """One of a server-defined set of error codes. Required. """
-    message: str = rest_field()
-    """A human-readable representation of the error. Required. """
-    target: Optional[str] = rest_field()
-    """The target of the error. """
-    details: List["_models.Error"] = rest_field()
-    """An array of details about specific errors that led to this reported error. Required. """
-    innererror: Optional["_models.InnerError"] = rest_field()
-    """An object containing more specific information than the current object about the error. """
-
-    @overload
-    def __init__(
-        self,
-        *,
-        code: str,
-        message: str,
-        details: List["_models.Error"],
-        target: Optional[str] = None,
-        innererror: Optional["_models.InnerError"] = None,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-        ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-class ErrorResponse(_model_base.Model):
-    """A response containing error details.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar error: The error object. Required.
-    :vartype error: ~adp.models.Error
-    """
-
-    error: "_models.Error" = rest_field()
-    """The error object. Required. """
-
-    @overload
-    def __init__(
-        self,
-        *,
-        error: "_models.Error",
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-        ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-class InnerError(_model_base.Model):
-    """An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar code: One of a server-defined set of error codes. Required.
-    :vartype code: str
-    :ivar innererror: Inner error.
-    :vartype innererror: ~adp.models.InnerError
-    """
-
-    code: str = rest_field()
-    """One of a server-defined set of error codes. Required. """
-    innererror: Optional["_models.InnerError"] = rest_field()
-    """Inner error. """
-
-    @overload
-    def __init__(
-        self,
-        *,
-        code: str,
-        innererror: Optional["_models.InnerError"] = None,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-        ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class LongRunningOperationWithResponseHeaders(_model_base.Model):
     """LongRunningOperationWithResponseHeaders.
 
@@ -401,7 +278,7 @@ class LongRunningOperationWithResponseHeaders(_model_base.Model):
     :ivar operation_type: The operation type.
     :vartype operation_type: str
     :ivar error: The operation error.
-    :vartype error: ~adp.models.Error
+    :vartype error: any
     :ivar operation_id: The operation Id. Required.
     :vartype operation_id: str
     :ivar retry_after: The Retry-After header can indicate how long the client should wait before
@@ -415,7 +292,7 @@ class LongRunningOperationWithResponseHeaders(_model_base.Model):
     """The operation status. Required. Known values are: \"Created\", \"InProgress\", \"Succeeded\", \"Failed\", and \"Canceled\"."""
     operation_type: Optional[str] = rest_field(name="operationType")
     """The operation type. """
-    error: Optional["_models.Error"] = rest_field()
+    error: Optional[Any] = rest_field()
     """The operation error. """
     operation_id: str = rest_field(name="operationId")
     """The operation Id. Required. """
@@ -431,7 +308,7 @@ class LongRunningOperationWithResponseHeaders(_model_base.Model):
         status: Union[str, "_models.LongRunningOperationStatus"],
         operation_id: str,
         operation_type: Optional[str] = None,
-        error: Optional["_models.Error"] = None,
+        error: Optional[Any] = None,
         retry_after: Optional[int] = None,
         location: Optional[str] = None,
     ):
@@ -687,7 +564,7 @@ class UploadLroResponse(_model_base.Model):
      "CompleteUpload", and "AbortUpload".
     :vartype operation_type: str or ~adp.models.UploadOperationType
     :ivar error: The operation error.
-    :vartype error: ~adp.models.Error
+    :vartype error: any
     """
 
     operation_id: str = rest_field(name="operationId")
@@ -696,7 +573,7 @@ class UploadLroResponse(_model_base.Model):
     """The operation status. Required. Known values are: \"Created\", \"InProgress\", \"Succeeded\", \"Failed\", and \"Canceled\"."""
     operation_type: Optional[Union[str, "_models.UploadOperationType"]] = rest_field(name="operationType")
     """The operation type. Known values are: \"FinalizeFileList\", \"ShardFiles\", \"CompleteUpload\", and \"AbortUpload\"."""
-    error: Optional["_models.Error"] = rest_field()
+    error: Optional[Any] = rest_field()
     """The operation error. """
 
     @overload
@@ -706,7 +583,7 @@ class UploadLroResponse(_model_base.Model):
         operation_id: str,
         status: Union[str, "_models.LongRunningOperationStatus"],
         operation_type: Optional[Union[str, "_models.UploadOperationType"]] = None,
-        error: Optional["_models.Error"] = None,
+        error: Optional[Any] = None,
     ):
         ...
 

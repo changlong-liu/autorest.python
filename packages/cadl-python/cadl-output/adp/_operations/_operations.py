@@ -490,8 +490,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
@@ -691,8 +690,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         if response.status_code == 200:
             deserialized = _deserialize(_models.Discovery, response.json())
@@ -746,8 +744,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         deserialized = _deserialize(_models.Discovery, response.json())
 
@@ -1051,8 +1048,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _deserialize(_models.ErrorResponse, response.json())
-                raise HttpResponseError(response=response, model=error)
+                raise HttpResponseError(response=response)
 
             return pipeline_response
 
@@ -1088,8 +1084,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["Operation-Location"] = self._deserialize("str", response.headers.get("Operation-Location"))
@@ -1229,8 +1224,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _deserialize(_models.ErrorResponse, response.json())
-                raise HttpResponseError(response=response, model=error)
+                raise HttpResponseError(response=response)
 
             return pipeline_response
 
@@ -1357,8 +1351,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         if response.status_code == 200:
             deserialized = _deserialize(_models.Upload, response.json())
@@ -1412,8 +1405,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         deserialized = _deserialize(_models.Upload, response.json())
 
@@ -1716,8 +1708,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _deserialize(_models.ErrorResponse, response.json())
-                raise HttpResponseError(response=response, model=error)
+                raise HttpResponseError(response=response)
 
             return pipeline_response
 
@@ -1753,8 +1744,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["Operation-Location"] = self._deserialize("str", response.headers.get("Operation-Location"))
@@ -1893,8 +1883,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _deserialize(_models.ErrorResponse, response.json())
-                raise HttpResponseError(response=response, model=error)
+                raise HttpResponseError(response=response)
 
             return pipeline_response
 
@@ -1930,8 +1919,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
         if response.status_code not in [202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.ErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
         response_headers = {}
         response_headers["Operation-Location"] = self._deserialize("str", response.headers.get("Operation-Location"))
@@ -2070,8 +2058,7 @@ class ADPClientOperationsMixin(ADPClientMixinABC):  # pylint: disable=too-many-p
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _deserialize(_models.ErrorResponse, response.json())
-                raise HttpResponseError(response=response, model=error)
+                raise HttpResponseError(response=response)
 
             return pipeline_response
 

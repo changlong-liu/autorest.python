@@ -12,9 +12,6 @@ from ._models import DiscoveryCreationParameters
 from ._models import DiscoveryLroResponse
 from ._models import DiscoverySpecialFile
 from ._models import DiscoveryUpload
-from ._models import Error
-from ._models import ErrorResponse
-from ._models import InnerError
 from ._models import LongRunningOperationWithResponseHeaders
 from ._models import Upload
 from ._models import UploadCreationParameters
@@ -39,9 +36,6 @@ __all__ = [
     "DiscoveryLroResponse",
     "DiscoverySpecialFile",
     "DiscoveryUpload",
-    "Error",
-    "ErrorResponse",
-    "InnerError",
     "LongRunningOperationWithResponseHeaders",
     "Upload",
     "UploadCreationParameters",
