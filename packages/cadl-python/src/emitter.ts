@@ -619,7 +619,7 @@ function emitNumber(type: string, program: Program, modelTypeProperty: ModelProp
 function isReadOnly(program: Program, type: ModelProperty): boolean {
     const visibility = getVisibility(program, type);
     if (visibility) {
-        return !visibility.includes("write");
+        return visibility.includes("read") && !["delete", "create", "update", "query"].some(v => visibility.includes(v));
     } else {
         return false;
     }
