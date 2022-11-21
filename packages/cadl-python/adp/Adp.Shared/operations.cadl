@@ -1,0 +1,13 @@
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using Autorest;
+
+namespace Adp.DataManagement;
+
+@client(SharedClients.LongRunningOperationsClient)
+@tag("Long Running Operation")
+interface LongRunningOperations {
+  @doc("Get the details of an LRO.")
+  getStatus is ResourceRead<LongRunningOperationWithResponseHeaders>;
+}

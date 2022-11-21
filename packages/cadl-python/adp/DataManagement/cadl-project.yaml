@@ -1,0 +1,17 @@
+emitters:
+  "@azure-tools/cadl-autorest":
+    examples-directory: ./examples
+    output-file: adp-data-management-api.json
+
+    # Not using the "output-dir" (added in CADL Compiler 0.37), because it does not resolve the API version and type
+    #output-dir: ../data-plane/
+
+    # Use "azure-resource-provider-folder" instead of "output-dir"
+    # Note, this directive need to go up one extra level for some reason and also does not support "internal" API type
+    # It generates "stable" folder for "####-##-##-internal" API version.
+    # TODO: need to understand the guidelines for adding support for "internal" APIs that should not be "visible" 
+    # or accessible to the external clients 
+    azure-resource-provider-folder: ../../data-plane/
+  "@azure-tools/cadl-csharp":
+    library-name: "Azure.AI.AutonomousDevelopmentPlatform"
+    namespace: "Azure.AI.AutonomousDevelopmentPlatform"

@@ -1,0 +1,176 @@
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using Azure.Core.Foundations.Extensions;
+using OpenAPI;
+using Autorest;
+
+namespace Adp.DataManagement;
+
+@client(DataStreamClients.DataStreamClient)
+@tag("Data Stream")
+interface DataStreamOperations {
+  @doc("Get data-stream by identifier.")
+  get is ResourceRead<DataStream>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("Creates new data-stream resource.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  create is CustomLongRunningResourceCreateWithServiceProvidedName<
+    DataStream,
+    CustomBodyWrapper<DataStreamCreationParameters>
+  >;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("Clear the data-stream content.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  clearContent is CustomLongRunningResourceAction<DataStream>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("""
+  Lists the existing data-streams.
+  Supports the following filter expressions:
+  - filter="type=[System | Raw | Derived]"
+  """)
+  list is CustomResourceList<
+    DataStream,
+    {
+      parameters: FilterQueryParameter;
+    }
+  >;
+
+  @doc("""
+  Returns SAS-signed upload URIs for files that need to be uploaded to Azure Storage.
+  This URI expires in 24 hours.
+  """)
+  stageFiles is ResourceAction<
+    DataStream,
+    CustomBodyWrapper<UploadDerivedDataStreamFilesRequest>,
+    UploadDerivedDataStreamFilesResponse
+  >;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("Marks a data stream as completed")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  complete is CustomLongRunningResourceAction<DataStream>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("Marks a data stream as failed")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  fail is CustomLongRunningResourceAction<DataStream>;
+
+  @doc("Lists the data-streams by tags.")
+  findByTags is ResourceCollectionAction<
+    DataStream,
+    CustomBodyWrapper<FindDataStreamByTagsRequestParameters>,
+    Page<DataStream>
+  >;
+
+  @doc("Lists the data-streams by lineage.")
+  findByLineage is ResourceCollectionAction<
+    DataStream,
+    CustomBodyWrapper<FindDataStreamByLineageRequestParameters>,
+    Page<DataStream>
+  >;
+
+  @doc("Lists the data-streams by lineage graph.")
+  getLineageGraphsByLineage is ResourceCollectionAction<
+    DataStream,
+    CustomBodyWrapper<FindDataStreamByLineageGraphRequestParameters>,
+    Page<DataStreamsGraphListResponse>
+  >;
+}
+
+@client(DataStreamClients.DataStreamStorageClient)
+@tag("Data Stream")
+interface DataStreamsStorageOperations {
+  /*   
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("""
+  Returns the data-stream storage resource with SAS signed URIs that allow reading from Azure Storage.
+  The SAS token expires in 24 hours.
+  """)
+  @segmentOf(Storage)
+  get is CustomSingletonResourceRead<Storage, {}, StorageBase>;
+ */
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("""
+  Create or replace storage information of the data-stream.
+  Returns the data-stream storage resource with SAS signed URIs that allow uploading to Azure Storage.
+  The SAS token expires in 24 hours.
+  """)
+  @segmentOf(Storage)
+  create is CustomSingletonResourceCreateOrReplace<
+    Storage,
+    CustomBodyWrapper<StorageCreationParameters>,
+    StorageBase
+  >;
+
+  @doc("""
+  Returns the data-stream storage resource with SAS signed URIs that allow uploading to Azure Storage.
+  The SAS token expires in 24 hours.
+  """)
+  getWritableUris is ResourceCollectionAction<Storage, {}, StorageBase>;
+}
+
+#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+@client(DataStreamClients.DataStreamTagsClient)
+@tag("Data Stream")
+interface DataStreamTagsOperations {
+  @doc("Returns set of the data-stream tags.")
+  @segmentOf(TagSet)
+  get is CustomSingletonResourceRead<TagSet>;
+
+  @doc("Create or replace all tags at once.")
+  @segmentOf(TagSet)
+  create is CustomSingletonResourceCreateOrReplace<
+    TagSet,
+    CustomBodyWrapper<TagSetCreationParameters>,
+    TagSetBase
+  >;
+}
+
+#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+@client(DataStreamClients.DataStreamFilesClient)
+@tag("Data Stream")
+interface DataStreamFileOperations {
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
+  @doc("Returns SAS signed URIs for reading special files from Azure Storage.")
+  list is CustomResourceList<DataStreamFile>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
+  @doc("Initiates the process of generating SAS signed URIs for accessing the data-stream files.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  generate is CustomLongRunningResourceCollectionAction<
+    DataStreamFile,
+    {},
+    Page<DataStreamFile>,
+    DefaultLroResponse
+  >;
+}
+
+#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+@client(DataStreamClients.DataStreamLogsContainerClient)
+@tag("Data Stream")
+interface DataStreamLogsContainerOperations {
+  @doc("""
+  Returns SAS signed URI of the data-stream logs folder that allow uploading log files to Azure Storage.
+  The SAS token expires in 24 hours.
+  """)
+  getWritableUri is ResourceCollectionAction<
+    DataStreamLogsContainer,
+    {},
+    DataStreamLogsContainerBase
+  >;
+}

@@ -1,0 +1,3 @@
+// import from parent main to help VSCode with resolving dependencies
+import "./discovery";
+import "./upload";

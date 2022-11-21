@@ -1,0 +1,113 @@
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using Azure.Core.Foundations.Extensions;
+using OpenAPI;
+using Autorest;
+
+namespace Adp.DataManagement;
+
+@client(UploadClients.UploadClient)
+@tag("Upload")
+interface UploadOperations {
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
+  @doc("Creates a new ingestion upload instance.")
+  createOrReplace is CustomResourceCreateOrReplace<
+    Upload,
+    CustomBodyWrapper<UploadCreationParameters>
+  >;
+
+  @doc("Get discovery by ID.")
+  get is ResourceRead<Upload>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
+  @doc("Initiates the process of completing the upload and creating the measurements.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  complete is CustomLongRunningResourceAction<
+    Upload,
+    {},
+    {},
+    UploadLroResponse
+  >;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
+  @doc("Initiates the process of cancelling the upload.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  cancel is CustomLongRunningResourceAction<Upload, {}, {}, UploadLroResponse>;
+}
+
+@client(UploadClients.UploadSpecialFilesClient)
+@tag("Upload")
+interface UploadSpecialFileOperations {
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
+  @doc("Returns SAS signed URIs for reading special files from Azure Storage.")
+  list is CustomResourceList<UploadSpecialFile>;
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
+  @doc("Initiates the process of generating SAS signed URIs for uploading special files for the upload.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  generate is CustomLongRunningResourceCollectionAction<
+    UploadSpecialFile,
+    {},
+    UploadSpecialFile,
+    UploadLroResponse
+  >;
+
+  @doc("""
+  List special files details for the upload resource.
+  Returns SAS signed URI that allows uploading special files to Azure Storage.
+  This URI expires in 24 hours.
+  """)
+  listWritableUris is ResourceCollectionAction<
+    UploadSpecialFile,
+    {},
+    Page<UploadSpecialFile>
+  >;
+}
+
+@client(UploadClients.UploadDataFilesClient)
+@tag("Upload")
+interface UploadDataFileOperations {
+  /*   
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
+  @doc("Returns SAS signed URIs for reading data files from Azure Storage.")
+  list is CustomResourceList<UploadDataFile>;
+ */
+
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom LRO response template the LRO actions."
+  @doc("Initiates the process of allocating the data files.")
+  @extension("x-ms-long-running-operation", true)
+  @asyncOperationOptions("location")
+  @pollingOperation(LongRunningOperations.getStatus)
+  generate is CustomLongRunningResourceCollectionAction<
+    UploadDataFile,
+    {},
+    UploadDataFile,
+    UploadLroResponse
+  >;
+
+  @doc("""
+  List special files details for the upload resource.
+  Returns SAS signed URI that allows uploading data files to Azure Storage.
+  This URI expires in 24 hours.
+  """)
+  listWritableUris is ResourceCollectionAction<
+    UploadDataFile,
+    {},
+    Page<UploadDataFile>
+  >;
+}
+
+@client(UploadClients.UploadMeasurementsClient)
+@tag("Upload")
+interface UploadResultMeasurementOperations {
+  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
+  @doc("List of the measurement identifiers that have been created by the upload.")
+  list is CustomResourceList<UploadResultMeasurement>;
+}

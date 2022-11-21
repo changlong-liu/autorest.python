@@ -1,0 +1,163 @@
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using Azure.Core.Foundations;
+
+namespace Adp;
+
+enum SharedClients {
+  LongRunningOperationsClient,
+}
+
+@doc("Internal - generic Key/Value model for internal use")
+model CommonKeyValuePair {
+  @doc("The key")
+  @key
+  key: string;
+
+  @doc("The value")
+  value: string;
+}
+
+@doc("Internal - the model for internal use")
+model CommonResourceEndpoint {
+  @doc("The endpoint uri of the owning resource")
+  @visibility("read")
+  resourceEndpoint?: uri;
+}
+
+@doc("File upload information")
+model FileUploadInformation {
+  @doc("File name specified by the client")
+  @key
+  clientFileName: string;
+
+  ...FileLocation;
+}
+
+@doc("File location.")
+model FileLocation {
+  @doc("""
+  SAS signed URI for uploading (write) file to Azure Storage.
+  This URI expires in 24 hours.
+  """)
+  fileUri: uri;
+}
+
+@doc("Error code header.")
+model XMsErrorCodeHeader {
+  @doc("Error code for specific error that occurred.")
+  @header
+  "x-ms-error-code": string;
+}
+
+@doc("Azure Active Directory OAuth2 Flow")
+model ImplicitAuthorizationFlow {
+  @doc("Use implicit authorization flow type")
+  type: OAuth2FlowType.implicit;
+
+  @doc("Authorization URL")
+  authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+
+  @doc("ADP Scope: impersonate user account")
+  scopes: ["https://adp.azure.com/.default"];
+}
+
+@doc("A long running operation resource.")
+@resource("operations")
+model LongRunningOperation {
+  @key("operationId")
+  @doc("The unique ID of the operation.")
+  @minLength(1)
+  @maxLength(36)
+  operationId: string;
+  ...LongRunningOperationBase;
+}
+
+@doc("Standard Azure LRO response headers.")
+model LongRunningOperationWithResponseHeaders {
+  ...LongRunningOperation;
+  ...Foundations.RetryAfterHeader;
+  ...LongRunningOperationResultLocation;
+}
+
+@doc("Metadata for long running operation status monitor locations")
+model LongRunningOperationStatusLocation {
+  @pollingLocation
+  @doc("The location for monitoring the operation state.")
+  @header("Operation-Location")
+  operationLocation: ResourceLocation<LongRunningOperation>;
+}
+
+@doc("Final location of the operation result.")
+model LongRunningOperationResultLocation {
+  @doc("Final location of the operation result.")
+  @finalLocation
+  @header("Location")
+  location?: uri;
+}
+
+@doc("""
+Client specific long running operation identifier.
+This identifier will serve as idempotence key to ensure idempotensy of the long running operation.
+""")
+model LongRunningOperationIdHeader {
+  @doc("The long running operation identifier. Operation-Id should be valid UUID string.")
+  @format("uuid")
+  @header
+  "operation-id"?: string;
+}
+
+@doc("The long running operation model without the key.")
+model LongRunningOperationBase<TOperationType = string, TStatusError = Azure.Core.Foundations.Error> {
+  @doc("The operation status.")
+  @visibility("read", "update")
+  status: LongRunningOperationStatus;
+
+  @doc("The operation type.")
+  @visibility("read", "create")
+  operationType?: TOperationType;
+
+  @doc("The operation error.")
+  @visibility("update")
+  error?: TStatusError;
+
+  @doc("The operation final result URI. Will be returned if the operation succeeds via `Location` header in response.")
+  @visibility("read", "create")
+  resultUri?: uri;
+
+  ...Azure.Core.Foundations.Extensions.CustomEtagProperty;
+}
+
+@doc("The long running operation response")
+model LongRunningOperationResponse<TOperationType = string> {
+  @doc("The operation Id.")
+  @minLength(1)
+  @maxLength(36)
+  operationId: string;
+  ...LongRunningOperationBase<TOperationType>;
+}
+
+@doc("The async operation status")
+@knownValues(LongRunningOperationStatusKV)
+model LongRunningOperationStatus is string;
+enum LongRunningOperationStatusKV {
+  Created,
+  InProgress,
+  Succeeded,
+  Failed,
+  Canceled,
+}
+
+@doc("The supported status codes.")
+@knownValues(SupportedHttpStatusCodesKV)
+model SupportedHttpStatusCode is string;
+enum SupportedHttpStatusCodesKV {
+  OK,
+  Accepted,
+  NoContent,
+  PartialContent,
+  BadRequest,
+  NotFound,
+  Conflict,
+}

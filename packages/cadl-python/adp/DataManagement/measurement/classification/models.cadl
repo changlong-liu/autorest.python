@@ -1,0 +1,24 @@
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+using OpenAPI;
+using Autorest;
+
+namespace Adp;
+
+enum MeasurementClassificationClients {
+  MeasurementClassificationsClient,
+}
+
+@doc("Measurement classification")
+@resource("classifications")
+@parentResource(Measurement)
+model MeasurementClassification {
+  ...Classification;
+}
+
+@doc("{name} resource creation parameters.", MeasurementClassification)
+@withVisibility("create")
+model MeasurementClassificationCreationParameters {
+  ...MeasurementClassification;
+}

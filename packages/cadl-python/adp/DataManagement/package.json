@@ -1,0 +1,49 @@
+{
+  "name": "@cadl-api-spec/adp-data-management",
+  "version": "1.0",
+  "description": "ADP Data Management API",
+  "main": "index.js",
+  "cadlMain": "main.cadl",
+  "config": {
+    "verbose": " -Verbose",
+    "DataManagementOutputDirectory": "../data-plane/Adp.DataManagement",
+    "DataManagementPublicOutputFile": "preview/2022-11-30-preview/adp-data-management-api.json",
+    "PublicClientPath": "../generated/clients/DataManagement/Clients.DataManagement.vDraftCompliant",
+    "PublicClientNamespace": "Microsoft.Azure.Adp.DataManagement.Clients.vDraftCompliant",
+    "PublishDataManagementPublicOutputFileName": "../../../../draftcompliant/apispec.core.datamanagement.2022-11-30-draftcompliant.json",
+    "PathToAzureApiReviewRepository": "C:/Users/igmakhli/source/repos/imakhlin/azure-rest-api-specs-pr/specification/adp/data-plane/Adp.DataManagement/preview",
+    "AutorestManifestFile": "../src/scripts/autorest.md"
+  },
+  "scripts": {
+    "lint": "cadl compile . --warn-as-error --import @cadl-lang/library-linter --no-emit",
+    "build": "npm run formatCadl && npx cadl compile . && npm run validateSpecDataManagementPublic && npm run generateDataManagementPublicClient",
+    "publish": "npm run publishDataManagementPublic",
+    "buildDataManagementPublicApi": "pwsh ../src/scripts/compile.ps1 -IsPublicApi -InputCadl . -OutputPath %npm_package_config_DataManagementOutputDirectory% -OutputFile %npm_package_config_DataManagementPublicOutputFile%",
+    "publishDataManagementPublic": "pwsh ../src/scripts/publish.ps1 %npm_package_config_verbose% -SourcePath %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% -OutputPath %npm_package_config_PublishDataManagementPublicOutputFileName% -PathToAzureApiReviewRepository %npm_package_config_PathToAzureApiReviewRepository%",
+    "generateDataManagementPublicClient": "pwsh ../src/scripts/generate-autorest-client.ps1 -InputOpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% -OutputPath %npm_package_config_PublicClientPath%/generated -Namespace %npm_package_config_PublicClientNamespace% -AutorestManifestFile %npm_package_config_AutorestManifestFile%",
+    "validateSpecDataManagementPublic": "pwsh ../src/scripts/validate-spec.ps1 -OpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile% && pwsh ../src/scripts/validate-examples.ps1 -OpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile%",
+    "generateExamplesDataManagementPublic": "pwsh ../src/scripts/generate-examples.ps1 -OpenApiSpecFile %npm_package_config_DataManagementOutputDirectory%/%npm_package_config_DataManagementPublicOutputFile%",
+    "formatCadl": "npx cadl format --pretty ./**/*.cadl",
+    "formatJs": "prettier --write \"**/*.+(js|json)\"",
+    "formatAll": "npm run formatCadl && npm run formatJs",
+    "refreshVSToken": "vsts-npm-auth -config .npmrc"
+  },
+  "keywords": [],
+  "author": "igmakhli@microsoft.com",
+  "license": "MIT",
+  "dependencies": {
+    "@cadl-lang/openapi": "latest",
+    "@cadl-lang/openapi3": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/versioning": "latest",
+    "@azure-tools/cadl-autorest": "latest",
+    "@azure-tools/cadl-azure-core": "latest"
+  },
+  "devDependencies": {
+    "@cadl-lang/compiler": "latest",
+    "avocado": "^1.0.0",
+    "prettier": "^2.7.1",
+    "@cadl-lang/library-linter": "~0.2.1",
+    "@microsoft.azure/openapi-validator": "^2.0.0"
+  }
+}

@@ -1,0 +1,21 @@
+using Cadl.Http;
+using Cadl.Rest;
+
+namespace Adp;
+
+enum DataStreamClassificationClients {
+  DataStreamClassificationsClient,
+}
+
+@doc("The data-stream classification.")
+@resource("classifications")
+@parentResource(DataStream)
+model DataStreamClassification {
+  ...Classification;
+}
+
+@doc("{name} resource creation parameters.", DataStreamClassification)
+@withVisibility("create")
+model DataStreamClassificationCreationParameters {
+  ...DataStreamClassification;
+}
