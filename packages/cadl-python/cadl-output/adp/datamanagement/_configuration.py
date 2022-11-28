@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class DataManagementClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
-    """Configuration for DataManagementClient.
+class LongRunningOperationsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for LongRunningOperationsClient.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.
@@ -31,7 +31,7 @@ class DataManagementClientConfiguration(Configuration):  # pylint: disable=too-m
     """
 
     def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
-        super(DataManagementClientConfiguration, self).__init__(**kwargs)
+        super(LongRunningOperationsClientConfiguration, self).__init__(**kwargs)
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
         if api_version is None:
@@ -40,7 +40,829 @@ class DataManagementClientConfiguration(Configuration):  # pylint: disable=too-m
         self.credential = credential
         self.api_version = api_version
         self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
-        kwargs.setdefault("sdk_moniker", "datamanagementclient/{}".format(VERSION))
+        kwargs.setdefault("sdk_moniker", "longrunningoperationsclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DiscoveryOperationsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DiscoveryOperationsClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DiscoveryOperationsClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "discoveryoperationsclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DiscoverySpecialFilesClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DiscoverySpecialFilesClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DiscoverySpecialFilesClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "discoveryspecialfilesclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DiscoveryUploadsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DiscoveryUploadsClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DiscoveryUploadsClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "discoveryuploadsclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class UploadClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for UploadClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(UploadClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "uploadclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class UploadSpecialFilesClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for UploadSpecialFilesClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(UploadSpecialFilesClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "uploadspecialfilesclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class UploadDataFilesClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for UploadDataFilesClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(UploadDataFilesClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "uploaddatafilesclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class UploadMeasurementsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for UploadMeasurementsClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(UploadMeasurementsClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "uploadmeasurementsclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class ClassificationSchemaClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for ClassificationSchemaClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(ClassificationSchemaClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "classificationschemaclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class MeasurementClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for MeasurementClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(MeasurementClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "measurementclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class MeasurementMetadataClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for MeasurementMetadataClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(MeasurementMetadataClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "measurementmetadataclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class MeasurementProcessingResultsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for MeasurementProcessingResultsClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(MeasurementProcessingResultsClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "measurementprocessingresultsclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class MeasurementStateMachineClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for MeasurementStateMachineClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(MeasurementStateMachineClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "measurementstatemachineclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class MeasurementMetadataFileInfoClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for MeasurementMetadataFileInfoClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(MeasurementMetadataFileInfoClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "measurementmetadatafileinfoclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class MeasurementMetadataSchemaFileInfoClientConfiguration(
+    Configuration
+):  # pylint: disable=too-many-instance-attributes
+    """Configuration for MeasurementMetadataSchemaFileInfoClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(MeasurementMetadataSchemaFileInfoClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "measurementmetadataschemafileinfoclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DataStreamClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DataStreamClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DataStreamClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "datastreamclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DataStreamStorageClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DataStreamStorageClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DataStreamStorageClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "datastreamstorageclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DataStreamTagsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DataStreamTagsClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DataStreamTagsClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "datastreamtagsclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DataStreamFilesClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DataStreamFilesClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DataStreamFilesClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "datastreamfilesclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DataStreamLogsContainerClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DataStreamLogsContainerClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DataStreamLogsContainerClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "datastreamlogscontainerclient/{}".format(VERSION))
+        self._configure(**kwargs)
+
+    def _configure(self, **kwargs: Any) -> None:
+        self.user_agent_policy = kwargs.get("user_agent_policy") or policies.UserAgentPolicy(**kwargs)
+        self.headers_policy = kwargs.get("headers_policy") or policies.HeadersPolicy(**kwargs)
+        self.proxy_policy = kwargs.get("proxy_policy") or policies.ProxyPolicy(**kwargs)
+        self.logging_policy = kwargs.get("logging_policy") or policies.NetworkTraceLoggingPolicy(**kwargs)
+        self.http_logging_policy = kwargs.get("http_logging_policy") or policies.HttpLoggingPolicy(**kwargs)
+        self.retry_policy = kwargs.get("retry_policy") or policies.RetryPolicy(**kwargs)
+        self.custom_hook_policy = kwargs.get("custom_hook_policy") or policies.CustomHookPolicy(**kwargs)
+        self.redirect_policy = kwargs.get("redirect_policy") or policies.RedirectPolicy(**kwargs)
+        self.authentication_policy = kwargs.get("authentication_policy")
+        if self.credential and not self.authentication_policy:
+            self.authentication_policy = policies.BearerTokenCredentialPolicy(
+                self.credential, *self.credential_scopes, **kwargs
+            )
+
+
+class DataStreamClassificationsClientConfiguration(Configuration):  # pylint: disable=too-many-instance-attributes
+    """Configuration for DataStreamClassificationsClient.
+
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, **kwargs: Any) -> None:
+        super(DataStreamClassificationsClientConfiguration, self).__init__(**kwargs)
+        if credential is None:
+            raise ValueError("Parameter 'credential' must not be None.")
+        if api_version is None:
+            raise ValueError("Parameter 'api_version' must not be None.")
+
+        self.credential = credential
+        self.api_version = api_version
+        self.credential_scopes = kwargs.pop("credential_scopes", ["https://adp.azure.com/.default"])
+        kwargs.setdefault("sdk_moniker", "datastreamclassificationsclient/{}".format(VERSION))
         self._configure(**kwargs)
 
     def _configure(self, **kwargs: Any) -> None:

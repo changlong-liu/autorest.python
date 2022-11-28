@@ -1141,32 +1141,6 @@ class Measurement(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class MeasurementClassification(_model_base.Model):
-    """MeasurementClassification.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar schema_name: Classification schema name. Required.
-    :vartype schema_name: str
-    :ivar classification_object: Classification object model (JSON as string). Required.
-    :vartype classification_object: str
-    :ivar etag: The entity tag for this resource. Required.
-    :vartype etag: str
-    """
-
-    schema_name: str = rest_field(name="schemaName", readonly=True)
-    """Classification schema name. Required. """
-    classification_object: str = rest_field(name="classificationObject", readonly=True)
-    """Classification object model (JSON as string). Required. """
-    etag: str = rest_field(readonly=True)
-    """The entity tag for this resource. Required. """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class MeasurementListRequestParameters(_model_base.Model):
     """A wrapper for the List of measurements IDs.
 
@@ -1634,26 +1608,6 @@ class PagedMeasurement(_model_base.Model):
 
     value: List["_models.Measurement"] = rest_field()
     """The Measurement items on this page. Required. """
-    next_link: Optional[str] = rest_field(name="nextLink")
-    """The link to the next page of items. """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-class PagedMeasurementClassification(_model_base.Model):
-    """Paged collection of MeasurementClassification items.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The MeasurementClassification items on this page. Required.
-    :vartype value: list[~adp.datamanagement.models.MeasurementClassification]
-    :ivar next_link: The link to the next page of items.
-    :vartype next_link: str
-    """
-
-    value: List["_models.MeasurementClassification"] = rest_field()
-    """The MeasurementClassification items on this page. Required. """
     next_link: Optional[str] = rest_field(name="nextLink")
     """The link to the next page of items. """
 

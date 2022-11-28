@@ -12,8 +12,52 @@ from typing import Any, TYPE_CHECKING
 from azure.core import PipelineClient
 from azure.core.rest import HttpRequest, HttpResponse
 
-from ._configuration import DataManagementClientConfiguration
-from ._operations import DataManagementClientOperationsMixin
+from ._configuration import (
+    ClassificationSchemaClientConfiguration,
+    DataStreamClassificationsClientConfiguration,
+    DataStreamClientConfiguration,
+    DataStreamFilesClientConfiguration,
+    DataStreamLogsContainerClientConfiguration,
+    DataStreamStorageClientConfiguration,
+    DataStreamTagsClientConfiguration,
+    DiscoveryOperationsClientConfiguration,
+    DiscoverySpecialFilesClientConfiguration,
+    DiscoveryUploadsClientConfiguration,
+    LongRunningOperationsClientConfiguration,
+    MeasurementClientConfiguration,
+    MeasurementMetadataClientConfiguration,
+    MeasurementMetadataFileInfoClientConfiguration,
+    MeasurementMetadataSchemaFileInfoClientConfiguration,
+    MeasurementProcessingResultsClientConfiguration,
+    MeasurementStateMachineClientConfiguration,
+    UploadClientConfiguration,
+    UploadDataFilesClientConfiguration,
+    UploadMeasurementsClientConfiguration,
+    UploadSpecialFilesClientConfiguration,
+)
+from ._operations import (
+    ClassificationSchemaClientOperationsMixin,
+    DataStreamClassificationsClientOperationsMixin,
+    DataStreamClientOperationsMixin,
+    DataStreamFilesClientOperationsMixin,
+    DataStreamLogsContainerClientOperationsMixin,
+    DataStreamStorageClientOperationsMixin,
+    DataStreamTagsClientOperationsMixin,
+    DiscoveryOperationsClientOperationsMixin,
+    DiscoverySpecialFilesClientOperationsMixin,
+    DiscoveryUploadsClientOperationsMixin,
+    LongRunningOperationsClientOperationsMixin,
+    MeasurementClientOperationsMixin,
+    MeasurementMetadataClientOperationsMixin,
+    MeasurementMetadataFileInfoClientOperationsMixin,
+    MeasurementMetadataSchemaFileInfoClientOperationsMixin,
+    MeasurementProcessingResultsClientOperationsMixin,
+    MeasurementStateMachineClientOperationsMixin,
+    UploadClientOperationsMixin,
+    UploadDataFilesClientOperationsMixin,
+    UploadMeasurementsClientOperationsMixin,
+    UploadSpecialFilesClientOperationsMixin,
+)
 from ._serialization import Deserializer, Serializer
 
 if TYPE_CHECKING:
@@ -21,8 +65,10 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class DataManagementClient(DataManagementClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
-    """DataManagementClient.
+class LongRunningOperationsClient(
+    LongRunningOperationsClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """LongRunningOperationsClient.
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
@@ -30,12 +76,12 @@ class DataManagementClient(DataManagementClientOperationsMixin):  # pylint: disa
     :type api_version: str
     :keyword endpoint: Service host. Required.
     :paramtype endpoint: str
-    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-     Retry-After header is present.
     """
 
     def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
-        self._config = DataManagementClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._config = LongRunningOperationsClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
         self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
 
         self._serialize = Serializer()
@@ -67,7 +113,1113 @@ class DataManagementClient(DataManagementClientOperationsMixin):  # pylint: disa
     def close(self) -> None:
         self._client.close()
 
-    def __enter__(self) -> "DataManagementClient":
+    def __enter__(self) -> "LongRunningOperationsClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DiscoveryOperationsClient(
+    DiscoveryOperationsClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """DiscoveryOperationsClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DiscoveryOperationsClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DiscoveryOperationsClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DiscoverySpecialFilesClient(
+    DiscoverySpecialFilesClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """DiscoverySpecialFilesClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DiscoverySpecialFilesClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DiscoverySpecialFilesClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DiscoveryUploadsClient(
+    DiscoveryUploadsClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """DiscoveryUploadsClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DiscoveryUploadsClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DiscoveryUploadsClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class UploadClient(UploadClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+    """UploadClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = UploadClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "UploadClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class UploadSpecialFilesClient(
+    UploadSpecialFilesClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """UploadSpecialFilesClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = UploadSpecialFilesClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "UploadSpecialFilesClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class UploadDataFilesClient(UploadDataFilesClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+    """UploadDataFilesClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = UploadDataFilesClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "UploadDataFilesClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class UploadMeasurementsClient(
+    UploadMeasurementsClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """UploadMeasurementsClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = UploadMeasurementsClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "UploadMeasurementsClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class ClassificationSchemaClient(
+    ClassificationSchemaClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """ClassificationSchemaClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = ClassificationSchemaClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "ClassificationSchemaClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class MeasurementClient(MeasurementClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+    """MeasurementClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = MeasurementClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "MeasurementClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class MeasurementMetadataClient(
+    MeasurementMetadataClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """MeasurementMetadataClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = MeasurementMetadataClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "MeasurementMetadataClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class MeasurementProcessingResultsClient(
+    MeasurementProcessingResultsClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """MeasurementProcessingResultsClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = MeasurementProcessingResultsClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "MeasurementProcessingResultsClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class MeasurementStateMachineClient(
+    MeasurementStateMachineClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """MeasurementStateMachineClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = MeasurementStateMachineClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "MeasurementStateMachineClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class MeasurementMetadataFileInfoClient(
+    MeasurementMetadataFileInfoClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """MeasurementMetadataFileInfoClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = MeasurementMetadataFileInfoClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "MeasurementMetadataFileInfoClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class MeasurementMetadataSchemaFileInfoClient(
+    MeasurementMetadataSchemaFileInfoClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """MeasurementMetadataSchemaFileInfoClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = MeasurementMetadataSchemaFileInfoClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "MeasurementMetadataSchemaFileInfoClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DataStreamClient(DataStreamClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+    """DataStreamClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DataStreamClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DataStreamClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DataStreamStorageClient(
+    DataStreamStorageClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """DataStreamStorageClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DataStreamStorageClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DataStreamStorageClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DataStreamTagsClient(DataStreamTagsClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+    """DataStreamTagsClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DataStreamTagsClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DataStreamTagsClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DataStreamFilesClient(DataStreamFilesClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
+    """DataStreamFilesClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DataStreamFilesClientConfiguration(credential=credential, api_version=api_version, **kwargs)
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DataStreamFilesClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DataStreamLogsContainerClient(
+    DataStreamLogsContainerClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """DataStreamLogsContainerClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DataStreamLogsContainerClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DataStreamLogsContainerClient":
+        self._client.__enter__()
+        return self
+
+    def __exit__(self, *exc_details) -> None:
+        self._client.__exit__(*exc_details)
+
+
+class DataStreamClassificationsClient(
+    DataStreamClassificationsClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword
+    """DataStreamClassificationsClient.
+
+    :param credential: Credential needed for the client to connect to Azure. Required.
+    :type credential: ~azure.core.credentials.TokenCredential
+    :param api_version: The API version to use for this operation. Required.
+    :type api_version: str
+    :keyword endpoint: Service host. Required.
+    :paramtype endpoint: str
+    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+     Retry-After header is present.
+    """
+
+    def __init__(self, credential: "TokenCredential", api_version: str, *, endpoint: str, **kwargs: Any) -> None:
+        self._config = DataStreamClassificationsClientConfiguration(
+            credential=credential, api_version=api_version, **kwargs
+        )
+        self._client = PipelineClient(base_url=endpoint, config=self._config, **kwargs)
+
+        self._serialize = Serializer()
+        self._deserialize = Deserializer()
+        self._serialize.client_side_validation = False
+
+    def send_request(self, request: HttpRequest, **kwargs: Any) -> HttpResponse:
+        """Runs the network request through the client's chained policies.
+
+        >>> from azure.core.rest import HttpRequest
+        >>> request = HttpRequest("GET", "https://www.example.org/")
+        <HttpRequest [GET], url: 'https://www.example.org/'>
+        >>> response = client.send_request(request)
+        <HttpResponse: 200 OK>
+
+        For more information on this code flow, see https://aka.ms/azsdk/dpcodegen/python/send_request
+
+        :param request: The network request you want to make. Required.
+        :type request: ~azure.core.rest.HttpRequest
+        :keyword bool stream: Whether the response payload will be streamed. Defaults to False.
+        :return: The response of your network call. Does not do error handling on your response.
+        :rtype: ~azure.core.rest.HttpResponse
+        """
+
+        request_copy = deepcopy(request)
+        request_copy.url = self._client.format_url(request_copy.url)
+        return self._client.send_request(request_copy, **kwargs)
+
+    def close(self) -> None:
+        self._client.close()
+
+    def __enter__(self) -> "DataStreamClassificationsClient":
         self._client.__enter__()
         return self
 

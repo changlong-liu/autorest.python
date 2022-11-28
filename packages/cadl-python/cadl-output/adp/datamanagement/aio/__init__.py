@@ -6,7 +6,27 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._client import DataManagementClient
+from ._client import LongRunningOperationsClient
+from ._client import DiscoveryOperationsClient
+from ._client import DiscoverySpecialFilesClient
+from ._client import DiscoveryUploadsClient
+from ._client import UploadClient
+from ._client import UploadSpecialFilesClient
+from ._client import UploadDataFilesClient
+from ._client import UploadMeasurementsClient
+from ._client import ClassificationSchemaClient
+from ._client import MeasurementClient
+from ._client import MeasurementMetadataClient
+from ._client import MeasurementProcessingResultsClient
+from ._client import MeasurementStateMachineClient
+from ._client import MeasurementMetadataFileInfoClient
+from ._client import MeasurementMetadataSchemaFileInfoClient
+from ._client import DataStreamClient
+from ._client import DataStreamStorageClient
+from ._client import DataStreamTagsClient
+from ._client import DataStreamFilesClient
+from ._client import DataStreamLogsContainerClient
+from ._client import DataStreamClassificationsClient
 
 try:
     from ._patch import __all__ as _patch_all
@@ -16,7 +36,27 @@ except ImportError:
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    "DataManagementClient",
+    "LongRunningOperationsClient",
+    "DiscoveryOperationsClient",
+    "DiscoverySpecialFilesClient",
+    "DiscoveryUploadsClient",
+    "UploadClient",
+    "UploadSpecialFilesClient",
+    "UploadDataFilesClient",
+    "UploadMeasurementsClient",
+    "ClassificationSchemaClient",
+    "MeasurementClient",
+    "MeasurementMetadataClient",
+    "MeasurementProcessingResultsClient",
+    "MeasurementStateMachineClient",
+    "MeasurementMetadataFileInfoClient",
+    "MeasurementMetadataSchemaFileInfoClient",
+    "DataStreamClient",
+    "DataStreamStorageClient",
+    "DataStreamTagsClient",
+    "DataStreamFilesClient",
+    "DataStreamLogsContainerClient",
+    "DataStreamClassificationsClient",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 

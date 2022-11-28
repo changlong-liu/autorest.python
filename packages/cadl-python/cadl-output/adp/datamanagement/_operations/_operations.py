@@ -30,7 +30,30 @@ from azure.core.utils import case_insensitive_dict
 from .. import models as _models
 from .._model_base import AzureJSONEncoder, _deserialize
 from .._serialization import Serializer
-from .._vendor import DataManagementClientMixinABC, _format_url_section
+from .._vendor import (
+    ClassificationSchemaClientMixinABC,
+    DataStreamClassificationsClientMixinABC,
+    DataStreamClientMixinABC,
+    DataStreamFilesClientMixinABC,
+    DataStreamLogsContainerClientMixinABC,
+    DataStreamStorageClientMixinABC,
+    DataStreamTagsClientMixinABC,
+    DiscoveryOperationsClientMixinABC,
+    DiscoverySpecialFilesClientMixinABC,
+    DiscoveryUploadsClientMixinABC,
+    LongRunningOperationsClientMixinABC,
+    MeasurementClientMixinABC,
+    MeasurementMetadataClientMixinABC,
+    MeasurementMetadataFileInfoClientMixinABC,
+    MeasurementMetadataSchemaFileInfoClientMixinABC,
+    MeasurementProcessingResultsClientMixinABC,
+    MeasurementStateMachineClientMixinABC,
+    UploadClientMixinABC,
+    UploadDataFilesClientMixinABC,
+    UploadMeasurementsClientMixinABC,
+    UploadSpecialFilesClientMixinABC,
+    _format_url_section,
+)
 
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
@@ -44,7 +67,9 @@ _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_data_management_get_status_request(operation_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_long_running_operations_get_status_request(
+    operation_id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -67,7 +92,7 @@ def build_data_management_get_status_request(operation_id: str, *, api_version: 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_or_replace_request(
+def build_discovery_operations_create_or_replace_request(
     discovery_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -95,7 +120,7 @@ def build_data_management_create_or_replace_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(discovery_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_discovery_operations_get_request(discovery_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -118,7 +143,7 @@ def build_data_management_get_request(discovery_id: str, *, api_version: str, **
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_complete_request(
+def build_discovery_operations_complete_request(
     discovery_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -145,7 +170,7 @@ def build_data_management_complete_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_cancel_request(
+def build_discovery_operations_cancel_request(
     discovery_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -172,7 +197,7 @@ def build_data_management_cancel_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_generate_request(
+def build_discovery_special_files_generate_request(
     discovery_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -199,7 +224,7 @@ def build_data_management_generate_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_writable_uris_request(
+def build_discovery_special_files_list_writable_uris_request(
     discovery_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -224,7 +249,7 @@ def build_data_management_list_writable_uris_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(discovery_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_discovery_uploads_list_request(discovery_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -247,7 +272,7 @@ def build_data_management_list_request(discovery_id: str, *, api_version: str, *
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_or_replace_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_upload_create_or_replace_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -273,7 +298,7 @@ def build_data_management_create_or_replace_request(upload_id: str, *, api_versi
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_upload_get_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -296,7 +321,7 @@ def build_data_management_get_request(upload_id: str, *, api_version: str, **kwa
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_complete_request(
+def build_upload_complete_request(
     upload_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -323,7 +348,7 @@ def build_data_management_complete_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_cancel_request(
+def build_upload_cancel_request(
     upload_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -350,7 +375,7 @@ def build_data_management_cancel_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_upload_special_files_list_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -373,7 +398,7 @@ def build_data_management_list_request(upload_id: str, *, api_version: str, **kw
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_generate_request(
+def build_upload_special_files_generate_request(
     upload_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -400,7 +425,9 @@ def build_data_management_generate_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_writable_uris_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_upload_special_files_list_writable_uris_request(
+    upload_id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -423,7 +450,7 @@ def build_data_management_list_writable_uris_request(upload_id: str, *, api_vers
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_generate_request(
+def build_upload_data_files_generate_request(
     upload_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -450,7 +477,9 @@ def build_data_management_generate_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_writable_uris_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_upload_data_files_list_writable_uris_request(
+    upload_id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -473,7 +502,7 @@ def build_data_management_list_writable_uris_request(upload_id: str, *, api_vers
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_upload_measurements_list_request(upload_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -496,7 +525,7 @@ def build_data_management_list_request(upload_id: str, *, api_version: str, **kw
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(name: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_classification_schema_get_request(name: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -519,7 +548,7 @@ def build_data_management_get_request(name: str, *, api_version: str, **kwargs: 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_request(
+def build_classification_schema_create_request(
     *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -544,7 +573,7 @@ def build_data_management_create_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_delete_request(
+def build_classification_schema_delete_request(
     name: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -571,7 +600,7 @@ def build_data_management_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_classification_schema_list_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -589,7 +618,7 @@ def build_data_management_list_request(*, api_version: str, **kwargs: Any) -> Ht
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_get_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -612,7 +641,7 @@ def build_data_management_get_request(measurement_id: str, *, api_version: str, 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_delete_request(
+def build_measurement_delete_request(
     measurement_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -639,7 +668,7 @@ def build_data_management_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_list_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -657,7 +686,7 @@ def build_data_management_list_request(*, api_version: str, **kwargs: Any) -> Ht
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_query_measurements_with_metadata_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_query_measurements_with_metadata_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -675,7 +704,7 @@ def build_data_management_query_measurements_with_metadata_request(*, api_versio
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_find_by_ids_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_find_by_ids_request(*, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -696,7 +725,7 @@ def build_data_management_find_by_ids_request(*, api_version: str, **kwargs: Any
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_metadata_get_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -719,7 +748,9 @@ def build_data_management_get_request(measurement_id: str, *, api_version: str, 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_processing_results_get_request(
+    measurement_id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -742,7 +773,9 @@ def build_data_management_get_request(measurement_id: str, *, api_version: str, 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(measurement_id: str, id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_state_machine_get_request(
+    measurement_id: str, id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -766,7 +799,9 @@ def build_data_management_get_request(measurement_id: str, id: str, *, api_versi
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_state_machine_list_request(
+    measurement_id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -789,7 +824,7 @@ def build_data_management_list_request(measurement_id: str, *, api_version: str,
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_act_request(
+def build_measurement_state_machine_act_request(
     measurement_id: str, id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -820,7 +855,7 @@ def build_data_management_act_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_complete_request(
+def build_measurement_metadata_file_info_complete_request(
     measurement_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -850,7 +885,7 @@ def build_data_management_complete_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_writable_uri_request(
+def build_measurement_metadata_file_info_get_writable_uri_request(
     measurement_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -875,7 +910,9 @@ def build_data_management_get_writable_uri_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_measurement_metadata_schema_file_info_get_request(
+    measurement_id: str, *, api_version: str, **kwargs: Any
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -898,114 +935,7 @@ def build_data_management_get_request(measurement_id: str, *, api_version: str, 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(
-    measurement_id: str, schema_name: str, *, api_version: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/measurements/{measurementId}/classifications/{schemaName}"
-    path_format_arguments = {
-        "measurementId": _SERIALIZER.url("measurement_id", measurement_id, "str"),
-        "schemaName": _SERIALIZER.url("schema_name", schema_name, "str", max_length=256, min_length=1),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_data_management_create_request(
-    measurement_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/measurements/{measurementId}/classifications"
-    path_format_arguments = {
-        "measurementId": _SERIALIZER.url("measurement_id", measurement_id, "str"),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if operation_id is not None:
-        _headers["operation-id"] = _SERIALIZER.header("operation_id", operation_id, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_data_management_delete_request(
-    measurement_id: str, schema_name: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/measurements/{measurementId}/classifications/{schemaName}"
-    path_format_arguments = {
-        "measurementId": _SERIALIZER.url("measurement_id", measurement_id, "str"),
-        "schemaName": _SERIALIZER.url("schema_name", schema_name, "str", max_length=256, min_length=1),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if operation_id is not None:
-        _headers["operation-id"] = _SERIALIZER.header("operation_id", operation_id, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_data_management_list_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/measurements/{measurementId}/classifications"
-    path_format_arguments = {
-        "measurementId": _SERIALIZER.url("measurement_id", measurement_id, "str"),
-    }
-
-    _url: str = _format_url_section(_url, **path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_data_management_get_request(
+def build_data_stream_get_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1031,7 +961,7 @@ def build_data_management_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_request(
+def build_data_stream_create_request(
     measurement_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1061,7 +991,7 @@ def build_data_management_create_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_clear_content_request(
+def build_data_stream_clear_content_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1089,7 +1019,7 @@ def build_data_management_clear_content_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(
+def build_data_stream_list_request(
     measurement_id: str, *, api_version: str, filter: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1116,7 +1046,7 @@ def build_data_management_list_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_stage_files_request(
+def build_data_stream_stage_files_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1145,7 +1075,7 @@ def build_data_management_stage_files_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_complete_request(
+def build_data_stream_complete_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1173,7 +1103,7 @@ def build_data_management_complete_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_fail_request(
+def build_data_stream_fail_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1201,7 +1131,7 @@ def build_data_management_fail_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_find_by_tags_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
+def build_data_stream_find_by_tags_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -1227,9 +1157,7 @@ def build_data_management_find_by_tags_request(measurement_id: str, *, api_versi
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_find_by_lineage_request(
-    measurement_id: str, *, api_version: str, **kwargs: Any
-) -> HttpRequest:
+def build_data_stream_find_by_lineage_request(measurement_id: str, *, api_version: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -1255,7 +1183,7 @@ def build_data_management_find_by_lineage_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_lineage_graphs_by_lineage_request(
+def build_data_stream_get_lineage_graphs_by_lineage_request(
     measurement_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1283,7 +1211,7 @@ def build_data_management_get_lineage_graphs_by_lineage_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_request(
+def build_data_stream_storage_create_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1312,7 +1240,7 @@ def build_data_management_create_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_writable_uris_request(
+def build_data_stream_storage_get_writable_uris_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1338,7 +1266,7 @@ def build_data_management_get_writable_uris_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(
+def build_data_stream_tags_get_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1364,7 +1292,7 @@ def build_data_management_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_request(
+def build_data_stream_tags_create_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1393,7 +1321,7 @@ def build_data_management_create_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(
+def build_data_stream_files_list_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1419,7 +1347,7 @@ def build_data_management_list_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_generate_request(
+def build_data_stream_files_generate_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1447,7 +1375,7 @@ def build_data_management_generate_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_writable_uri_request(
+def build_data_stream_logs_container_get_writable_uri_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1473,7 +1401,7 @@ def build_data_management_get_writable_uri_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_get_request(
+def build_data_stream_classifications_get_request(
     measurement_id: str, data_stream_id: str, schema_name: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1500,7 +1428,7 @@ def build_data_management_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_create_request(
+def build_data_stream_classifications_create_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, operation_id: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1531,7 +1459,7 @@ def build_data_management_create_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_delete_request(
+def build_data_stream_classifications_delete_request(
     measurement_id: str,
     data_stream_id: str,
     schema_name: str,
@@ -1566,7 +1494,7 @@ def build_data_management_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_data_management_list_request(
+def build_data_stream_classifications_list_request(
     measurement_id: str, data_stream_id: str, *, api_version: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1592,7 +1520,7 @@ def build_data_management_list_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pylint: disable=too-many-public-methods
+class LongRunningOperationsClientOperationsMixin(LongRunningOperationsClientMixinABC):
     @distributed_trace
     def get_status(self, operation_id: str, **kwargs: Any) -> _models.LongRunningOperationWithResponseHeaders:
         """Get the details of an LRO.
@@ -1617,7 +1545,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.LongRunningOperationWithResponseHeaders] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_status_request(
+        request = build_long_running_operations_get_status_request(
             operation_id=operation_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1646,6 +1574,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC):
     @overload
     def create_or_replace(
         self,
@@ -1731,7 +1661,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_or_replace_request(
+        request = build_discovery_operations_create_or_replace_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -1785,7 +1715,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.Discovery] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_discovery_operations_get_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1826,7 +1756,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.Discovery, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_complete_request(
+        request = build_discovery_operations_complete_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -1943,7 +1873,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.Discovery, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_cancel_request(
+        request = build_discovery_operations_cancel_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2043,6 +1973,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
+
+class DiscoverySpecialFilesClientOperationsMixin(DiscoverySpecialFilesClientMixinABC):
     def _generate_initial(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.DiscoverySpecialFile, _models.DiscoveryLroResponse]:
@@ -2059,7 +1991,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.DiscoverySpecialFile, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_generate_request(
+        request = build_discovery_special_files_generate_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2190,7 +2122,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_writable_uris_request(
+                request = build_discovery_special_files_list_writable_uris_request(
                     discovery_id=discovery_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -2227,6 +2159,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class DiscoveryUploadsClientOperationsMixin(DiscoveryUploadsClientMixinABC):
     @distributed_trace
     def list(self, discovery_id: str, **kwargs: Any) -> Iterable["_models.DiscoveryUpload"]:
         """List upload detail for the discovery resource.
@@ -2254,7 +2188,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_discovery_uploads_list_request(
                     discovery_id=discovery_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -2291,6 +2225,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class UploadClientOperationsMixin(UploadClientMixinABC):
     @overload
     def create_or_replace(
         self,
@@ -2374,7 +2310,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_or_replace_request(
+        request = build_upload_create_or_replace_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -2428,7 +2364,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.Upload] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_upload_get_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -2469,7 +2405,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.Upload, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_complete_request(
+        request = build_upload_complete_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2585,7 +2521,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.Upload, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_cancel_request(
+        request = build_upload_cancel_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2685,6 +2621,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
+
+class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
     @distributed_trace
     def list(self, upload_id: str, **kwargs: Any) -> Iterable["_models.UploadSpecialFile"]:
         """Returns SAS signed URIs for reading special files from Azure Storage.
@@ -2714,7 +2652,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_upload_special_files_list_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -2767,7 +2705,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.UploadSpecialFile, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_generate_request(
+        request = build_upload_special_files_generate_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2897,7 +2835,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_writable_uris_request(
+                request = build_upload_special_files_list_writable_uris_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -2934,6 +2872,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
     def _generate_initial(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.UploadDataFile, _models.UploadLroResponse]:
@@ -2950,7 +2890,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.UploadDataFile, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_generate_request(
+        request = build_upload_data_files_generate_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -3078,7 +3018,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_writable_uris_request(
+                request = build_upload_data_files_list_writable_uris_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -3115,6 +3055,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class UploadMeasurementsClientOperationsMixin(UploadMeasurementsClientMixinABC):
     @distributed_trace
     def list(self, upload_id: str, **kwargs: Any) -> Iterable["_models.UploadResultMeasurement"]:
         """List of the measurement identifiers that have been created by the upload.
@@ -3144,7 +3086,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_upload_measurements_list_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -3181,6 +3123,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinABC):
     @distributed_trace
     def get(self, name: str, **kwargs: Any) -> _models.ClassificationSchema:
         """Get classification schema by name.
@@ -3204,7 +3148,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.ClassificationSchema] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_classification_schema_get_request(
             name=name,
             api_version=self._config.api_version,
             headers=_headers,
@@ -3260,7 +3204,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_request(
+        request = build_classification_schema_create_request(
             api_version=self._config.api_version,
             operation_id=operation_id,
             content_type=content_type,
@@ -3455,7 +3399,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_delete_request(
+        request = build_classification_schema_delete_request(
             name=name,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -3579,7 +3523,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_classification_schema_list_request(
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -3615,6 +3559,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, **kwargs: Any) -> _models.Measurement:
         """Get measurement by ID.
@@ -3638,7 +3584,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.Measurement] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_measurement_get_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -3679,7 +3625,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_delete_request(
+        request = build_measurement_delete_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -3806,7 +3752,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_measurement_list_request(
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -3869,7 +3815,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_query_measurements_with_metadata_request(
+                request = build_measurement_query_measurements_with_metadata_request(
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -3988,7 +3934,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_find_by_ids_request(
+                request = build_measurement_find_by_ids_request(
                     api_version=self._config.api_version,
                     content_type=content_type,
                     content=_content,
@@ -4026,6 +3972,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class MeasurementMetadataClientOperationsMixin(MeasurementMetadataClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementMetadataBase:
         """Returns the measurement metadata.
@@ -4049,7 +3997,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.MeasurementMetadataBase] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_measurement_metadata_get_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -4074,6 +4022,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class MeasurementProcessingResultsClientOperationsMixin(MeasurementProcessingResultsClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementProcessingResultsBase:
         """Returns the measurement processing result.
@@ -4098,7 +4048,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.MeasurementProcessingResultsBase] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_measurement_processing_results_get_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -4123,6 +4073,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, id: str, **kwargs: Any) -> _models.StateMachine:
         """Returns the state machine instance for the measurement.
@@ -4148,7 +4100,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.StateMachine] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_measurement_state_machine_get_request(
             measurement_id=measurement_id,
             id=id,
             api_version=self._config.api_version,
@@ -4201,7 +4153,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_measurement_state_machine_list_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -4271,7 +4223,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_act_request(
+        request = build_measurement_state_machine_act_request(
             measurement_id=measurement_id,
             id=id,
             api_version=self._config.api_version,
@@ -4470,6 +4422,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
+
+class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileInfoClientMixinABC):
     def _complete_initial(
         self,
         measurement_id: str,
@@ -4504,7 +4458,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_complete_request(
+        request = build_measurement_metadata_file_info_complete_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -4730,7 +4684,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.MeasurementMetadataFileInfoBase] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_writable_uri_request(
+        request = build_measurement_metadata_file_info_get_writable_uri_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -4758,6 +4712,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class MeasurementMetadataSchemaFileInfoClientOperationsMixin(MeasurementMetadataSchemaFileInfoClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementMetadataSchemaFileInfoBase:
         """Returns the measurement metadata schema file information.
@@ -4782,7 +4738,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.MeasurementMetadataSchemaFileInfoBase] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_measurement_metadata_schema_file_info_get_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -4807,471 +4763,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
-    @distributed_trace
-    def get(self, measurement_id: str, schema_name: str, **kwargs: Any) -> _models.MeasurementClassification:
-        """Get measurement classification by schema name.
 
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param schema_name: Classification schema name. Required.
-        :type schema_name: str
-        :return: MeasurementClassification. The MeasurementClassification is compatible with
-         MutableMapping
-        :rtype: ~adp.datamanagement.models.MeasurementClassification
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.MeasurementClassification] = kwargs.pop("cls", None)
-
-        request = build_data_management_get_request(
-            measurement_id=measurement_id,
-            schema_name=schema_name,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        deserialized = _deserialize(_models.MeasurementClassification, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    def _create_initial(
-        self,
-        measurement_id: str,
-        body: Union[Optional[Union[_models.MeasurementClassification, JSON, IO]]] = None,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> Union[_models.MeasurementClassification, _models.DefaultLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Union[_models.MeasurementClassification, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
-        else:
-            if body is not None:
-                _content = json.dumps(body, cls=AzureJSONEncoder)
-            else:
-                _content = None
-
-        request = build_data_management_create_request(
-            measurement_id=measurement_id,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.CustomErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
-
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = _deserialize(_models.MeasurementClassification, response.json())
-
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_create(
-        self,
-        measurement_id: str,
-        body: Union[Optional[_models.MeasurementClassification], JSON] = None,
-        *,
-        operation_id: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> Union[LROPoller[_models.MeasurementClassification], LROPoller[_models.DefaultLroResponse]]:
-        """Assigns classification to the measurement.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body.
-         Default value is None.
-        :type body: ~adp.datamanagement.models.MeasurementClassification or JSON
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be LROBasePolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns MeasurementClassification or An instance of
-         LROPoller that returns DefaultLroResponse. The MeasurementClassification is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~adp.datamanagement.models.MeasurementClassification] or
-         ~azure.core.polling.LROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_create(
-        self,
-        measurement_id: str,
-        body: Optional[IO] = None,
-        *,
-        operation_id: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> Union[LROPoller[_models.MeasurementClassification], LROPoller[_models.DefaultLroResponse]]:
-        """Assigns classification to the measurement.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body.
-         Default value is None.
-        :type body: IO
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be LROBasePolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns MeasurementClassification or An instance of
-         LROPoller that returns DefaultLroResponse. The MeasurementClassification is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~adp.datamanagement.models.MeasurementClassification] or
-         ~azure.core.polling.LROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_create(
-        self,
-        measurement_id: str,
-        body: Union[Optional[Union[_models.MeasurementClassification, JSON, IO]]] = None,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> Union[LROPoller[_models.MeasurementClassification], LROPoller[_models.DefaultLroResponse]]:
-        """Assigns classification to the measurement.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body. Is
-         either a model type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.MeasurementClassification or JSON or IO
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be LROBasePolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns MeasurementClassification or An instance of
-         LROPoller that returns DefaultLroResponse. The MeasurementClassification is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~adp.datamanagement.models.MeasurementClassification] or
-         ~azure.core.polling.LROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.MeasurementClassification] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._create_initial(
-                measurement_id=measurement_id,
-                body=body,
-                operation_id=operation_id,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response = pipeline_response.http_response
-            deserialized = _deserialize(_models.MeasurementClassification, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, LROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    def _delete_initial(
-        self, measurement_id: str, schema_name: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Optional[_models.DefaultLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
-
-        request = build_data_management_delete_request(
-            measurement_id=measurement_id,
-            schema_name=schema_name,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [202, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.CustomErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
-
-        deserialized = None
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)
-
-        return deserialized
-
-    @distributed_trace
-    def begin_delete(
-        self, measurement_id: str, schema_name: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> LROPoller[_models.DefaultLroResponse]:
-        """Unassign the classification from the measurement.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param schema_name: Classification schema name. Required.
-        :type schema_name: str
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be LROBasePolling. Pass in False for
-         this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.PollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns DefaultLroResponse. The DefaultLroResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.DefaultLroResponse] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._delete_initial(
-                measurement_id=measurement_id,
-                schema_name=schema_name,
-                operation_id=operation_id,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)
-            return deserialized
-
-        if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, LROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    @distributed_trace
-    def list(self, measurement_id: str, **kwargs: Any) -> Iterable["_models.MeasurementClassification"]:
-        """Lists the classifications assigned to the measurement.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :return: An iterator like instance of MeasurementClassification. The MeasurementClassification
-         is compatible with MutableMapping
-        :rtype: ~azure.core.paging.ItemPaged[~adp.datamanagement.models.MeasurementClassification]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models._models.PagedMeasurementClassification] = kwargs.pop(
-            "cls", None
-        )  # pylint: disable=protected-access
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_data_management_list_request(
-                    measurement_id=measurement_id,
-                    api_version=self._config.api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request.url = self._client.format_url(request.url)
-
-            return request
-
-        def extract_data(pipeline_response):
-            deserialized = _deserialize(_models._models.PagedMeasurementClassification, pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
+class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.DataStream:
         """Get data-stream by identifier.
@@ -5297,7 +4790,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.DataStream] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_data_stream_get_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -5355,7 +4848,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_request(
+        request = build_data_stream_create_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -5561,7 +5054,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_clear_content_request(
+        request = build_data_stream_clear_content_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -5700,7 +5193,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_data_stream_list_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     filter=filter,
@@ -5846,7 +5339,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_stage_files_request(
+        request = build_data_stream_stage_files_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -5890,7 +5383,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_complete_request(
+        request = build_data_stream_complete_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -6010,7 +5503,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_fail_request(
+        request = build_data_stream_fail_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -6207,7 +5700,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_find_by_tags_request(
+                request = build_data_stream_find_by_tags_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     content_type=content_type,
@@ -6339,7 +5832,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_find_by_lineage_request(
+                request = build_data_stream_find_by_lineage_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     content_type=content_type,
@@ -6474,7 +5967,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_get_lineage_graphs_by_lineage_request(
+                request = build_data_stream_get_lineage_graphs_by_lineage_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     content_type=content_type,
@@ -6513,6 +6006,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return ItemPaged(get_next, extract_data)
 
+
+class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
     @overload
     def create(
         self,
@@ -6622,7 +6117,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_request(
+        request = build_data_stream_storage_create_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -6681,7 +6176,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.StorageBase] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_writable_uris_request(
+        request = build_data_stream_storage_get_writable_uris_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -6707,6 +6202,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class DataStreamTagsClientOperationsMixin(DataStreamTagsClientMixinABC):
     @distributed_trace
     def get(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.TagSet:
         """Returns set of the data-stream tags.
@@ -6732,7 +6229,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.TagSet] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_data_stream_tags_get_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -6858,7 +6355,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_request(
+        request = build_data_stream_tags_create_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -6890,6 +6387,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class DataStreamFilesClientOperationsMixin(DataStreamFilesClientMixinABC):
     @distributed_trace
     def list(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> Iterable["_models.DataStreamFile"]:
         """Returns SAS signed URIs for reading special files from Azure Storage.
@@ -6919,7 +6418,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_data_stream_files_list_request(
                     measurement_id=measurement_id,
                     data_stream_id=data_stream_id,
                     api_version=self._config.api_version,
@@ -6975,7 +6474,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             "cls", None
         )  # pylint: disable=protected-access
 
-        request = build_data_management_generate_request(
+        request = build_data_stream_files_generate_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -7055,7 +6554,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_generate_request(
+                request = build_data_stream_files_generate_request(
                     measurement_id=measurement_id,
                     data_stream_id=data_stream_id,
                     api_version=self._config.api_version,
@@ -7130,6 +6629,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             )
         return LROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
+
+class DataStreamLogsContainerClientOperationsMixin(DataStreamLogsContainerClientMixinABC):
     @distributed_trace
     def get_writable_uri(
         self, measurement_id: str, data_stream_id: str, **kwargs: Any
@@ -7160,7 +6661,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.DataStreamLogsContainerBase] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_writable_uri_request(
+        request = build_data_stream_logs_container_get_writable_uri_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -7186,6 +6687,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         return deserialized  # type: ignore
 
+
+class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsClientMixinABC):
     @distributed_trace
     def get(
         self, measurement_id: str, data_stream_id: str, schema_name: str, **kwargs: Any
@@ -7216,7 +6719,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[_models.DataStreamClassification] = kwargs.pop("cls", None)
 
-        request = build_data_management_get_request(
+        request = build_data_stream_classifications_get_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             schema_name=schema_name,
@@ -7276,7 +6779,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
             else:
                 _content = None
 
-        request = build_data_management_create_request(
+        request = build_data_stream_classifications_create_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -7502,7 +7005,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_management_delete_request(
+        request = build_data_stream_classifications_delete_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             schema_name=schema_name,
@@ -7651,7 +7154,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_management_list_request(
+                request = build_data_stream_classifications_list_request(
                     measurement_id=measurement_id,
                     data_stream_id=data_stream_id,
                     api_version=self._config.api_version,

@@ -9,12 +9,12 @@
 from setuptools import setup, find_packages
 
 
-PACKAGE_NAME = "datamanagementclient"
+PACKAGE_NAME = "longrunningoperationsclient"
 version = "1.0.0b1"
 setup(
     name=PACKAGE_NAME,
     version=version,
-    description="DataManagementClient",
+    description="LongRunningOperationsClient",
     author_email="",
     url="",
     keywords="azure, azure sdk",
@@ -25,6 +25,6 @@ setup(
         "azure-core<2.0.0,>=1.24.0",
     ],
     long_description="""\
-    DataManagementClient.
+    LongRunningOperationsClient.
     """,
 )

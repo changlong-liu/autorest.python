@@ -8,7 +8,29 @@
 from abc import ABC
 from typing import TYPE_CHECKING
 
-from ._configuration import DataManagementClientConfiguration
+from ._configuration import (
+    ClassificationSchemaClientConfiguration,
+    DataStreamClassificationsClientConfiguration,
+    DataStreamClientConfiguration,
+    DataStreamFilesClientConfiguration,
+    DataStreamLogsContainerClientConfiguration,
+    DataStreamStorageClientConfiguration,
+    DataStreamTagsClientConfiguration,
+    DiscoveryOperationsClientConfiguration,
+    DiscoverySpecialFilesClientConfiguration,
+    DiscoveryUploadsClientConfiguration,
+    LongRunningOperationsClientConfiguration,
+    MeasurementClientConfiguration,
+    MeasurementMetadataClientConfiguration,
+    MeasurementMetadataFileInfoClientConfiguration,
+    MeasurementMetadataSchemaFileInfoClientConfiguration,
+    MeasurementProcessingResultsClientConfiguration,
+    MeasurementStateMachineClientConfiguration,
+    UploadClientConfiguration,
+    UploadDataFilesClientConfiguration,
+    UploadMeasurementsClientConfiguration,
+    UploadSpecialFilesClientConfiguration,
+)
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -28,10 +50,190 @@ def _format_url_section(template, **kwargs):
             template = "/".join(components)
 
 
-class DataManagementClientMixinABC(ABC):
+class LongRunningOperationsClientMixinABC(ABC):
     """DO NOT use this class. It is for internal typing use only."""
 
     _client: "PipelineClient"
-    _config: DataManagementClientConfiguration
+    _config: LongRunningOperationsClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DiscoveryOperationsClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DiscoveryOperationsClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DiscoverySpecialFilesClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DiscoverySpecialFilesClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DiscoveryUploadsClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DiscoveryUploadsClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class UploadClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: UploadClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class UploadSpecialFilesClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: UploadSpecialFilesClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class UploadDataFilesClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: UploadDataFilesClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class UploadMeasurementsClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: UploadMeasurementsClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class ClassificationSchemaClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: ClassificationSchemaClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class MeasurementClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: MeasurementClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class MeasurementMetadataClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: MeasurementMetadataClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class MeasurementProcessingResultsClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: MeasurementProcessingResultsClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class MeasurementStateMachineClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: MeasurementStateMachineClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class MeasurementMetadataFileInfoClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: MeasurementMetadataFileInfoClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class MeasurementMetadataSchemaFileInfoClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: MeasurementMetadataSchemaFileInfoClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DataStreamClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DataStreamClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DataStreamStorageClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DataStreamStorageClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DataStreamTagsClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DataStreamTagsClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DataStreamFilesClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DataStreamFilesClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DataStreamLogsContainerClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DataStreamLogsContainerClientConfiguration
+    _serialize: "Serializer"
+    _deserialize: "Deserializer"
+
+
+class DataStreamClassificationsClientMixinABC(ABC):
+    """DO NOT use this class. It is for internal typing use only."""
+
+    _client: "PipelineClient"
+    _config: DataStreamClassificationsClientConfiguration
     _serialize: "Serializer"
     _deserialize: "Deserializer"

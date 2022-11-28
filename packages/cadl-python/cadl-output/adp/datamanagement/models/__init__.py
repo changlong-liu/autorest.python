@@ -33,7 +33,6 @@ from ._models import FindDataStreamByTagsRequestParameters
 from ._models import InnerError
 from ._models import LongRunningOperationWithResponseHeaders
 from ._models import Measurement
-from ._models import MeasurementClassification
 from ._models import MeasurementListRequestParameters
 from ._models import MeasurementMetadataBase
 from ._models import MeasurementMetadataFileInfoBase
@@ -100,7 +99,6 @@ __all__ = [
     "InnerError",
     "LongRunningOperationWithResponseHeaders",
     "Measurement",
-    "MeasurementClassification",
     "MeasurementListRequestParameters",
     "MeasurementMetadataBase",
     "MeasurementMetadataFileInfoBase",

@@ -1,0 +1,26 @@
+import "./main.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+@@client(Adp.DataManagement.LongRunningOperations, {name: "LongRunningOperationsClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DiscoveryOperations, {name: "DiscoveryOperationsClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DiscoverySpecialFileOperations, {name: "DiscoverySpecialFilesClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DiscoveryResultUploadOperations, {name: "DiscoveryUploadsClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.UploadOperations, {name: "UploadClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.UploadSpecialFileOperations, {name: "UploadSpecialFilesClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.UploadDataFileOperations, {name: "UploadDataFilesClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.UploadResultMeasurementOperations, {name: "UploadMeasurementsClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.ClassificationSchemaOperations, {name: "ClassificationSchemaClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.MeasurementOperations, {name: "MeasurementClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.MeasurementMetadataOperations, {name: "MeasurementMetadataClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.MeasurementProcessingResultsOperations, {name: "MeasurementProcessingResultsClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.MeasurementStateMachineOperations, {name: "MeasurementStateMachineClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.MeasurementMetadataFileInfoOperations, {name: "MeasurementMetadataFileInfoClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.MeasurementMetadataSchemaFileInfoOperations, {name: "MeasurementMetadataSchemaFileInfoClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DataStreamOperations, {name: "DataStreamClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DataStreamsStorageOperations, {name: "DataStreamStorageClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DataStreamTagsOperations, {name: "DataStreamTagsClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DataStreamFileOperations, {name: "DataStreamFilesClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DataStreamLogsContainerOperations, {name: "DataStreamLogsContainerClient", service: Adp.DataManagement})
+@@client(Adp.DataManagement.DataStreamClassificationOperations, {name: "DataStreamClassificationsClient", service: Adp.DataManagement})
