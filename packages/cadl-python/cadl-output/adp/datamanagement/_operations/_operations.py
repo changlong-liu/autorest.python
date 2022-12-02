@@ -1795,7 +1795,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
     @distributed_trace
     def begin_complete(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.Discovery], LROPoller[_models.DiscoveryLroResponse]]:
+    ) -> LROPoller[_models.Discovery]:
         """Initiates the process of completing the discovery and creating the upload file grouping
         manifest files.
 
@@ -1912,7 +1912,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
     @distributed_trace
     def begin_cancel(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.Discovery], LROPoller[_models.DiscoveryLroResponse]]:
+    ) -> LROPoller[_models.Discovery]:
         """Initiates the process of cancelling the discovery.
 
         :param discovery_id: The discovery identifier. Required.
@@ -2029,7 +2029,7 @@ class DiscoverySpecialFilesClientOperationsMixin(DiscoverySpecialFilesClientMixi
     @distributed_trace
     def begin_generate(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.DiscoverySpecialFile], LROPoller[_models.DiscoveryLroResponse]]:
+    ) -> LROPoller[_models.DiscoverySpecialFile]:
         """Initiates the process of generating SAS signed URIs for uploading special files for the
         discovery.
 
@@ -2444,7 +2444,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
     @distributed_trace
     def begin_complete(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.Upload], LROPoller[_models.UploadLroResponse]]:
+    ) -> LROPoller[_models.Upload]:
         """Initiates the process of completing the upload and creating the measurements.
 
         :param upload_id: The upload resource identifier. Required.
@@ -2560,7 +2560,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
     @distributed_trace
     def begin_cancel(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.Upload], LROPoller[_models.UploadLroResponse]]:
+    ) -> LROPoller[_models.Upload]:
         """Initiates the process of cancelling the upload.
 
         :param upload_id: The upload resource identifier. Required.
@@ -2743,7 +2743,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
     @distributed_trace
     def begin_generate(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.UploadSpecialFile], LROPoller[_models.UploadLroResponse]]:
+    ) -> LROPoller[_models.UploadSpecialFile]:
         """Initiates the process of generating SAS signed URIs for uploading special files for the upload.
 
         :param upload_id: The upload resource identifier. Required.
@@ -2928,7 +2928,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
     @distributed_trace
     def begin_generate(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.UploadDataFile], LROPoller[_models.UploadLroResponse]]:
+    ) -> LROPoller[_models.UploadDataFile]:
         """Initiates the process of allocating the data files.
 
         :param upload_id: The upload resource identifier. Required.
@@ -3249,7 +3249,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.ClassificationSchema], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.ClassificationSchema]:
         """Creates new classification schema.
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Default
@@ -3283,7 +3283,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.ClassificationSchema], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.ClassificationSchema]:
         """Creates new classification schema.
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Default
@@ -3316,7 +3316,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[LROPoller[_models.ClassificationSchema], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.ClassificationSchema]:
         """Creates new classification schema.
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Is either
@@ -4272,7 +4272,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.StateMachine], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.StateMachine]:
         """Initiates process of applying an action on the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4311,7 +4311,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.StateMachine], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.StateMachine]:
         """Initiates process of applying an action on the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4349,7 +4349,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[LROPoller[_models.StateMachine], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.StateMachine]:
         """Initiates process of applying an action on the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4506,7 +4506,7 @@ class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileIn
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.MeasurementMetadataFileInfoBase], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.MeasurementMetadataFileInfoBase]:
         """Initiates a process that replaces the measurement's metadata file.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4545,7 +4545,7 @@ class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileIn
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.MeasurementMetadataFileInfoBase], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.MeasurementMetadataFileInfoBase]:
         """Initiates a process that replaces the measurement's metadata file.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4583,7 +4583,7 @@ class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileIn
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[LROPoller[_models.MeasurementMetadataFileInfoBase], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.MeasurementMetadataFileInfoBase]:
         """Initiates a process that replaces the measurement's metadata file.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4895,7 +4895,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStream], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStream]:
         """Creates new data-stream resource.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4932,7 +4932,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStream], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStream]:
         """Creates new data-stream resource.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4968,7 +4968,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStream], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStream]:
         """Creates new data-stream resource.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5094,7 +5094,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace
     def begin_clear_content(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStream], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStream]:
         """Clear the data-stream content.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5423,7 +5423,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace
     def begin_complete(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStream], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStream]:
         """Marks a data stream as completed.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5543,7 +5543,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace
     def begin_fail(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStream], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStream]:
         """Marks a data stream as failed.
 
         :param measurement_id: The measurement identifier. Required.
@@ -6828,7 +6828,7 @@ class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsCl
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStreamClassification], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStreamClassification]:
         """Assigns the classification to the data-stream.
 
         :param measurement_id: The measurement identifier. Required.
@@ -6869,7 +6869,7 @@ class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsCl
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStreamClassification], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStreamClassification]:
         """Assigns the classification to the data-stream.
 
         :param measurement_id: The measurement identifier. Required.
@@ -6909,7 +6909,7 @@ class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsCl
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[LROPoller[_models.DataStreamClassification], LROPoller[_models.DefaultLroResponse]]:
+    ) -> LROPoller[_models.DataStreamClassification]:
         """Assigns the classification to the data-stream.
 
         :param measurement_id: The measurement identifier. Required.

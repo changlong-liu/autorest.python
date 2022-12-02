@@ -396,7 +396,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
     @distributed_trace_async
     async def begin_complete(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.Discovery], AsyncLROPoller[_models.DiscoveryLroResponse]]:
+    ) -> AsyncLROPoller[_models.Discovery]:
         """Initiates the process of completing the discovery and creating the upload file grouping
         manifest files.
 
@@ -513,7 +513,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
     @distributed_trace_async
     async def begin_cancel(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.Discovery], AsyncLROPoller[_models.DiscoveryLroResponse]]:
+    ) -> AsyncLROPoller[_models.Discovery]:
         """Initiates the process of cancelling the discovery.
 
         :param discovery_id: The discovery identifier. Required.
@@ -630,7 +630,7 @@ class DiscoverySpecialFilesClientOperationsMixin(DiscoverySpecialFilesClientMixi
     @distributed_trace_async
     async def begin_generate(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DiscoverySpecialFile], AsyncLROPoller[_models.DiscoveryLroResponse]]:
+    ) -> AsyncLROPoller[_models.DiscoverySpecialFile]:
         """Initiates the process of generating SAS signed URIs for uploading special files for the
         discovery.
 
@@ -1047,7 +1047,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
     @distributed_trace_async
     async def begin_complete(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.Upload], AsyncLROPoller[_models.UploadLroResponse]]:
+    ) -> AsyncLROPoller[_models.Upload]:
         """Initiates the process of completing the upload and creating the measurements.
 
         :param upload_id: The upload resource identifier. Required.
@@ -1163,7 +1163,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
     @distributed_trace_async
     async def begin_cancel(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.Upload], AsyncLROPoller[_models.UploadLroResponse]]:
+    ) -> AsyncLROPoller[_models.Upload]:
         """Initiates the process of cancelling the upload.
 
         :param upload_id: The upload resource identifier. Required.
@@ -1346,7 +1346,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
     @distributed_trace_async
     async def begin_generate(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.UploadSpecialFile], AsyncLROPoller[_models.UploadLroResponse]]:
+    ) -> AsyncLROPoller[_models.UploadSpecialFile]:
         """Initiates the process of generating SAS signed URIs for uploading special files for the upload.
 
         :param upload_id: The upload resource identifier. Required.
@@ -1532,7 +1532,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
     @distributed_trace_async
     async def begin_generate(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.UploadDataFile], AsyncLROPoller[_models.UploadLroResponse]]:
+    ) -> AsyncLROPoller[_models.UploadDataFile]:
         """Initiates the process of allocating the data files.
 
         :param upload_id: The upload resource identifier. Required.
@@ -1855,7 +1855,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.ClassificationSchema], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.ClassificationSchema]:
         """Creates new classification schema.
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Default
@@ -1890,7 +1890,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.ClassificationSchema], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.ClassificationSchema]:
         """Creates new classification schema.
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Default
@@ -1924,7 +1924,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.ClassificationSchema], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.ClassificationSchema]:
         """Creates new classification schema.
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Is either
@@ -2883,7 +2883,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.StateMachine], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.StateMachine]:
         """Initiates process of applying an action on the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2923,7 +2923,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.StateMachine], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.StateMachine]:
         """Initiates process of applying an action on the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2962,7 +2962,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.StateMachine], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.StateMachine]:
         """Initiates process of applying an action on the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3120,7 +3120,7 @@ class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileIn
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.MeasurementMetadataFileInfoBase], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.MeasurementMetadataFileInfoBase]:
         """Initiates a process that replaces the measurement's metadata file.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3159,7 +3159,7 @@ class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileIn
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.MeasurementMetadataFileInfoBase], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.MeasurementMetadataFileInfoBase]:
         """Initiates a process that replaces the measurement's metadata file.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3197,7 +3197,7 @@ class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileIn
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.MeasurementMetadataFileInfoBase], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.MeasurementMetadataFileInfoBase]:
         """Initiates a process that replaces the measurement's metadata file.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3509,7 +3509,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStream], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStream]:
         """Creates new data-stream resource.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3546,7 +3546,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStream], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStream]:
         """Creates new data-stream resource.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3582,7 +3582,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStream], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStream]:
         """Creates new data-stream resource.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3708,7 +3708,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace_async
     async def begin_clear_content(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStream], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStream]:
         """Clear the data-stream content.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4037,7 +4037,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace_async
     async def begin_complete(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStream], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStream]:
         """Marks a data stream as completed.
 
         :param measurement_id: The measurement identifier. Required.
@@ -4157,7 +4157,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace_async
     async def begin_fail(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStream], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStream]:
         """Marks a data stream as failed.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5445,7 +5445,7 @@ class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsCl
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStreamClassification], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStreamClassification]:
         """Assigns the classification to the data-stream.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5486,7 +5486,7 @@ class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsCl
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStreamClassification], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStreamClassification]:
         """Assigns the classification to the data-stream.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5526,7 +5526,7 @@ class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsCl
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
-    ) -> Union[AsyncLROPoller[_models.DataStreamClassification], AsyncLROPoller[_models.DefaultLroResponse]]:
+    ) -> AsyncLROPoller[_models.DataStreamClassification]:
         """Assigns the classification to the data-stream.
 
         :param measurement_id: The measurement identifier. Required.
