@@ -26,6 +26,7 @@
         "operationId": "00000000-0000-0000-0000-000000000123",
         "status": "Created",
         "operationType": "string",
+        "lastModifiedBy": "string",
         "etag": "sha256",
         "error": {
           "code": "string",

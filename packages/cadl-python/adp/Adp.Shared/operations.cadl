@@ -3,9 +3,8 @@ using Cadl.Rest;
 using Azure.Core;
 using Autorest;
 
-namespace Adp.DataManagement;
+namespace Adp.Shared;
 
-@client(SharedClients.LongRunningOperationsClient)
 @tag("Long Running Operation")
 interface LongRunningOperations {
   @doc("Get the details of an LRO.")

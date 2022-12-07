@@ -1,4 +1,4 @@
-// import from parent main to help VSCode with resolving dependencies
+import "../main.cadl";
 import "./models.cadl";
 import "./operations.cadl";
 import "./classification";

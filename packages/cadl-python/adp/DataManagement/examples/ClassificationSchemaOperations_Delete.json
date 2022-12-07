@@ -13,9 +13,10 @@
         "operation-location": "https://workspace-name-hash.workspaces.region.adp.azure.com/operations/00000000-0000-0000-0000-000000000123?api-version=2022-11-30-preview"
       },
       "body": {
-        "operationId": "string",
-        "status": "Created",
+        "operationId": "00000000-0000-0000-0000-000000000123",
+        "status": "Deleted",
         "operationType": "string",
+        "lastModifiedBy": "string",
         "etag": "sha256",
         "error": {
           "code": "string",

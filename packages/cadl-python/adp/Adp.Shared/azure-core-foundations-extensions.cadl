@@ -57,7 +57,7 @@ op CustomResourceList<
 @createsOrReplacesResource(TResource)
 op CustomResourceCreateOrReplace<
   TResource extends object,
-  TResourceCreateParams extends object 
+  TResourceCreateParams extends object
 > is Foundations.ResourceOperation<
   TResource,
   TResourceCreateParams,
@@ -65,10 +65,17 @@ op CustomResourceCreateOrReplace<
 >;
 
 @doc("A wrapper for optional parameter in the body. The intent of model is to add description to 'body'")
-model CustomBodyWrapper<T extends object>{
+model CustomBodyWrapper<T extends object> {
   @doc("Parameter of type '{name}' in the body.", T)
   @body
   body?: T;
+}
+
+@doc("A wrapper for required parameter in the body. The intent of model is to add description to 'body' and make it requred.")
+model CustomRequiredBodyWrapper<T extends object> {
+  @doc("Parameter of type '{name}' in the body.", T)
+  @body
+  body: T;
 }
 
 @doc("A {name} resource was successfully created.", T)
@@ -106,7 +113,7 @@ op CustomLongRunningResourceCreateUsingHttpPost<
 @doc("Creates a {name}", TResource)
 @createsResource(TResource)
 op CustomLongRunningResourceCreateWithServiceProvidedName<
-  TResource extends object ,
+  TResource extends object,
   TResourceCreateParams extends object = {},
   TCustom extends Foundations.CustomizationFields = {},
   TLROResponse extends object = DefaultLroResponse
@@ -129,9 +136,9 @@ op CustomLongRunningResourceCreateWithServiceProvidedName<
 )
 op CustomLongRunningResourceAction<
   TResource extends object,
-  TRequestParameters  extends object = {},
+  TRequestParameters extends object = {},
   TCustom extends Foundations.CustomizationFields = {},
-  TLROResponse extends object= DefaultLroResponse
+  TLROResponse extends object = DefaultLroResponse
 >(
   ...Foundations.ItemKeysOf<TResource>,
   ...TRequestParameters,
@@ -151,7 +158,7 @@ op CustomLongRunningResourceAction<
 )
 op CustomLongRunningResourceActionWithParameters<
   TResource extends object,
-  TParams  extends object = {},
+  TParams extends object = {},
   TLROResponse extends object = DefaultLroResponse
 >(
   ...Foundations.ItemKeysOf<TResource>,

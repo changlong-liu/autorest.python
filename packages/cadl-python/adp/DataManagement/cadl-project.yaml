@@ -2,6 +2,10 @@ emitters:
   "@azure-tools/cadl-autorest":
     examples-directory: ./examples
     output-file: adp-data-management-api.json
+    # The output-dir could be used to hard-code relative path to the output directory
+    #   but it doesn't work with "azure-resource-provider-folder" which implicitly 
+    #   resolves the API version and namespace.
+    #output-dir: ../../../../draftcompliant/
 
     # Not using the "output-dir" (added in CADL Compiler 0.37), because it does not resolve the API version and type
     #output-dir: ../data-plane/
@@ -10,8 +14,22 @@ emitters:
     # Note, this directive need to go up one extra level for some reason and also does not support "internal" API type
     # It generates "stable" folder for "####-##-##-internal" API version.
     # TODO: need to understand the guidelines for adding support for "internal" APIs that should not be "visible" 
-    # or accessible to the external clients 
+    # or accessible to the external clients
+    #
+    # Note, the following relative path is equivalent to "src/core/apispecs/adp/data-plane"
     azure-resource-provider-folder: ../../data-plane/
+
+  # TODO: refine the library name and the namespace
+  # Suggested names:
+  #  library-name: "Microsoft.Azure.Adp.DataManagement"
+  #  namespace: "Microsoft.Azure.Adp.DataManagement.Clients.{api-version}"
+  #
+  # Commented out because of compilation errors
   "@azure-tools/cadl-csharp":
-    library-name: "Azure.AI.AutonomousDevelopmentPlatform"
-    namespace: "Azure.AI.AutonomousDevelopmentPlatform"
+    library-name: "Azure.Adp.DataManagement.Client.v2022_11"
+    namespace: "Azure.Adp.DataManagement.Client.v2022_11"
+    sdk-folder: "../../clients/DataManagement/Adp.DataManagement.Clients.v2022_11"
+    clear-output-folder: true
+    new-project: true    
+    generateConvenienceAPI: true
+    #single-top-level-client: true

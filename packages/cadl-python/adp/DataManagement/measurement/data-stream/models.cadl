@@ -2,19 +2,11 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Adp;
-
-enum DataStreamClients {
-  DataStreamClient,
-  DataStreamStorageClient,
-  DataStreamTagsClient,
-  DataStreamFilesClient,
-  DataStreamLogsContainerClient,
-}
+namespace Adp.DataManagement.DataStream;
 
 @doc("A data-stream resource")
 @resource("dataStreams")
-@parentResource(Measurement)
+@parentResource(Adp.DataManagement.Measurement.Measurement)
 model DataStream {
   @doc("The data stream identifier")
   @key
@@ -24,12 +16,6 @@ model DataStream {
   @doc("The data stream lineage information")
   @visibility("create")
   lineage: DataStreamLineage;
-  /* 
-  @doc("The data stream list of tags")
-  @visibility("read", "create")
-  tags: Tags;
-  */
-
 
   @doc("The data stream status")
   @visibility("update")
@@ -53,7 +39,6 @@ model DataStreamCreationParameters {
 @doc("A wrapper for the list of data streams")
 model DataStreamListResponse {
   @doc("Collection of the data stream's channels")
-  @visibility("read")
   dataStreams: DataStream[];
 }
 
@@ -264,7 +249,7 @@ model StorageBase {
   ...Azure.Core.Foundations.Extensions.CustomEtagProperty;
 }
 
-@doc("A data-stream with unsharded storage resource")
+@doc("A data-stream with non sharded storage resource")
 @resource("storage")
 @parentResource(DataStream)
 model Storage {
@@ -274,7 +259,7 @@ model Storage {
   TODO: check with CADL team how to define a singleton child resource without key.
   """)
   @key
-  id: string;
+  id: SingletonIdentifier;
   ...StorageBase;
 }
 
@@ -295,7 +280,7 @@ model TagSet {
   TODO: check with CADL team how to define a singleton child resource without key.
   """)
   @key
-  id: string;
+  id: SingletonIdentifier;
   ...TagSetBase;
 }
 
@@ -338,8 +323,7 @@ model DataStreamFile {
   fileUri: uri;
 
   @doc("UTC date and time indicating the start of file recording")
-  @format("date")
-  externalTimeStamp: string;
+  externalTimeStamp: zonedDateTime;
 
   @doc("Size in bytes")
   size: int64;
@@ -351,7 +335,7 @@ model DataStreamFile {
 model DataStreamLogsContainer {
   @doc("Static identifier for singleton resource")
   @key
-  id: "default";
+  id: SingletonIdentifier;
   ...DataStreamLogsContainerBase;
 }
 

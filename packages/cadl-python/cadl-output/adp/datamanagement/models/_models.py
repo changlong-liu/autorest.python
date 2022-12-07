@@ -51,38 +51,6 @@ class ClassificationSchema(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class CompleteUploadMetadataFileRequest(_model_base.Model):
-    """Request parameters for the complete upload metadata file API.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar pending_file_e_tag: The ETag of the uploaded metadata file. Required.
-    :vartype pending_file_e_tag: str
-    """
-
-    pending_file_e_tag: str = rest_field(name="pendingFileETag")
-    """The ETag of the uploaded metadata file. Required. """
-
-    @overload
-    def __init__(
-        self,
-        *,
-        pending_file_e_tag: str,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-        ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class CustomErrorResponse(_model_base.Model):
     """Error response with 'x-ms-error-code' header.
 
@@ -121,7 +89,7 @@ class CustomErrorResponse(_model_base.Model):
 
 
 class DataStream(_model_base.Model):
-    """DataStream.
+    """A data-stream resource.
 
     Readonly variables are only populated by the server, and will be ignored when sending a request.
 
@@ -159,32 +127,6 @@ class DataStream(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class DataStreamClassification(_model_base.Model):
-    """DataStreamClassification.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar schema_name: Classification schema name. Required.
-    :vartype schema_name: str
-    :ivar classification_object: Classification object model (JSON as string). Required.
-    :vartype classification_object: str
-    :ivar etag: The entity tag for this resource. Required.
-    :vartype etag: str
-    """
-
-    schema_name: str = rest_field(name="schemaName", readonly=True)
-    """Classification schema name. Required. """
-    classification_object: str = rest_field(name="classificationObject", readonly=True)
-    """Classification object model (JSON as string). Required. """
-    etag: str = rest_field(readonly=True)
-    """The entity tag for this resource. Required. """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class DataStreamFile(_model_base.Model):
     """Data-stream file list.
 
@@ -198,7 +140,7 @@ class DataStreamFile(_model_base.Model):
      This URI expires in 24 hours. Required.
     :vartype file_uri: str
     :ivar external_time_stamp: UTC date and time indicating the start of file recording. Required.
-    :vartype external_time_stamp: str
+    :vartype external_time_stamp: ~datetime.datetime
     :ivar size: Size in bytes. Required.
     :vartype size: int
     """
@@ -208,7 +150,7 @@ class DataStreamFile(_model_base.Model):
     file_uri: str = rest_field(name="fileUri")
     """SAS signed URI for downloading the file from Azure Storage.
 This URI expires in 24 hours. Required. """
-    external_time_stamp: str = rest_field(name="externalTimeStamp")
+    external_time_stamp: datetime.datetime = rest_field(name="externalTimeStamp")
     """UTC date and time indicating the start of file recording. Required. """
     size: int = rest_field()
     """Size in bytes. Required. """
@@ -218,7 +160,7 @@ This URI expires in 24 hours. Required. """
         self,
         *,
         file_uri: str,
-        external_time_stamp: str,
+        external_time_stamp: datetime.datetime,
         size: int,
     ):
         ...
@@ -510,9 +452,11 @@ class DefaultLroResponse(_model_base.Model):
     :vartype operation_type: str or ~adp.datamanagement.models.DefaultLroType
     :ivar error: The operation error.
     :vartype error: ~adp.datamanagement.models.Error
-    :ivar result_uri: The operation final result URI. Will be returned if the operation succeeds
-     via ``Location`` header in response.
-    :vartype result_uri: str
+    :ivar last_modified_by: The identifier of the service that was last to modify the operation
+     status. Required.
+    :vartype last_modified_by: str
+    :ivar result_location: The result resource location (URI).
+    :vartype result_location: str
     :ivar etag: The entity tag for this resource. Required.
     :vartype etag: str
     """
@@ -525,8 +469,10 @@ class DefaultLroResponse(_model_base.Model):
     """The operation type. \"default\""""
     error: Optional["_models.Error"] = rest_field(readonly=True)
     """The operation error. """
-    result_uri: Optional[str] = rest_field(name="resultUri", readonly=True)
-    """The operation final result URI. Will be returned if the operation succeeds via ``Location`` header in response. """
+    last_modified_by: str = rest_field(name="lastModifiedBy", readonly=True)
+    """The identifier of the service that was last to modify the operation status. Required. """
+    result_location: Optional[str] = rest_field(name="resultLocation", readonly=True)
+    """The result resource location (URI). """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
 
@@ -643,9 +589,11 @@ class DiscoveryLroResponse(_model_base.Model):
     :vartype operation_type: str or ~adp.datamanagement.models.DiscoveryOperationType
     :ivar error: The operation error.
     :vartype error: ~adp.datamanagement.models.Error
-    :ivar result_uri: The operation final result URI. Will be returned if the operation succeeds
-     via ``Location`` header in response.
-    :vartype result_uri: str
+    :ivar last_modified_by: The identifier of the service that was last to modify the operation
+     status. Required.
+    :vartype last_modified_by: str
+    :ivar result_location: The result resource location (URI).
+    :vartype result_location: str
     :ivar etag: The entity tag for this resource. Required.
     :vartype etag: str
     """
@@ -660,8 +608,10 @@ class DiscoveryLroResponse(_model_base.Model):
     """The operation type. Known values are: \"CompleteDiscovery\", \"FinalizeFileList\", and \"AbortDiscovery\"."""
     error: Optional["_models.Error"] = rest_field(readonly=True)
     """The operation error. """
-    result_uri: Optional[str] = rest_field(name="resultUri", readonly=True)
-    """The operation final result URI. Will be returned if the operation succeeds via ``Location`` header in response. """
+    last_modified_by: str = rest_field(name="lastModifiedBy", readonly=True)
+    """The identifier of the service that was last to modify the operation status. Required. """
+    result_location: Optional[str] = rest_field(name="resultLocation", readonly=True)
+    """The result resource location (URI). """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
 
@@ -1019,9 +969,11 @@ class LongRunningOperationWithResponseHeaders(_model_base.Model):
     :vartype operation_type: str
     :ivar error: The operation error.
     :vartype error: ~adp.datamanagement.models.Error
-    :ivar result_uri: The operation final result URI. Will be returned if the operation succeeds
-     via ``Location`` header in response.
-    :vartype result_uri: str
+    :ivar last_modified_by: The identifier of the service that was last to modify the operation
+     status. Required.
+    :vartype last_modified_by: str
+    :ivar result_location: The result resource location (URI).
+    :vartype result_location: str
     :ivar etag: The entity tag for this resource. Required.
     :vartype etag: str
     :ivar retry_after: The Retry-After header can indicate how long the client should wait before
@@ -1039,8 +991,10 @@ class LongRunningOperationWithResponseHeaders(_model_base.Model):
     """The operation type. """
     error: Optional["_models.Error"] = rest_field(readonly=True)
     """The operation error. """
-    result_uri: Optional[str] = rest_field(name="resultUri", readonly=True)
-    """The operation final result URI. Will be returned if the operation succeeds via ``Location`` header in response. """
+    last_modified_by: str = rest_field(name="lastModifiedBy", readonly=True)
+    """The identifier of the service that was last to modify the operation status. Required. """
+    result_location: Optional[str] = rest_field(name="resultLocation", readonly=True)
+    """The result resource location (URI). """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
     retry_after: Optional[int] = rest_field(name="retryAfter")
@@ -1141,6 +1095,32 @@ class Measurement(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
+class MeasurementClassification(_model_base.Model):
+    """MeasurementClassification.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar schema_name: Classification schema name. Required.
+    :vartype schema_name: str
+    :ivar classification_object: Classification object model (JSON as string). Required.
+    :vartype classification_object: str
+    :ivar etag: The entity tag for this resource. Required.
+    :vartype etag: str
+    """
+
+    schema_name: str = rest_field(name="schemaName", readonly=True)
+    """Classification schema name. Required. """
+    classification_object: str = rest_field(name="classificationObject", readonly=True)
+    """Classification object model (JSON as string). Required. """
+    etag: str = rest_field(readonly=True)
+    """The entity tag for this resource. Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
 class MeasurementListRequestParameters(_model_base.Model):
     """A wrapper for the List of measurements IDs.
 
@@ -1190,54 +1170,6 @@ class MeasurementMetadataBase(_model_base.Model):
         self,
         *,
         metadata: Dict[str, str],
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-        ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
-class MeasurementMetadataFileInfoBase(_model_base.Model):
-    """Measurement metadata file information model.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar metadata_file_name: The measurement's metadata file name. Required.
-    :vartype metadata_file_name: str
-    :ivar metadata_file_uri: SAS signed URI to measurement metadata file.
-     If file already exists on storage then ETag of this file will be returned in the response
-     header.
-     This URI expires in 24 hours. Required.
-    :vartype metadata_file_uri: str
-    :ivar etag_header: The entity tag for the response.
-    :vartype etag_header: str
-    """
-
-    metadata_file_name: str = rest_field(name="metadataFileName")
-    """The measurement's metadata file name. Required. """
-    metadata_file_uri: str = rest_field(name="metadataFileUri")
-    """SAS signed URI to measurement metadata file.
-If file already exists on storage then ETag of this file will be returned in the response header.
-This URI expires in 24 hours. Required. """
-    etag_header: Optional[str] = rest_field(name="etagHeader", readonly=True)
-    """The entity tag for the response. """
-
-    @overload
-    def __init__(
-        self,
-        *,
-        metadata_file_name: str,
-        metadata_file_uri: str,
     ):
         ...
 
@@ -1495,26 +1427,6 @@ class PagedDataStream(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class PagedDataStreamClassification(_model_base.Model):
-    """Paged collection of DataStreamClassification items.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar value: The DataStreamClassification items on this page. Required.
-    :vartype value: list[~adp.datamanagement.models.DataStreamClassification]
-    :ivar next_link: The link to the next page of items.
-    :vartype next_link: str
-    """
-
-    value: List["_models.DataStreamClassification"] = rest_field()
-    """The DataStreamClassification items on this page. Required. """
-    next_link: Optional[str] = rest_field(name="nextLink")
-    """The link to the next page of items. """
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class PagedDataStreamFile(_model_base.Model):
     """Paged collection of DataStreamFile items.
 
@@ -1608,6 +1520,26 @@ class PagedMeasurement(_model_base.Model):
 
     value: List["_models.Measurement"] = rest_field()
     """The Measurement items on this page. Required. """
+    next_link: Optional[str] = rest_field(name="nextLink")
+    """The link to the next page of items. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class PagedMeasurementClassification(_model_base.Model):
+    """Paged collection of MeasurementClassification items.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar value: The MeasurementClassification items on this page. Required.
+    :vartype value: list[~adp.datamanagement.models.MeasurementClassification]
+    :ivar next_link: The link to the next page of items.
+    :vartype next_link: str
+    """
+
+    value: List["_models.MeasurementClassification"] = rest_field()
+    """The MeasurementClassification items on this page. Required. """
     next_link: Optional[str] = rest_field(name="nextLink")
     """The link to the next page of items. """
 
@@ -1865,7 +1797,7 @@ class StateMachineAction(_model_base.Model):
 
 
 class Storage(_model_base.Model):
-    """A data-stream with unsharded storage resource.
+    """A data-stream with non sharded storage resource.
 
     Readonly variables are only populated by the server, and will be ignored when sending a request.
 
@@ -1874,7 +1806,8 @@ class Storage(_model_base.Model):
     :ivar id: The data stream storage identifier.
      Not in use as this is a singleton resource.
      TODO: check with CADL team how to define a singleton child resource without key. Required.
-    :vartype id: str
+     "current"
+    :vartype id: str or ~adp.datamanagement.models.SingletonIdentifier
     :ivar type: Storage type. Required.
     :vartype type: str
     :ivar rolling_information: The data stream rolling information.
@@ -1893,10 +1826,10 @@ class Storage(_model_base.Model):
     :vartype etag: str
     """
 
-    id: str = rest_field(readonly=True)
+    id: Union[str, "_models.SingletonIdentifier"] = rest_field(readonly=True)
     """The data stream storage identifier.
 Not in use as this is a singleton resource.
-TODO: check with CADL team how to define a singleton child resource without key. Required. """
+TODO: check with CADL team how to define a singleton child resource without key. Required. \"current\""""
     type: str = rest_field()
     """Storage type. Required. """
     rolling_information: Optional["_models.DataStreamRollingInformation"] = rest_field(
@@ -2044,15 +1977,16 @@ class TagSet(_model_base.Model):
     :ivar id: The data stream tag set identifier.
      Not in use as this is a singleton resource. Tags could be set or returned as singleton set.
      TODO: check with CADL team how to define a singleton child resource without key. Required.
-    :vartype id: str
+     "current"
+    :vartype id: str or ~adp.datamanagement.models.SingletonIdentifier
     :ivar tags: Set of data-stream tags. Required.
     :vartype tags: list[~adp.datamanagement.models.Tag]
     """
 
-    id: str = rest_field(readonly=True)
+    id: Union[str, "_models.SingletonIdentifier"] = rest_field(readonly=True)
     """The data stream tag set identifier.
 Not in use as this is a singleton resource. Tags could be set or returned as singleton set.
-TODO: check with CADL team how to define a singleton child resource without key. Required. """
+TODO: check with CADL team how to define a singleton child resource without key. Required. \"current\""""
     tags: List["_models.Tag"] = rest_field(readonly=True)
     """Set of data-stream tags. Required. """
 
@@ -2251,9 +2185,11 @@ class UploadLroResponse(_model_base.Model):
     :vartype operation_type: str or ~adp.datamanagement.models.UploadOperationType
     :ivar error: The operation error.
     :vartype error: ~adp.datamanagement.models.Error
-    :ivar result_uri: The operation final result URI. Will be returned if the operation succeeds
-     via ``Location`` header in response.
-    :vartype result_uri: str
+    :ivar last_modified_by: The identifier of the service that was last to modify the operation
+     status. Required.
+    :vartype last_modified_by: str
+    :ivar result_location: The result resource location (URI).
+    :vartype result_location: str
     :ivar etag: The entity tag for this resource. Required.
     :vartype etag: str
     """
@@ -2268,8 +2204,10 @@ class UploadLroResponse(_model_base.Model):
     """The operation type. Known values are: \"FinalizeFileList\", \"ShardFiles\", \"CompleteUpload\", and \"AbortUpload\"."""
     error: Optional["_models.Error"] = rest_field(readonly=True)
     """The operation error. """
-    result_uri: Optional[str] = rest_field(name="resultUri", readonly=True)
-    """The operation final result URI. Will be returned if the operation succeeds via ``Location`` header in response. """
+    last_modified_by: str = rest_field(name="lastModifiedBy", readonly=True)
+    """The identifier of the service that was last to modify the operation status. Required. """
+    result_location: Optional[str] = rest_field(name="resultLocation", readonly=True)
+    """The result resource location (URI). """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
 

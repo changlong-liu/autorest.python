@@ -2,10 +2,12 @@
   "name": "@cadl-api-spec/adp-shared",
   "version": "1.0",
   "description": "ADP Shared API",
+  "private": true,
   "main": "index.js",
-  "cadlMain": "main.cadl",
+  "cadlMain": "client.cadl",
   "config": {
     "verbose": " -Verbose",
+    "OutputDirectory": "../data-plane/Adp.Shared",
     "OutputFile": "preview/2022-11-30-preview/adp-shared-api.json",
     "ClientPath": "../../../../../clients/Shared/Clients.Shared.vDraftCompliant",
     "ClientNamespace": "Microsoft.Azure.Adp.Shared.Clients.vDraftCompliant",
@@ -14,26 +16,30 @@
     "AutorestManifestFile": "../src/scripts/autorest.md"
   },
   "scripts": {
-    "build": "pwsh ../src/scripts/compile.ps1 -IsPublicApi -InputCadl ./main.cadl -OutputPath ./generated/cadl-autorest/public/Shared -OutputFile %npm_package_config_OutputFile%",
-    "publish": "pwsh ../src/scripts/publish.ps1 %npm_package_config_verbose% -SourcePath ./generated/cadl-autorest/public/Shared/%npm_package_config_OutputFile% -OutputPath %npm_package_config_PublishOutputFileName%",
-    "generateAutorestClient": "pwsh ../src/scripts/generate-autorest-client.ps1 -InputOpenApiSpecFile ./generated/cadl-autorest/public/Shared/%npm_package_config_OutputFile% -OutputPath %npm_package_configClientPath%/generated -Namespace %npm_package_configClientNamespace% -AutorestManifestFile %npm_package_config_AutorestManifestFile%",
-    "validate": "pwsh ../src/scripts/validate-spec.ps1 -OpenApiSpecFile ./generated/cadl-autorest/public/Shared/%npm_package_config_OutputFile% && pwsh ../src/scripts/validate-examples.ps1 -OpenApiSpecFile ./generated/cadl-autorest/public/Shared/%npm_package_config_OutputFile%",
+    "lint": "cadl compile . --warn-as-error --import @cadl-lang/library-linter --no-emit",
+    "validate": "npm run _validateOpenApiSpec && npm run _validateExamples",
+    "build": "npm run format && npx cadl compile . && npm run validate",
+    "publish": "pwsh ../src/scripts/publish.ps1 %npm_package_config_verbose% -SourcePath %npm_package_config_OutputDirectory%/%npm_package_config_OutputFile% -OutputPath %npm_package_config_PublishOutputFileName%",
+    "_generateAutorestClient": "pwsh ../src/scripts/generate-autorest-client.ps1 -InputOpenApiSpecFile %npm_package_config_OutputDirectory%/%npm_package_config_OutputFile% -OutputPath %npm_package_configClientPath%/generated -Namespace %npm_package_configClientNamespace% -AutorestManifestFile %npm_package_config_AutorestManifestFile%",
+    "_validateOpenApiSpec": "pwsh ../src/scripts/validate-spec.ps1 -OpenApiSpecFile %npm_package_config_OutputDirectory%/%npm_package_config_OutputFile%",
+    "_validateExamples": "pwsh ../src/scripts/validate-examples.ps1 -OpenApiSpecFile %npm_package_config_OutputDirectory%/%npm_package_config_OutputFile%",
     "format": "npx cadl format --pretty ./**/*.cadl"
   },
   "keywords": [],
   "author": "igmakhli@microsoft.com",
   "license": "MIT",
-  "dependencies": {
-    "@azure-tools/cadl-autorest": "latest",
-    "@azure-tools/cadl-azure-core": "latest",
-    "@cadl-lang/openapi": "latest",
-    "@cadl-lang/openapi3": "latest",
-    "@cadl-lang/rest": "latest",
-    "@cadl-lang/versioning": "latest"
-  },
   "devDependencies": {
-    "@cadl-lang/compiler": "latest",
-    "avocado": "^1.0.0",
-    "prettier": "^2.7.1"
+    "@cadl-lang/openapi": "~0.14.0",
+    "@cadl-lang/openapi3": "~0.17.0",
+    "@cadl-lang/rest": "~0.19.0",
+    "@cadl-lang/versioning": "~0.10.0",
+    "@azure-tools/cadl-autorest": "~0.22.0",
+    "@azure-tools/cadl-azure-core": "~0.9.0",
+    "@cadl-lang/compiler": "~0.37.0",
+    "@azure-tools/cadl-dpg": "~0.3.0",
+    "@azure-tools/cadl-csharp": "0.1.9",
+    "avocado": "1.0.0",
+    "prettier": "^2.7.1",
+    "@cadl-lang/library-linter": "~0.2.1"
   }
 }

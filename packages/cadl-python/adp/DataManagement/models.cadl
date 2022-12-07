@@ -1,0 +1,9 @@
+namespace Adp.DataManagement;
+
+enum Clients {
+  DiscoveryClient,
+  UploadClient,
+  ClassificationSchemaClient,
+  MeasurementClient,
+  DataStreamClient,
+}

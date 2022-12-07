@@ -2,16 +2,7 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Adp;
-
-enum Clients {
-  MeasurementClient,
-  MeasurementStateMachineClient,
-  MeasurementMetadataClient,
-  MeasurementProcessingResultsClient,
-  MeasurementMetadataFileInfoClient,
-  MeasurementMetadataSchemaFileInfoClient,
-}
+namespace Adp.DataManagement.Measurement;
 
 @parentResource(Measurement)
 @resource("stateMachines")
@@ -40,14 +31,6 @@ model Measurement {
   @doc("The measurement identifier.")
   @key
   measurementId: string;
-  /*   @doc("The measurement state")
-  @visibility("update")
-  state?: MeasurementState;
-
-  @doc("The measurement current status")
-  @visibility("update")
-  executionStatus?: MeasurementStateExecutionStatus; */
-
 
   @doc("The storage account location which contains the measurement")
   location: string;
@@ -89,7 +72,7 @@ model MeasurementProcessingResults {
     MeasurementProcessingResults
   )
   @key
-  id: string;
+  id: SingletonIdentifier;
   ...MeasurementProcessingResultsBase;
 }
 
@@ -112,7 +95,7 @@ model MeasurementMetadata {
     MeasurementMetadata
   )
   @key
-  id: string;
+  id: SingletonIdentifier;
   ...MeasurementMetadataBase;
 }
 
@@ -143,7 +126,7 @@ model MeasurementMetadataFileInfo {
     MeasurementMetadataFileInfo
   )
   @key
-  id: string;
+  id: SingletonIdentifier;
   ...MeasurementMetadataFileInfoBase;
 }
 
@@ -172,7 +155,7 @@ model MeasurementMetadataSchemaFileInfo {
     MeasurementMetadataSchemaFileInfo
   )
   @key
-  id: string;
+  id: SingletonIdentifier;
   ...MeasurementMetadataSchemaFileInfoBase;
 }
 

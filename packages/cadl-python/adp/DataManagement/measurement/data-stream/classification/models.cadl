@@ -1,7 +1,7 @@
 using Cadl.Http;
 using Cadl.Rest;
 
-namespace Adp;
+namespace Adp.DataManagement.DataStream.Classification;
 
 enum DataStreamClassificationClients {
   DataStreamClassificationsClient,
@@ -11,7 +11,7 @@ enum DataStreamClassificationClients {
 @resource("classifications")
 @parentResource(DataStream)
 model DataStreamClassification {
-  ...Classification;
+  ...Adp.Classification;
 }
 
 @doc("{name} resource creation parameters.", DataStreamClassification)

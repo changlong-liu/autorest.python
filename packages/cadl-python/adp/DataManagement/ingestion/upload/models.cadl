@@ -2,7 +2,7 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Adp;
+namespace Adp.DataManagement.Ingestion.Upload;
 
 @doc("Internal - the model for internal use")
 model UploadIdentifier {
@@ -13,13 +13,6 @@ model UploadIdentifier {
   @minLength(1)
   @maxLength(36)
   uploadId: string;
-}
-
-enum UploadClients {
-  UploadClient,
-  UploadSpecialFilesClient,
-  UploadDataFilesClient,
-  UploadMeasurementsClient,
 }
 
 @doc("Upload resource creation parameters")

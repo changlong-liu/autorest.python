@@ -5,9 +5,8 @@ using Azure.Core.Foundations.Extensions;
 using OpenAPI;
 using Autorest;
 
-namespace Adp.DataManagement;
+namespace Adp.DataManagement.DataStream.Classification;
 
-@client(DataStreamClassificationClients.DataStreamClassificationsClient)
 @tag("Data Stream Classification")
 interface DataStreamClassificationOperations {
   @doc("Get classification by schema name.")
@@ -17,7 +16,7 @@ interface DataStreamClassificationOperations {
   @doc("Assigns the classification to the data-stream.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   create is CustomLongRunningResourceCreateUsingHttpPost<
     DataStreamClassification,
     CustomBodyWrapper<DataStreamClassificationCreationParameters>
@@ -27,10 +26,10 @@ interface DataStreamClassificationOperations {
   @doc("Unassign the classification from the data-stream.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   delete is CustomLongRunningResourceDelete<DataStreamClassification>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
   @doc("Lists the classifications assigned to the data-stream.")
-  list is CustomResourceList<DataStreamClassification>;
+  getAll is CustomResourceList<DataStreamClassification>;
 }

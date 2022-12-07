@@ -1,5 +1,3 @@
-import "../../Adp.Shared/main.cadl";
-
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
@@ -7,9 +5,8 @@ using Azure.Core.Foundations.Extensions;
 using OpenAPI;
 using Autorest;
 
-namespace Adp.DataManagement;
+namespace Adp.DataManagement.ClassificationSchema;
 
-@client(ClassificationSchemaClients.ClassificationSchemaClient)
 @tag("Classification Schema")
 interface ClassificationSchemaOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource read operation."
@@ -20,7 +17,7 @@ interface ClassificationSchemaOperations {
   @doc("Creates new classification schema.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   create is CustomLongRunningResourceCreateUsingHttpPost<
     ClassificationSchema,
     CustomBodyWrapper<ClassificationSchemaCreationParameters>
@@ -30,10 +27,10 @@ interface ClassificationSchemaOperations {
   @doc("Deletes the classification schema and all related classification assignments (instances).")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   delete is CustomLongRunningResourceDelete<ClassificationSchema>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
   @doc("List all classification schemas.")
-  list is CustomResourceList<ClassificationSchema>;
+  getAll is CustomResourceList<ClassificationSchema>;
 }

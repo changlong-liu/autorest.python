@@ -4,17 +4,13 @@ using Azure.Core;
 using OpenAPI;
 using Autorest;
 
-namespace Adp;
-
-enum MeasurementClassificationClients {
-  MeasurementClassificationsClient,
-}
+namespace Adp.DataManagement.Measurement.Classification;
 
 @doc("Measurement classification")
 @resource("classifications")
 @parentResource(Measurement)
 model MeasurementClassification {
-  ...Classification;
+  ...Adp.Classification;
 }
 
 @doc("{name} resource creation parameters.", MeasurementClassification)

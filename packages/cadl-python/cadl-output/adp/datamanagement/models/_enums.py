@@ -97,6 +97,12 @@ class LongRunningOperationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CANCELED = "Canceled"
 
 
+class SingletonIdentifier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """SingletonIdentifier."""
+
+    CURRENT = "current"
+
+
 class UploadOperationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The supported operations of the upload."""
 

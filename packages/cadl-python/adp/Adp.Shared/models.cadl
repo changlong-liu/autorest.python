@@ -31,7 +31,6 @@ model FileUploadInformation {
   @doc("File name specified by the client")
   @key
   clientFileName: string;
-
   ...FileLocation;
 }
 
@@ -109,7 +108,10 @@ model LongRunningOperationIdHeader {
 }
 
 @doc("The long running operation model without the key.")
-model LongRunningOperationBase<TOperationType = string, TStatusError = Azure.Core.Foundations.Error> {
+model LongRunningOperationBase<
+  TOperationType = string,
+  TStatusError = Azure.Core.Foundations.Error
+> {
   @doc("The operation status.")
   @visibility("read", "update")
   status: LongRunningOperationStatus;
@@ -121,12 +123,23 @@ model LongRunningOperationBase<TOperationType = string, TStatusError = Azure.Cor
   @doc("The operation error.")
   @visibility("update")
   error?: TStatusError;
-
-  @doc("The operation final result URI. Will be returned if the operation succeeds via `Location` header in response.")
-  @visibility("read", "create")
-  resultUri?: uri;
-
+  ...LastModifiedBy;
+  ...ResultLocation;
   ...Azure.Core.Foundations.Extensions.CustomEtagProperty;
+}
+
+@doc("Result location.")
+model ResultLocation {
+  @doc("The result resource location (URI).")
+  @visibility("read", "update", "create")
+  resultLocation?: uri;
+}
+
+@doc("The identifier of the service that was last to modify the operation status.")
+model LastModifiedBy {
+  @doc("The identifier of the service that was last to modify the operation status.")
+  @visibility("read", "update")
+  lastModifiedBy: string;
 }
 
 @doc("The long running operation response")
@@ -160,4 +173,11 @@ enum SupportedHttpStatusCodesKV {
   BadRequest,
   NotFound,
   Conflict,
+}
+
+@doc("[Internal] Static identifier used by singleton resources.")
+@knownValues(SingletonIdentifierKV)
+model SingletonIdentifier is string;
+enum SingletonIdentifierKV {
+  current
 }

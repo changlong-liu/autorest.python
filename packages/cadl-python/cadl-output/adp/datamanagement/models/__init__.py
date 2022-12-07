@@ -7,10 +7,8 @@
 # --------------------------------------------------------------------------
 
 from ._models import ClassificationSchema
-from ._models import CompleteUploadMetadataFileRequest
 from ._models import CustomErrorResponse
 from ._models import DataStream
-from ._models import DataStreamClassification
 from ._models import DataStreamFile
 from ._models import DataStreamInput
 from ._models import DataStreamLineage
@@ -33,9 +31,9 @@ from ._models import FindDataStreamByTagsRequestParameters
 from ._models import InnerError
 from ._models import LongRunningOperationWithResponseHeaders
 from ._models import Measurement
+from ._models import MeasurementClassification
 from ._models import MeasurementListRequestParameters
 from ._models import MeasurementMetadataBase
-from ._models import MeasurementMetadataFileInfoBase
 from ._models import MeasurementMetadataSchemaFileInfoBase
 from ._models import MeasurementProcessingResultsBase
 from ._models import MeasurementRuleValidationResult
@@ -65,6 +63,7 @@ from ._enums import DefaultLroType
 from ._enums import DiscoveryOperationType
 from ._enums import DiscoveryStatus
 from ._enums import LongRunningOperationStatus
+from ._enums import SingletonIdentifier
 from ._enums import UploadOperationType
 from ._enums import UploadStatus
 from ._patch import __all__ as _patch_all
@@ -73,10 +72,8 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "ClassificationSchema",
-    "CompleteUploadMetadataFileRequest",
     "CustomErrorResponse",
     "DataStream",
-    "DataStreamClassification",
     "DataStreamFile",
     "DataStreamInput",
     "DataStreamLineage",
@@ -99,9 +96,9 @@ __all__ = [
     "InnerError",
     "LongRunningOperationWithResponseHeaders",
     "Measurement",
+    "MeasurementClassification",
     "MeasurementListRequestParameters",
     "MeasurementMetadataBase",
-    "MeasurementMetadataFileInfoBase",
     "MeasurementMetadataSchemaFileInfoBase",
     "MeasurementProcessingResultsBase",
     "MeasurementRuleValidationResult",
@@ -130,6 +127,7 @@ __all__ = [
     "DiscoveryOperationType",
     "DiscoveryStatus",
     "LongRunningOperationStatus",
+    "SingletonIdentifier",
     "UploadOperationType",
     "UploadStatus",
 ]

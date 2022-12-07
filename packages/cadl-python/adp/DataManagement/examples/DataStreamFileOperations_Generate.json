@@ -10,15 +10,10 @@
   "responses": {
     "200": {
       "body": {
-        "value": [
-          {
-            "clientFileName": "foo.dat",
-            "fileUri": "https://some-workspace/manifest.json",
-            "externalTimeStamp": "2022-11-17",
-            "size": 27
-          }
-        ],
-        "nextLink": "https://microsoft.com/a"
+        "clientFileName": "foo.dat",
+        "fileUri": "https://some-workspace/manifest.json",
+        "externalTimeStamp": "2022-10-26T06:20:36.367Z",
+        "size": 27
       }
     },
     "202": {
@@ -30,14 +25,14 @@
         "operationId": "string",
         "status": "Created",
         "operationType": "string",
+        "lastModifiedBy": "string",
         "etag": "sha256",
         "error": {
           "code": "string",
           "message": "string",
           "target": "string",
           "details": []
-        },
-        "resultUri": "https://microsoft.com/anpy"
+        }
       }
     }
   }

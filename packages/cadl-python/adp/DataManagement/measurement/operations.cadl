@@ -5,9 +5,8 @@ using Azure.Core.Foundations.Extensions;
 using OpenAPI;
 using Autorest;
 
-namespace Adp.DataManagement;
+namespace Adp.DataManagement.Measurement;
 
-@client(Clients.MeasurementClient)
 @tag("Measurement")
 interface MeasurementOperations {
   @doc("Get measurement by ID.")
@@ -17,12 +16,12 @@ interface MeasurementOperations {
   @doc("Deletes the measurement.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   delete is CustomLongRunningResourceDelete<Measurement>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
   @doc("Lists the measurements in a workspace.")
-  list is CustomResourceList<Measurement>;
+  getAll is CustomResourceList<Measurement>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
   @doc("Lists the measurements in a workspace with extended metadata.")
@@ -38,16 +37,8 @@ interface MeasurementOperations {
     CustomBodyWrapper<MeasurementListRequestParameters>,
     Page<Measurement>
   >;
-
-  /*   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
-  @doc("Initiates process of processing the measurement.")
-  @extension("x-ms-long-running-operation", true)
-  @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
-  process is CustomLongRunningResourceAction<Measurement>; */
 }
 
-@client(Clients.MeasurementMetadataClient)
 @tag("Measurement")
 interface MeasurementMetadataOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
@@ -60,7 +51,6 @@ interface MeasurementMetadataOperations {
   >;
 }
 
-@client(Clients.MeasurementProcessingResultsClient)
 @tag("Measurement")
 interface MeasurementProcessingResultsOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
@@ -73,7 +63,6 @@ interface MeasurementProcessingResultsOperations {
   >;
 }
 
-@client(Clients.MeasurementStateMachineClient)
 @tag("Measurement")
 interface MeasurementStateMachineOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
@@ -82,47 +71,31 @@ interface MeasurementStateMachineOperations {
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
   @doc("List state machines instance for the measurement.")
-  list is CustomResourceList<StateMachine>;
+  getAll is CustomResourceList<StateMachine>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
   @doc("Initiates process of applying an action on the measurement.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   act is CustomLongRunningResourceAction<
     StateMachine,
     CustomBodyWrapper<StateMachineAction>
   >;
 }
 
-@client(Clients.MeasurementMetadataFileInfoClient)
 @tag("Measurement")
 interface MeasurementMetadataFileInfoOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
   @doc("Initiates a process that replaces the measurement's metadata file")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   complete is CustomLongRunningResourceCollectionAction<
     MeasurementMetadataFileInfo,
     CustomBodyWrapper<CompleteUploadMetadataFileRequest>,
     MeasurementMetadataFileInfoBase
   >;
-
-  /*   
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."
-  @doc("""
-  Returns SAS signed URI to an existing metadata file with `read` permissions
-  and the eTag of that file in response header.
-  This URI expires in 24 hours.
-  """)
-  @segmentOf(MeasurementMetadataFileInfo)
-  get is CustomSingletonResourceRead<
-    MeasurementMetadataFileInfo,
-    {},
-    MeasurementMetadataFileInfoBase
-  >;
- */
 
   @doc("""
   Returns SAS signed URI that allows uploading temporary measurement metadata file to Azure Storage.
@@ -135,7 +108,6 @@ interface MeasurementMetadataFileInfoOperations {
   >;
 }
 
-@client(Clients.MeasurementMetadataSchemaFileInfoClient)
 @tag("Measurement")
 interface MeasurementMetadataSchemaFileInfoOperations {
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom resource list operation."

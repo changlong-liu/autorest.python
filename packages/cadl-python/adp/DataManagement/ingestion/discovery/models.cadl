@@ -1,7 +1,7 @@
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Adp;
+namespace Adp.DataManagement.Ingestion.Discovery;
 
 @doc("Internal - the model for internal use")
 model DiscoveryIdentifier {
@@ -10,12 +10,6 @@ model DiscoveryIdentifier {
   @minLength(1)
   @maxLength(36)
   discoveryId: string;
-}
-
-enum DiscoveryClients {
-  DiscoveryClient,
-  DiscoverySpecialFilesClient,
-  DiscoveryUploadsClient,
 }
 
 @doc("LRO of DiscoveryOperationType type")

@@ -1,13 +1,8 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "@azure-tools/cadl-autorest";
-import "@azure-tools/cadl-azure-core";
-
 using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Adp;
+namespace Adp.DataManagement.ClassificationSchema;
 
 enum ClassificationSchemaClients {
   ClassificationSchemaClient,

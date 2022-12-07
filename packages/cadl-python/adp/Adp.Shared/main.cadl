@@ -3,4 +3,4 @@ import "./operations.cadl";
 import "./azure-core-foundations-extensions.cadl";
 import "./classification";
 
-namespace Adp.DataManagement;
+namespace Adp.Shared;

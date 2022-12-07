@@ -31,86 +31,61 @@ from azure.core.utils import case_insensitive_dict
 from ... import models as _models
 from ..._model_base import AzureJSONEncoder, _deserialize
 from ..._operations._operations import (
-    build_classification_schema_create_request,
-    build_classification_schema_delete_request,
-    build_classification_schema_get_request,
-    build_classification_schema_list_request,
-    build_data_stream_classifications_create_request,
-    build_data_stream_classifications_delete_request,
-    build_data_stream_classifications_get_request,
-    build_data_stream_classifications_list_request,
-    build_data_stream_clear_content_request,
-    build_data_stream_complete_request,
-    build_data_stream_create_request,
-    build_data_stream_fail_request,
-    build_data_stream_files_generate_request,
-    build_data_stream_files_list_request,
-    build_data_stream_find_by_lineage_request,
-    build_data_stream_find_by_tags_request,
-    build_data_stream_get_lineage_graphs_by_lineage_request,
-    build_data_stream_get_request,
-    build_data_stream_list_request,
-    build_data_stream_logs_container_get_writable_uri_request,
-    build_data_stream_stage_files_request,
-    build_data_stream_storage_create_request,
-    build_data_stream_storage_get_writable_uris_request,
-    build_data_stream_tags_create_request,
-    build_data_stream_tags_get_request,
-    build_discovery_operations_cancel_request,
-    build_discovery_operations_complete_request,
-    build_discovery_operations_create_or_replace_request,
-    build_discovery_operations_get_request,
-    build_discovery_special_files_generate_request,
-    build_discovery_special_files_list_writable_uris_request,
-    build_discovery_uploads_list_request,
-    build_long_running_operations_get_status_request,
-    build_measurement_delete_request,
-    build_measurement_find_by_ids_request,
-    build_measurement_get_request,
-    build_measurement_list_request,
-    build_measurement_metadata_file_info_complete_request,
-    build_measurement_metadata_file_info_get_writable_uri_request,
-    build_measurement_metadata_get_request,
-    build_measurement_metadata_schema_file_info_get_request,
-    build_measurement_processing_results_get_request,
-    build_measurement_query_measurements_with_metadata_request,
-    build_measurement_state_machine_act_request,
-    build_measurement_state_machine_get_request,
-    build_measurement_state_machine_list_request,
-    build_upload_cancel_request,
-    build_upload_complete_request,
-    build_upload_create_or_replace_request,
-    build_upload_data_files_generate_request,
-    build_upload_data_files_list_writable_uris_request,
-    build_upload_get_request,
-    build_upload_measurements_list_request,
-    build_upload_special_files_generate_request,
-    build_upload_special_files_list_request,
-    build_upload_special_files_list_writable_uris_request,
+    build_data_management_act_measurement_state_machine_request,
+    build_data_management_cancel_discovery_request,
+    build_data_management_cancel_upload_request,
+    build_data_management_clear_content_of_data_stream_request,
+    build_data_management_complete_data_stream_request,
+    build_data_management_complete_discovery_request,
+    build_data_management_complete_upload_request,
+    build_data_management_create_classification_schema_request,
+    build_data_management_create_data_stream_request,
+    build_data_management_create_data_stream_storage_request,
+    build_data_management_create_measurement_classification_request,
+    build_data_management_create_or_replace_data_stream_tags_request,
+    build_data_management_create_or_replace_discovery_request,
+    build_data_management_create_or_replace_upload_request,
+    build_data_management_delete_classification_schema_request,
+    build_data_management_delete_measurement_classification_request,
+    build_data_management_delete_measurement_request,
+    build_data_management_fail_data_stream_request,
+    build_data_management_generate_data_stream_files_request,
+    build_data_management_generate_discovery_special_file_upload_locations_request,
+    build_data_management_generate_upload_data_files_request,
+    build_data_management_generate_upload_special_files_request,
+    build_data_management_get_all_data_stream_request,
+    build_data_management_get_all_discovery_uploads_request,
+    build_data_management_get_classification_schema_request,
+    build_data_management_get_classification_schemas_request,
+    build_data_management_get_data_stream_files_request,
+    build_data_management_get_data_stream_lineage_graphs_by_lineage_request,
+    build_data_management_get_data_stream_logs_container_location_request,
+    build_data_management_get_data_stream_request,
+    build_data_management_get_data_stream_storage_request,
+    build_data_management_get_data_stream_tags_request,
+    build_data_management_get_data_streams_by_lineage_request,
+    build_data_management_get_data_streams_by_tags_request,
+    build_data_management_get_discovery_request,
+    build_data_management_get_discovery_special_file_upload_locations_request,
+    build_data_management_get_long_running_request,
+    build_data_management_get_measurement_classification_request,
+    build_data_management_get_measurement_classifications_request,
+    build_data_management_get_measurement_metadata_request,
+    build_data_management_get_measurement_metadata_schema_file_info_request,
+    build_data_management_get_measurement_processing_results_request,
+    build_data_management_get_measurement_request,
+    build_data_management_get_measurement_state_machine_request,
+    build_data_management_get_measurement_state_machines_request,
+    build_data_management_get_measurements_by_ids_request,
+    build_data_management_get_measurements_request,
+    build_data_management_get_measurements_with_metadata_request,
+    build_data_management_get_upload_data_files_request,
+    build_data_management_get_upload_request,
+    build_data_management_get_upload_special_files_request,
+    build_data_management_list_measurements_request,
+    build_data_management_stage_files_for_data_stream_request,
 )
-from .._vendor import (
-    ClassificationSchemaClientMixinABC,
-    DataStreamClassificationsClientMixinABC,
-    DataStreamClientMixinABC,
-    DataStreamFilesClientMixinABC,
-    DataStreamLogsContainerClientMixinABC,
-    DataStreamStorageClientMixinABC,
-    DataStreamTagsClientMixinABC,
-    DiscoveryOperationsClientMixinABC,
-    DiscoverySpecialFilesClientMixinABC,
-    DiscoveryUploadsClientMixinABC,
-    LongRunningOperationsClientMixinABC,
-    MeasurementClientMixinABC,
-    MeasurementMetadataClientMixinABC,
-    MeasurementMetadataFileInfoClientMixinABC,
-    MeasurementMetadataSchemaFileInfoClientMixinABC,
-    MeasurementProcessingResultsClientMixinABC,
-    MeasurementStateMachineClientMixinABC,
-    UploadClientMixinABC,
-    UploadDataFilesClientMixinABC,
-    UploadMeasurementsClientMixinABC,
-    UploadSpecialFilesClientMixinABC,
-)
+from .._vendor import DataManagementClientMixinABC
 
 if sys.version_info >= (3, 9):
     from collections.abc import MutableMapping
@@ -121,9 +96,11 @@ T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
 
 
-class LongRunningOperationsClientOperationsMixin(LongRunningOperationsClientMixinABC):
+class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pylint: disable=too-many-public-methods
     @distributed_trace_async
-    async def get_status(self, operation_id: str, **kwargs: Any) -> _models.LongRunningOperationWithResponseHeaders:
+    async def get_long_running(
+        self, operation_id: str, **kwargs: Any
+    ) -> _models.LongRunningOperationWithResponseHeaders:
         """Get the details of an LRO.
 
         :param operation_id: The unique ID of the operation. Required.
@@ -146,7 +123,7 @@ class LongRunningOperationsClientOperationsMixin(LongRunningOperationsClientMixi
 
         cls: ClsType[_models.LongRunningOperationWithResponseHeaders] = kwargs.pop("cls", None)
 
-        request = build_long_running_operations_get_status_request(
+        request = build_data_management_get_long_running_request(
             operation_id=operation_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -175,10 +152,8 @@ class LongRunningOperationsClientOperationsMixin(LongRunningOperationsClientMixi
 
         return deserialized  # type: ignore
 
-
-class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC):
     @overload
-    async def create_or_replace(
+    async def create_or_replace_discovery(
         self,
         discovery_id: str,
         body: Union[Optional[_models.Discovery], JSON] = None,
@@ -202,7 +177,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         """
 
     @overload
-    async def create_or_replace(
+    async def create_or_replace_discovery(
         self, discovery_id: str, body: Optional[IO] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> _models.Discovery:
         """Creates a new ingestion discovery instance.
@@ -221,7 +196,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         """
 
     @distributed_trace_async
-    async def create_or_replace(
+    async def create_or_replace_discovery(
         self, discovery_id: str, body: Union[Optional[Union[_models.Discovery, JSON, IO]]] = None, **kwargs: Any
     ) -> _models.Discovery:
         """Creates a new ingestion discovery instance.
@@ -262,7 +237,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
             else:
                 _content = None
 
-        request = build_discovery_operations_create_or_replace_request(
+        request = build_data_management_create_or_replace_discovery_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -294,7 +269,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def get(self, discovery_id: str, **kwargs: Any) -> _models.Discovery:
+    async def get_discovery(self, discovery_id: str, **kwargs: Any) -> _models.Discovery:
         """Get discovery by ID.
 
         :param discovery_id: The discovery identifier. Required.
@@ -316,7 +291,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
 
         cls: ClsType[_models.Discovery] = kwargs.pop("cls", None)
 
-        request = build_discovery_operations_get_request(
+        request = build_data_management_get_discovery_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -341,7 +316,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
 
         return deserialized  # type: ignore
 
-    async def _complete_initial(
+    async def _complete_discovery_initial(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.Discovery, _models.DiscoveryLroResponse]:
         error_map = {
@@ -357,7 +332,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
 
         cls: ClsType[Union[_models.Discovery, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_discovery_operations_complete_request(
+        request = build_data_management_complete_discovery_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -394,7 +369,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_complete(
+    async def begin_complete_discovery(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.Discovery]:
         """Initiates the process of completing the discovery and creating the upload file grouping
@@ -426,7 +401,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._complete_initial(
+            raw_result = await self._complete_discovery_initial(
                 discovery_id=discovery_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -458,7 +433,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    async def _cancel_initial(
+    async def _cancel_discovery_initial(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.Discovery, _models.DiscoveryLroResponse]:
         error_map = {
@@ -474,7 +449,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
 
         cls: ClsType[Union[_models.Discovery, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_discovery_operations_cancel_request(
+        request = build_data_management_cancel_discovery_request(
             discovery_id=discovery_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -511,7 +486,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_cancel(
+    async def begin_cancel_discovery(
         self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.Discovery]:
         """Initiates the process of cancelling the discovery.
@@ -542,7 +517,7 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._cancel_initial(
+            raw_result = await self._cancel_discovery_initial(
                 discovery_id=discovery_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -574,127 +549,10 @@ class DiscoveryOperationsClientOperationsMixin(DiscoveryOperationsClientMixinABC
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-
-class DiscoverySpecialFilesClientOperationsMixin(DiscoverySpecialFilesClientMixinABC):
-    async def _generate_initial(
-        self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[_models.DiscoverySpecialFile, _models.DiscoveryLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[Union[_models.DiscoverySpecialFile, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
-
-        request = build_discovery_special_files_generate_request(
-            discovery_id=discovery_id,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = _deserialize(_models.DiscoverySpecialFile, response.json())
-
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DiscoveryLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace_async
-    async def begin_generate(
-        self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> AsyncLROPoller[_models.DiscoverySpecialFile]:
-        """Initiates the process of generating SAS signed URIs for uploading special files for the
-        discovery.
-
-        :param discovery_id: The discovery identifier. Required.
-        :type discovery_id: str
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns DiscoverySpecialFile or An instance of
-         AsyncLROPoller that returns DiscoveryLroResponse. The DiscoverySpecialFile is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DiscoverySpecialFile] or
-         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DiscoveryLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.DiscoverySpecialFile] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._generate_initial(
-                discovery_id=discovery_id,
-                operation_id=operation_id,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response = pipeline_response.http_response
-            deserialized = _deserialize(_models.DiscoverySpecialFile, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
     @distributed_trace
-    def list_writable_uris(self, discovery_id: str, **kwargs: Any) -> AsyncIterable["_models.DiscoverySpecialFile"]:
+    def get_discovery_special_file_upload_locations(
+        self, discovery_id: str, **kwargs: Any
+    ) -> AsyncIterable["_models.DiscoverySpecialFile"]:
         """List special files details for the discovery resource.
         Returns SAS signed URI that allows uploading special files to Azure Storage.
         This URI expires in 24 hours.
@@ -725,7 +583,7 @@ class DiscoverySpecialFilesClientOperationsMixin(DiscoverySpecialFilesClientMixi
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_discovery_special_files_list_writable_uris_request(
+                request = build_data_management_get_discovery_special_file_upload_locations_request(
                     discovery_id=discovery_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -762,10 +620,125 @@ class DiscoverySpecialFilesClientOperationsMixin(DiscoverySpecialFilesClientMixi
 
         return AsyncItemPaged(get_next, extract_data)
 
+    async def _generate_discovery_special_file_upload_locations_initial(
+        self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> Union[_models.DiscoverySpecialFile, _models.DiscoveryLroResponse]:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
 
-class DiscoveryUploadsClientOperationsMixin(DiscoveryUploadsClientMixinABC):
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[Union[_models.DiscoverySpecialFile, _models.DiscoveryLroResponse]] = kwargs.pop("cls", None)
+
+        request = build_data_management_generate_discovery_special_file_upload_locations_request(
+            discovery_id=discovery_id,
+            api_version=self._config.api_version,
+            operation_id=operation_id,
+            headers=_headers,
+            params=_params,
+        )
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = _deserialize(_models.DiscoverySpecialFile, response.json())
+
+        if response.status_code == 202:
+            response_headers["Operation-Location"] = self._deserialize(
+                "str", response.headers.get("Operation-Location")
+            )
+
+            deserialized = _deserialize(_models.DiscoveryLroResponse, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def begin_generate_discovery_special_file_upload_locations(
+        self, discovery_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncLROPoller[_models.DiscoverySpecialFile]:
+        """Initiates the process of generating SAS signed URIs for uploading special files for the
+        discovery.
+
+        :param discovery_id: The discovery identifier. Required.
+        :type discovery_id: str
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns DiscoverySpecialFile or An instance of
+         AsyncLROPoller that returns DiscoveryLroResponse. The DiscoverySpecialFile is compatible with
+         MutableMapping
+        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DiscoverySpecialFile] or
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DiscoveryLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.DiscoverySpecialFile] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._generate_discovery_special_file_upload_locations_initial(
+                discovery_id=discovery_id,
+                operation_id=operation_id,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response = pipeline_response.http_response
+            deserialized = _deserialize(_models.DiscoverySpecialFile, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
     @distributed_trace
-    def list(self, discovery_id: str, **kwargs: Any) -> AsyncIterable["_models.DiscoveryUpload"]:
+    def get_all_discovery_uploads(self, discovery_id: str, **kwargs: Any) -> AsyncIterable["_models.DiscoveryUpload"]:
         """List upload detail for the discovery resource.
 
         :param discovery_id: The discovery identifier. Required.
@@ -791,7 +764,7 @@ class DiscoveryUploadsClientOperationsMixin(DiscoveryUploadsClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_discovery_uploads_list_request(
+                request = build_data_management_get_all_discovery_uploads_request(
                     discovery_id=discovery_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -828,10 +801,8 @@ class DiscoveryUploadsClientOperationsMixin(DiscoveryUploadsClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class UploadClientOperationsMixin(UploadClientMixinABC):
     @overload
-    async def create_or_replace(
+    async def create_or_replace_upload(
         self,
         upload_id: str,
         body: Union[Optional[_models.Upload], JSON] = None,
@@ -854,7 +825,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         """
 
     @overload
-    async def create_or_replace(
+    async def create_or_replace_upload(
         self, upload_id: str, body: Optional[IO] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> _models.Upload:
         """Creates a new ingestion upload instance.
@@ -872,7 +843,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         """
 
     @distributed_trace_async
-    async def create_or_replace(
+    async def create_or_replace_upload(
         self, upload_id: str, body: Union[Optional[Union[_models.Upload, JSON, IO]]] = None, **kwargs: Any
     ) -> _models.Upload:
         """Creates a new ingestion upload instance.
@@ -913,7 +884,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
             else:
                 _content = None
 
-        request = build_upload_create_or_replace_request(
+        request = build_data_management_create_or_replace_upload_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             content_type=content_type,
@@ -945,7 +916,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def get(self, upload_id: str, **kwargs: Any) -> _models.Upload:
+    async def get_upload(self, upload_id: str, **kwargs: Any) -> _models.Upload:
         """Get discovery by ID.
 
         :param upload_id: The upload resource identifier. Required.
@@ -967,7 +938,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
 
         cls: ClsType[_models.Upload] = kwargs.pop("cls", None)
 
-        request = build_upload_get_request(
+        request = build_data_management_get_upload_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -992,7 +963,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
 
         return deserialized  # type: ignore
 
-    async def _complete_initial(
+    async def _complete_upload_initial(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.Upload, _models.UploadLroResponse]:
         error_map = {
@@ -1008,7 +979,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
 
         cls: ClsType[Union[_models.Upload, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_upload_complete_request(
+        request = build_data_management_complete_upload_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -1045,7 +1016,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_complete(
+    async def begin_complete_upload(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.Upload]:
         """Initiates the process of completing the upload and creating the measurements.
@@ -1076,7 +1047,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._complete_initial(
+            raw_result = await self._complete_upload_initial(
                 upload_id=upload_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -1108,7 +1079,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    async def _cancel_initial(
+    async def _cancel_upload_initial(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.Upload, _models.UploadLroResponse]:
         error_map = {
@@ -1124,7 +1095,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
 
         cls: ClsType[Union[_models.Upload, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_upload_cancel_request(
+        request = build_data_management_cancel_upload_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -1161,7 +1132,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_cancel(
+    async def begin_cancel_upload(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.Upload]:
         """Initiates the process of cancelling the upload.
@@ -1192,7 +1163,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._cancel_initial(
+            raw_result = await self._cancel_upload_initial(
                 upload_id=upload_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -1224,75 +1195,7 @@ class UploadClientOperationsMixin(UploadClientMixinABC):
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-
-class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
-    @distributed_trace
-    def list(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadSpecialFile"]:
-        """Returns SAS signed URIs for reading special files from Azure Storage.
-
-        :param upload_id: The upload resource identifier. Required.
-        :type upload_id: str
-        :return: An iterator like instance of UploadSpecialFile. The UploadSpecialFile is compatible
-         with MutableMapping
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~adp.datamanagement.models.UploadSpecialFile]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models._models.PagedUploadSpecialFile] = kwargs.pop(
-            "cls", None
-        )  # pylint: disable=protected-access
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_upload_special_files_list_request(
-                    upload_id=upload_id,
-                    api_version=self._config.api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request.url = self._client.format_url(request.url)
-
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = _deserialize(_models._models.PagedUploadSpecialFile, pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    async def _generate_initial(
+    async def _generate_upload_special_files_initial(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.UploadSpecialFile, _models.UploadLroResponse]:
         error_map = {
@@ -1308,7 +1211,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
 
         cls: ClsType[Union[_models.UploadSpecialFile, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_upload_special_files_generate_request(
+        request = build_data_management_generate_upload_special_files_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -1344,7 +1247,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_generate(
+    async def begin_generate_upload_special_files(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.UploadSpecialFile]:
         """Initiates the process of generating SAS signed URIs for uploading special files for the upload.
@@ -1376,7 +1279,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._generate_initial(
+            raw_result = await self._generate_upload_special_files_initial(
                 upload_id=upload_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -1409,7 +1312,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @distributed_trace
-    def list_writable_uris(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadSpecialFile"]:
+    def get_upload_special_files(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadSpecialFile"]:
         """List special files details for the upload resource.
         Returns SAS signed URI that allows uploading special files to Azure Storage.
         This URI expires in 24 hours.
@@ -1439,7 +1342,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_upload_special_files_list_writable_uris_request(
+                request = build_data_management_get_upload_special_files_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -1476,9 +1379,7 @@ class UploadSpecialFilesClientOperationsMixin(UploadSpecialFilesClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
-    async def _generate_initial(
+    async def _generate_upload_data_files_initial(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.UploadDataFile, _models.UploadLroResponse]:
         error_map = {
@@ -1494,7 +1395,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
 
         cls: ClsType[Union[_models.UploadDataFile, _models.UploadLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_upload_data_files_generate_request(
+        request = build_data_management_generate_upload_data_files_request(
             upload_id=upload_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -1530,7 +1431,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_generate(
+    async def begin_generate_upload_data_files(
         self, upload_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.UploadDataFile]:
         """Initiates the process of allocating the data files.
@@ -1562,7 +1463,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._generate_initial(
+            raw_result = await self._generate_upload_data_files_initial(
                 upload_id=upload_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -1595,7 +1496,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @distributed_trace
-    def list_writable_uris(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadDataFile"]:
+    def get_upload_data_files(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadDataFile"]:
         """List special files details for the upload resource.
         Returns SAS signed URI that allows uploading data files to Azure Storage.
         This URI expires in 24 hours.
@@ -1623,7 +1524,7 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_upload_data_files_list_writable_uris_request(
+                request = build_data_management_get_upload_data_files_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -1660,10 +1561,8 @@ class UploadDataFilesClientOperationsMixin(UploadDataFilesClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class UploadMeasurementsClientOperationsMixin(UploadMeasurementsClientMixinABC):
     @distributed_trace
-    def list(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadResultMeasurement"]:
+    def list_measurements(self, upload_id: str, **kwargs: Any) -> AsyncIterable["_models.UploadResultMeasurement"]:
         """List of the measurement identifiers that have been created by the upload.
 
         :param upload_id: The upload resource identifier. Required.
@@ -1692,7 +1591,7 @@ class UploadMeasurementsClientOperationsMixin(UploadMeasurementsClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_upload_measurements_list_request(
+                request = build_data_management_list_measurements_request(
                     upload_id=upload_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -1729,10 +1628,8 @@ class UploadMeasurementsClientOperationsMixin(UploadMeasurementsClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinABC):
     @distributed_trace_async
-    async def get(self, name: str, **kwargs: Any) -> _models.ClassificationSchema:
+    async def get_classification_schema(self, name: str, **kwargs: Any) -> _models.ClassificationSchema:
         """Get classification schema by name.
 
         :param name: Classification schema identifier. Required.
@@ -1754,7 +1651,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
 
         cls: ClsType[_models.ClassificationSchema] = kwargs.pop("cls", None)
 
-        request = build_classification_schema_get_request(
+        request = build_data_management_get_classification_schema_request(
             name=name,
             api_version=self._config.api_version,
             headers=_headers,
@@ -1779,7 +1676,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
 
         return deserialized  # type: ignore
 
-    async def _create_initial(
+    async def _create_classification_schema_initial(
         self,
         body: Union[Optional[Union[_models.ClassificationSchema, JSON, IO]]] = None,
         *,
@@ -1810,7 +1707,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
             else:
                 _content = None
 
-        request = build_classification_schema_create_request(
+        request = build_data_management_create_classification_schema_request(
             api_version=self._config.api_version,
             operation_id=operation_id,
             content_type=content_type,
@@ -1848,7 +1745,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         return deserialized  # type: ignore
 
     @overload
-    async def begin_create(
+    async def begin_create_classification_schema(
         self,
         body: Union[Optional[_models.ClassificationSchema], JSON] = None,
         *,
@@ -1883,7 +1780,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         """
 
     @overload
-    async def begin_create(
+    async def begin_create_classification_schema(
         self,
         body: Optional[IO] = None,
         *,
@@ -1918,7 +1815,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         """
 
     @distributed_trace_async
-    async def begin_create(
+    async def begin_create_classification_schema(
         self,
         body: Union[Optional[Union[_models.ClassificationSchema, JSON, IO]]] = None,
         *,
@@ -1959,7 +1856,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._create_initial(
+            raw_result = await self._create_classification_schema_initial(
                 body=body,
                 operation_id=operation_id,
                 content_type=content_type,
@@ -1992,7 +1889,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    async def _delete_initial(
+    async def _delete_classification_schema_initial(
         self, name: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Optional[_models.DefaultLroResponse]:
         error_map = {
@@ -2008,7 +1905,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
 
         cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_classification_schema_delete_request(
+        request = build_data_management_delete_classification_schema_request(
             name=name,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2043,7 +1940,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         return deserialized
 
     @distributed_trace_async
-    async def begin_delete(
+    async def begin_delete_classification_schema(
         self, name: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.DefaultLroResponse]:
         """Deletes the classification schema and all related classification assignments (instances).
@@ -2073,7 +1970,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._delete_initial(
+            raw_result = await self._delete_classification_schema_initial(
                 name=name, operation_id=operation_id, cls=lambda x, y, z: x, headers=_headers, params=_params, **kwargs
             )
         kwargs.pop("error_map", None)
@@ -2106,7 +2003,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> AsyncIterable["_models.ClassificationSchema"]:
+    def get_classification_schemas(self, **kwargs: Any) -> AsyncIterable["_models.ClassificationSchema"]:
         """List all classification schemas.
 
         :return: An iterator like instance of ClassificationSchema. The ClassificationSchema is
@@ -2133,7 +2030,7 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_classification_schema_list_request(
+                request = build_data_management_get_classification_schemas_request(
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -2169,10 +2066,8 @@ class ClassificationSchemaClientOperationsMixin(ClassificationSchemaClientMixinA
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
     @distributed_trace_async
-    async def get(self, measurement_id: str, **kwargs: Any) -> _models.Measurement:
+    async def get_measurement(self, measurement_id: str, **kwargs: Any) -> _models.Measurement:
         """Get measurement by ID.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2194,7 +2089,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
 
         cls: ClsType[_models.Measurement] = kwargs.pop("cls", None)
 
-        request = build_measurement_get_request(
+        request = build_data_management_get_measurement_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -2219,7 +2114,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
 
         return deserialized  # type: ignore
 
-    async def _delete_initial(
+    async def _delete_measurement_initial(
         self, measurement_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Optional[_models.DefaultLroResponse]:
         error_map = {
@@ -2235,7 +2130,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
 
         cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_measurement_delete_request(
+        request = build_data_management_delete_measurement_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -2270,7 +2165,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         return deserialized
 
     @distributed_trace_async
-    async def begin_delete(
+    async def begin_delete_measurement(
         self, measurement_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.DefaultLroResponse]:
         """Deletes the measurement.
@@ -2300,7 +2195,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._delete_initial(
+            raw_result = await self._delete_measurement_initial(
                 measurement_id=measurement_id,
                 operation_id=operation_id,
                 cls=lambda x, y, z: x,
@@ -2338,7 +2233,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @distributed_trace
-    def list(self, **kwargs: Any) -> AsyncIterable["_models.Measurement"]:
+    def get_measurements(self, **kwargs: Any) -> AsyncIterable["_models.Measurement"]:
         """Lists the measurements in a workspace.
 
         :return: An iterator like instance of Measurement. The Measurement is compatible with
@@ -2362,7 +2257,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_measurement_list_request(
+                request = build_data_management_get_measurements_request(
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -2399,7 +2294,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace
-    def query_measurements_with_metadata(self, **kwargs: Any) -> AsyncIterable["_models.MeasurementWithMetadata"]:
+    def get_measurements_with_metadata(self, **kwargs: Any) -> AsyncIterable["_models.MeasurementWithMetadata"]:
         """Lists the measurements in a workspace with extended metadata.
 
         :return: An iterator like instance of MeasurementWithMetadata. The MeasurementWithMetadata is
@@ -2426,7 +2321,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_measurement_query_measurements_with_metadata_request(
+                request = build_data_management_get_measurements_with_metadata_request(
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -2463,7 +2358,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         return AsyncItemPaged(get_next, extract_data)
 
     @overload
-    def find_by_ids(
+    def get_measurements_by_ids(
         self,
         body: Union[Optional[_models.MeasurementListRequestParameters], JSON] = None,
         *,
@@ -2485,7 +2380,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         """
 
     @overload
-    def find_by_ids(
+    def get_measurements_by_ids(
         self, body: Optional[IO] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> AsyncIterable["_models.Measurement"]:
         """Lists the measurements in a workspace that are in the given measurement IDs list.
@@ -2503,7 +2398,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         """
 
     @distributed_trace
-    def find_by_ids(
+    def get_measurements_by_ids(
         self, body: Union[Optional[Union[_models.MeasurementListRequestParameters, JSON, IO]]] = None, **kwargs: Any
     ) -> AsyncIterable["_models.Measurement"]:
         """Lists the measurements in a workspace that are in the given measurement IDs list.
@@ -2545,7 +2440,7 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_measurement_find_by_ids_request(
+                request = build_data_management_get_measurements_by_ids_request(
                     api_version=self._config.api_version,
                     content_type=content_type,
                     content=_content,
@@ -2583,10 +2478,8 @@ class MeasurementClientOperationsMixin(MeasurementClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class MeasurementMetadataClientOperationsMixin(MeasurementMetadataClientMixinABC):
     @distributed_trace_async
-    async def get(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementMetadataBase:
+    async def get_measurement_metadata(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementMetadataBase:
         """Returns the measurement metadata.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2608,7 +2501,7 @@ class MeasurementMetadataClientOperationsMixin(MeasurementMetadataClientMixinABC
 
         cls: ClsType[_models.MeasurementMetadataBase] = kwargs.pop("cls", None)
 
-        request = build_measurement_metadata_get_request(
+        request = build_data_management_get_measurement_metadata_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -2633,10 +2526,10 @@ class MeasurementMetadataClientOperationsMixin(MeasurementMetadataClientMixinABC
 
         return deserialized  # type: ignore
 
-
-class MeasurementProcessingResultsClientOperationsMixin(MeasurementProcessingResultsClientMixinABC):
     @distributed_trace_async
-    async def get(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementProcessingResultsBase:
+    async def get_measurement_processing_results(
+        self, measurement_id: str, **kwargs: Any
+    ) -> _models.MeasurementProcessingResultsBase:
         """Returns the measurement processing result.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2659,7 +2552,7 @@ class MeasurementProcessingResultsClientOperationsMixin(MeasurementProcessingRes
 
         cls: ClsType[_models.MeasurementProcessingResultsBase] = kwargs.pop("cls", None)
 
-        request = build_measurement_processing_results_get_request(
+        request = build_data_management_get_measurement_processing_results_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -2684,10 +2577,8 @@ class MeasurementProcessingResultsClientOperationsMixin(MeasurementProcessingRes
 
         return deserialized  # type: ignore
 
-
-class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClientMixinABC):
     @distributed_trace_async
-    async def get(self, measurement_id: str, id: str, **kwargs: Any) -> _models.StateMachine:
+    async def get_measurement_state_machine(self, measurement_id: str, id: str, **kwargs: Any) -> _models.StateMachine:
         """Returns the state machine instance for the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2711,7 +2602,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
 
         cls: ClsType[_models.StateMachine] = kwargs.pop("cls", None)
 
-        request = build_measurement_state_machine_get_request(
+        request = build_data_management_get_measurement_state_machine_request(
             measurement_id=measurement_id,
             id=id,
             api_version=self._config.api_version,
@@ -2738,7 +2629,9 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         return deserialized  # type: ignore
 
     @distributed_trace
-    def list(self, measurement_id: str, **kwargs: Any) -> AsyncIterable["_models.StateMachine"]:
+    def get_measurement_state_machines(
+        self, measurement_id: str, **kwargs: Any
+    ) -> AsyncIterable["_models.StateMachine"]:
         """List state machines instance for the measurement.
 
         :param measurement_id: The measurement identifier. Required.
@@ -2764,7 +2657,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_measurement_state_machine_list_request(
+                request = build_data_management_get_measurement_state_machines_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -2801,7 +2694,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
 
         return AsyncItemPaged(get_next, extract_data)
 
-    async def _act_initial(
+    async def _act_measurement_state_machine_initial(
         self,
         measurement_id: str,
         id: str,
@@ -2834,7 +2727,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
             else:
                 _content = None
 
-        request = build_measurement_state_machine_act_request(
+        request = build_data_management_act_measurement_state_machine_request(
             measurement_id=measurement_id,
             id=id,
             api_version=self._config.api_version,
@@ -2874,7 +2767,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         return deserialized  # type: ignore
 
     @overload
-    async def begin_act(
+    async def begin_act_measurement_state_machine(
         self,
         measurement_id: str,
         id: str,
@@ -2914,7 +2807,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         """
 
     @overload
-    async def begin_act(
+    async def begin_act_measurement_state_machine(
         self,
         measurement_id: str,
         id: str,
@@ -2954,7 +2847,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         """
 
     @distributed_trace_async
-    async def begin_act(
+    async def begin_act_measurement_state_machine(
         self,
         measurement_id: str,
         id: str,
@@ -3001,7 +2894,7 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._act_initial(
+            raw_result = await self._act_measurement_state_machine_initial(
                 measurement_id=measurement_id,
                 id=id,
                 body=body,
@@ -3036,300 +2929,10 @@ class MeasurementStateMachineClientOperationsMixin(MeasurementStateMachineClient
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-
-class MeasurementMetadataFileInfoClientOperationsMixin(MeasurementMetadataFileInfoClientMixinABC):
-    async def _complete_initial(
-        self,
-        measurement_id: str,
-        body: Union[Optional[Union[_models.CompleteUploadMetadataFileRequest, JSON, IO]]] = None,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> Union[_models.MeasurementMetadataFileInfoBase, _models.DefaultLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Union[_models.MeasurementMetadataFileInfoBase, _models.DefaultLroResponse]] = kwargs.pop(
-            "cls", None
-        )
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
-        else:
-            if body is not None:
-                _content = json.dumps(body, cls=AzureJSONEncoder)
-            else:
-                _content = None
-
-        request = build_measurement_metadata_file_info_complete_request(
-            measurement_id=measurement_id,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        response_headers = {}
-        if response.status_code == 200:
-            response_headers["ETag"] = self._deserialize("str", response.headers.get("ETag"))
-
-            deserialized = _deserialize(_models.MeasurementMetadataFileInfoBase, response.json())
-
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    async def begin_complete(
-        self,
-        measurement_id: str,
-        body: Union[Optional[_models.CompleteUploadMetadataFileRequest], JSON] = None,
-        *,
-        operation_id: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.MeasurementMetadataFileInfoBase]:
-        """Initiates a process that replaces the measurement's metadata file.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param body: Parameter of type 'CompleteUploadMetadataFileRequest' in the body. Default value
-         is None.
-        :type body: ~adp.datamanagement.models.CompleteUploadMetadataFileRequest or JSON
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns MeasurementMetadataFileInfoBase or An
-         instance of AsyncLROPoller that returns DefaultLroResponse. The MeasurementMetadataFileInfoBase
-         is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.MeasurementMetadataFileInfoBase]
-         or ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_complete(
-        self,
-        measurement_id: str,
-        body: Optional[IO] = None,
-        *,
-        operation_id: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.MeasurementMetadataFileInfoBase]:
-        """Initiates a process that replaces the measurement's metadata file.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param body: Parameter of type 'CompleteUploadMetadataFileRequest' in the body. Default value
-         is None.
-        :type body: IO
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns MeasurementMetadataFileInfoBase or An
-         instance of AsyncLROPoller that returns DefaultLroResponse. The MeasurementMetadataFileInfoBase
-         is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.MeasurementMetadataFileInfoBase]
-         or ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
     @distributed_trace_async
-    async def begin_complete(
-        self,
-        measurement_id: str,
-        body: Union[Optional[Union[_models.CompleteUploadMetadataFileRequest, JSON, IO]]] = None,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.MeasurementMetadataFileInfoBase]:
-        """Initiates a process that replaces the measurement's metadata file.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param body: Parameter of type 'CompleteUploadMetadataFileRequest' in the body. Is either a
-         model type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.CompleteUploadMetadataFileRequest or JSON or IO
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns MeasurementMetadataFileInfoBase or An
-         instance of AsyncLROPoller that returns DefaultLroResponse. The MeasurementMetadataFileInfoBase
-         is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.MeasurementMetadataFileInfoBase]
-         or ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.MeasurementMetadataFileInfoBase] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._complete_initial(
-                measurement_id=measurement_id,
-                body=body,
-                operation_id=operation_id,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["ETag"] = self._deserialize("str", response.headers.get("ETag"))
-
-            deserialized = _deserialize(_models.MeasurementMetadataFileInfoBase, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    @distributed_trace_async
-    async def get_writable_uri(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementMetadataFileInfoBase:
-        """Returns SAS signed URI that allows uploading temporary measurement metadata file to Azure
-        Storage.
-        This URI expires in 24 hours.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :return: MeasurementMetadataFileInfoBase. The MeasurementMetadataFileInfoBase is compatible
-         with MutableMapping
-        :rtype: ~adp.datamanagement.models.MeasurementMetadataFileInfoBase
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.MeasurementMetadataFileInfoBase] = kwargs.pop("cls", None)
-
-        request = build_measurement_metadata_file_info_get_writable_uri_request(
-            measurement_id=measurement_id,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        response_headers = {}
-        response_headers["ETag"] = self._deserialize("str", response.headers.get("ETag"))
-
-        deserialized = _deserialize(_models.MeasurementMetadataFileInfoBase, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-
-class MeasurementMetadataSchemaFileInfoClientOperationsMixin(MeasurementMetadataSchemaFileInfoClientMixinABC):
-    @distributed_trace_async
-    async def get(self, measurement_id: str, **kwargs: Any) -> _models.MeasurementMetadataSchemaFileInfoBase:
+    async def get_measurement_metadata_schema_file_info(
+        self, measurement_id: str, **kwargs: Any
+    ) -> _models.MeasurementMetadataSchemaFileInfoBase:
         """Returns the measurement metadata schema file information.
 
         :param measurement_id: The measurement identifier. Required.
@@ -3352,7 +2955,7 @@ class MeasurementMetadataSchemaFileInfoClientOperationsMixin(MeasurementMetadata
 
         cls: ClsType[_models.MeasurementMetadataSchemaFileInfoBase] = kwargs.pop("cls", None)
 
-        request = build_measurement_metadata_schema_file_info_get_request(
+        request = build_data_management_get_measurement_metadata_schema_file_info_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -3377,18 +2980,19 @@ class MeasurementMetadataSchemaFileInfoClientOperationsMixin(MeasurementMetadata
 
         return deserialized  # type: ignore
 
-
-class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
     @distributed_trace_async
-    async def get(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.DataStream:
-        """Get data-stream by identifier.
+    async def get_measurement_classification(
+        self, measurement_id: str, schema_name: str, **kwargs: Any
+    ) -> _models.MeasurementClassification:
+        """Get measurement classification by schema name.
 
         :param measurement_id: The measurement identifier. Required.
         :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :return: DataStream. The DataStream is compatible with MutableMapping
-        :rtype: ~adp.datamanagement.models.DataStream
+        :param schema_name: Classification schema name. Required.
+        :type schema_name: str
+        :return: MeasurementClassification. The MeasurementClassification is compatible with
+         MutableMapping
+        :rtype: ~adp.datamanagement.models.MeasurementClassification
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map = {
@@ -3402,11 +3006,11 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[_models.DataStream] = kwargs.pop("cls", None)
+        cls: ClsType[_models.MeasurementClassification] = kwargs.pop("cls", None)
 
-        request = build_data_stream_get_request(
+        request = build_data_management_get_measurement_classification_request(
             measurement_id=measurement_id,
-            data_stream_id=data_stream_id,
+            schema_name=schema_name,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -3423,14 +3027,433 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = _deserialize(_models.DataStream, response.json())
+        deserialized = _deserialize(_models.MeasurementClassification, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
 
-    async def _create_initial(
+    @distributed_trace
+    def get_measurement_classifications(
+        self, measurement_id: str, **kwargs: Any
+    ) -> AsyncIterable["_models.MeasurementClassification"]:
+        """Lists the classifications assigned to the measurement.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :return: An iterator like instance of MeasurementClassification. The MeasurementClassification
+         is compatible with MutableMapping
+        :rtype:
+         ~azure.core.async_paging.AsyncItemPaged[~adp.datamanagement.models.MeasurementClassification]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models._models.PagedMeasurementClassification] = kwargs.pop(
+            "cls", None
+        )  # pylint: disable=protected-access
+
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                request = build_data_management_get_measurement_classifications_request(
+                    measurement_id=measurement_id,
+                    api_version=self._config.api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                request.url = self._client.format_url(request.url)
+
+            else:
+                request = HttpRequest("GET", next_link)
+                request.url = self._client.format_url(request.url)
+
+            return request
+
+        async def extract_data(pipeline_response):
+            deserialized = _deserialize(_models._models.PagedMeasurementClassification, pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            request = prepare_request(next_link)
+
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                request, stream=False, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    async def _delete_measurement_classification_initial(
+        self, measurement_id: str, schema_name: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> Optional[_models.DefaultLroResponse]:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
+
+        request = build_data_management_delete_measurement_classification_request(
+            measurement_id=measurement_id,
+            schema_name=schema_name,
+            api_version=self._config.api_version,
+            operation_id=operation_id,
+            headers=_headers,
+            params=_params,
+        )
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [202, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _deserialize(_models.CustomErrorResponse, response.json())
+            raise HttpResponseError(response=response, model=error)
+
+        deserialized = None
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Operation-Location"] = self._deserialize(
+                "str", response.headers.get("Operation-Location")
+            )
+
+            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)
+
+        return deserialized
+
+    @distributed_trace_async
+    async def begin_delete_measurement_classification(
+        self, measurement_id: str, schema_name: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncLROPoller[_models.DefaultLroResponse]:
+        """Unassign the classification from the measurement.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param schema_name: Classification schema name. Required.
+        :type schema_name: str
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns DefaultLroResponse. The DefaultLroResponse
+         is compatible with MutableMapping
+        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.DefaultLroResponse] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._delete_measurement_classification_initial(
+                measurement_id=measurement_id,
+                schema_name=schema_name,
+                operation_id=operation_id,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Operation-Location"] = self._deserialize(
+                "str", response.headers.get("Operation-Location")
+            )
+
+            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    async def _create_measurement_classification_initial(
+        self,
+        measurement_id: str,
+        body: Union[Optional[Union[_models.MeasurementClassification, JSON, IO]]] = None,
+        *,
+        operation_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> Union[_models.MeasurementClassification, _models.DefaultLroResponse]:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Union[_models.MeasurementClassification, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(body, (IO, bytes)):
+            _content = body
+        else:
+            if body is not None:
+                _content = json.dumps(body, cls=AzureJSONEncoder)
+            else:
+                _content = None
+
+        request = build_data_management_create_measurement_classification_request(
+            measurement_id=measurement_id,
+            api_version=self._config.api_version,
+            operation_id=operation_id,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _deserialize(_models.CustomErrorResponse, response.json())
+            raise HttpResponseError(response=response, model=error)
+
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = _deserialize(_models.MeasurementClassification, response.json())
+
+        if response.status_code == 202:
+            response_headers["Operation-Location"] = self._deserialize(
+                "str", response.headers.get("Operation-Location")
+            )
+
+            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    async def begin_create_measurement_classification(
+        self,
+        measurement_id: str,
+        body: Union[Optional[_models.MeasurementClassification], JSON] = None,
+        *,
+        operation_id: Optional[str] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.MeasurementClassification]:
+        """Assigns classification to the measurement.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body.
+         Default value is None.
+        :type body: ~adp.datamanagement.models.MeasurementClassification or JSON
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns MeasurementClassification or An instance of
+         AsyncLROPoller that returns DefaultLroResponse. The MeasurementClassification is compatible
+         with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.MeasurementClassification] or
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def begin_create_measurement_classification(
+        self,
+        measurement_id: str,
+        body: Optional[IO] = None,
+        *,
+        operation_id: Optional[str] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.MeasurementClassification]:
+        """Assigns classification to the measurement.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body.
+         Default value is None.
+        :type body: IO
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns MeasurementClassification or An instance of
+         AsyncLROPoller that returns DefaultLroResponse. The MeasurementClassification is compatible
+         with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.MeasurementClassification] or
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def begin_create_measurement_classification(
+        self,
+        measurement_id: str,
+        body: Union[Optional[Union[_models.MeasurementClassification, JSON, IO]]] = None,
+        *,
+        operation_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.MeasurementClassification]:
+        """Assigns classification to the measurement.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body. Is
+         either a model type or a IO type. Default value is None.
+        :type body: ~adp.datamanagement.models.MeasurementClassification or JSON or IO
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
+         value is None.
+        :paramtype content_type: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns MeasurementClassification or An instance of
+         AsyncLROPoller that returns DefaultLroResponse. The MeasurementClassification is compatible
+         with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.MeasurementClassification] or
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.MeasurementClassification] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._create_measurement_classification_initial(
+                measurement_id=measurement_id,
+                body=body,
+                operation_id=operation_id,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response = pipeline_response.http_response
+            deserialized = _deserialize(_models.MeasurementClassification, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    async def _create_data_stream_initial(
         self,
         measurement_id: str,
         body: Union[Optional[Union[_models.DataStream, JSON, IO]]] = None,
@@ -3462,7 +3485,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
             else:
                 _content = None
 
-        request = build_data_stream_create_request(
+        request = build_data_management_create_data_stream_request(
             measurement_id=measurement_id,
             api_version=self._config.api_version,
             operation_id=operation_id,
@@ -3501,7 +3524,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         return deserialized  # type: ignore
 
     @overload
-    async def begin_create(
+    async def begin_create_data_stream(
         self,
         measurement_id: str,
         body: Union[Optional[_models.DataStream], JSON] = None,
@@ -3538,7 +3561,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @overload
-    async def begin_create(
+    async def begin_create_data_stream(
         self,
         measurement_id: str,
         body: Optional[IO] = None,
@@ -3575,7 +3598,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @distributed_trace_async
-    async def begin_create(
+    async def begin_create_data_stream(
         self,
         measurement_id: str,
         body: Union[Optional[Union[_models.DataStream, JSON, IO]]] = None,
@@ -3618,7 +3641,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._create_initial(
+            raw_result = await self._create_data_stream_initial(
                 measurement_id=measurement_id,
                 body=body,
                 operation_id=operation_id,
@@ -3652,9 +3675,18 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    async def _clear_content_initial(
-        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[_models.DataStream, _models.DefaultLroResponse]:
+    @distributed_trace_async
+    async def get_data_stream(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.DataStream:
+        """Get data-stream by identifier.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param data_stream_id: The data stream identifier. Required.
+        :type data_stream_id: str
+        :return: DataStream. The DataStream is compatible with MutableMapping
+        :rtype: ~adp.datamanagement.models.DataStream
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
         error_map = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -3666,13 +3698,12 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataStream] = kwargs.pop("cls", None)
 
-        request = build_data_stream_clear_content_request(
+        request = build_data_management_get_data_stream_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
-            operation_id=operation_id,
             headers=_headers,
             params=_params,
         )
@@ -3684,96 +3715,19 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 202]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.CustomErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
+            raise HttpResponseError(response=response)
 
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = _deserialize(_models.DataStream, response.json())
-
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
+        deserialized = _deserialize(_models.DataStream, response.json())
 
         if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
 
-    @distributed_trace_async
-    async def begin_clear_content(
-        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> AsyncLROPoller[_models.DataStream]:
-        """Clear the data-stream content.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns DataStream or An instance of AsyncLROPoller
-         that returns DefaultLroResponse. The DataStream is compatible with MutableMapping
-        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DataStream] or
-         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.DataStream] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._clear_content_initial(
-                measurement_id=measurement_id,
-                data_stream_id=data_stream_id,
-                operation_id=operation_id,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response = pipeline_response.http_response
-            deserialized = _deserialize(_models.DataStream, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
     @distributed_trace
-    def list(
+    def get_all_data_stream(
         self, measurement_id: str, *, filter: Optional[str] = None, **kwargs: Any
     ) -> AsyncIterable["_models.DataStream"]:
         """Lists the existing data-streams.
@@ -3807,7 +3761,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_stream_list_request(
+                request = build_data_management_get_all_data_stream_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     filter=filter,
@@ -3845,8 +3799,128 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
+    async def _clear_content_of_data_stream_initial(
+        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> Union[_models.DataStream, _models.DefaultLroResponse]:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
+
+        request = build_data_management_clear_content_of_data_stream_request(
+            measurement_id=measurement_id,
+            data_stream_id=data_stream_id,
+            api_version=self._config.api_version,
+            operation_id=operation_id,
+            headers=_headers,
+            params=_params,
+        )
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _deserialize(_models.CustomErrorResponse, response.json())
+            raise HttpResponseError(response=response, model=error)
+
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = _deserialize(_models.DataStream, response.json())
+
+        if response.status_code == 202:
+            response_headers["Operation-Location"] = self._deserialize(
+                "str", response.headers.get("Operation-Location")
+            )
+
+            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def begin_clear_content_of_data_stream(
+        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncLROPoller[_models.DataStream]:
+        """Clear the data-stream content.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param data_stream_id: The data stream identifier. Required.
+        :type data_stream_id: str
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns DataStream or An instance of AsyncLROPoller
+         that returns DefaultLroResponse. The DataStream is compatible with MutableMapping
+        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DataStream] or
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.DataStream] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._clear_content_of_data_stream_initial(
+                measurement_id=measurement_id,
+                data_stream_id=data_stream_id,
+                operation_id=operation_id,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response = pipeline_response.http_response
+            deserialized = _deserialize(_models.DataStream, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
     @overload
-    async def stage_files(
+    async def stage_files_for_data_stream(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -3875,7 +3949,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @overload
-    async def stage_files(
+    async def stage_files_for_data_stream(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -3904,7 +3978,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @distributed_trace_async
-    async def stage_files(
+    async def stage_files_for_data_stream(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -3953,7 +4027,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
             else:
                 _content = None
 
-        request = build_data_stream_stage_files_request(
+        request = build_data_management_stage_files_for_data_stream_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -3981,7 +4055,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
 
         return deserialized  # type: ignore
 
-    async def _complete_initial(
+    async def _complete_data_stream_initial(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.DataStream, _models.DefaultLroResponse]:
         error_map = {
@@ -3997,7 +4071,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
 
         cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_stream_complete_request(
+        request = build_data_management_complete_data_stream_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -4035,7 +4109,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_complete(
+    async def begin_complete_data_stream(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.DataStream]:
         """Marks a data stream as completed.
@@ -4068,7 +4142,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._complete_initial(
+            raw_result = await self._complete_data_stream_initial(
                 measurement_id=measurement_id,
                 data_stream_id=data_stream_id,
                 operation_id=operation_id,
@@ -4101,7 +4175,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
             )
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
-    async def _fail_initial(
+    async def _fail_data_stream_initial(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> Union[_models.DataStream, _models.DefaultLroResponse]:
         error_map = {
@@ -4117,7 +4191,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
 
         cls: ClsType[Union[_models.DataStream, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
 
-        request = build_data_stream_fail_request(
+        request = build_data_management_fail_data_stream_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -4155,7 +4229,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_fail(
+    async def begin_fail_data_stream(
         self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
     ) -> AsyncLROPoller[_models.DataStream]:
         """Marks a data stream as failed.
@@ -4188,7 +4262,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._fail_initial(
+            raw_result = await self._fail_data_stream_initial(
                 measurement_id=measurement_id,
                 data_stream_id=data_stream_id,
                 operation_id=operation_id,
@@ -4222,7 +4296,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @overload
-    def find_by_tags(
+    def get_data_streams_by_tags(
         self,
         measurement_id: str,
         body: Union[Optional[_models.FindDataStreamByTagsRequestParameters], JSON] = None,
@@ -4247,7 +4321,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @overload
-    def find_by_tags(
+    def get_data_streams_by_tags(
         self, measurement_id: str, body: Optional[IO] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> AsyncIterable["_models.DataStream"]:
         """Lists the data-streams by tags.
@@ -4267,7 +4341,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @distributed_trace
-    def find_by_tags(
+    def get_data_streams_by_tags(
         self,
         measurement_id: str,
         body: Union[Optional[Union[_models.FindDataStreamByTagsRequestParameters, JSON, IO]]] = None,
@@ -4314,7 +4388,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_stream_find_by_tags_request(
+                request = build_data_management_get_data_streams_by_tags_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     content_type=content_type,
@@ -4354,7 +4428,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         return AsyncItemPaged(get_next, extract_data)
 
     @overload
-    def find_by_lineage(
+    def get_data_streams_by_lineage(
         self,
         measurement_id: str,
         body: Union[Optional[_models.FindDataStreamByLineageRequestParameters], JSON] = None,
@@ -4379,7 +4453,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @overload
-    def find_by_lineage(
+    def get_data_streams_by_lineage(
         self, measurement_id: str, body: Optional[IO] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> AsyncIterable["_models.DataStream"]:
         """Lists the data-streams by lineage.
@@ -4399,7 +4473,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @distributed_trace
-    def find_by_lineage(
+    def get_data_streams_by_lineage(
         self,
         measurement_id: str,
         body: Union[Optional[Union[_models.FindDataStreamByLineageRequestParameters, JSON, IO]]] = None,
@@ -4446,7 +4520,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_stream_find_by_lineage_request(
+                request = build_data_management_get_data_streams_by_lineage_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     content_type=content_type,
@@ -4486,7 +4560,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         return AsyncItemPaged(get_next, extract_data)
 
     @overload
-    def get_lineage_graphs_by_lineage(
+    def get_data_stream_lineage_graphs_by_lineage(
         self,
         measurement_id: str,
         body: Union[Optional[_models.FindDataStreamByLineageGraphRequestParameters], JSON] = None,
@@ -4512,7 +4586,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @overload
-    def get_lineage_graphs_by_lineage(
+    def get_data_stream_lineage_graphs_by_lineage(
         self, measurement_id: str, body: Optional[IO] = None, *, content_type: str = "application/json", **kwargs: Any
     ) -> AsyncIterable["_models.DataStreamsGraphListResponse"]:
         """Lists the data-streams by lineage graph.
@@ -4533,7 +4607,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         """
 
     @distributed_trace
-    def get_lineage_graphs_by_lineage(
+    def get_data_stream_lineage_graphs_by_lineage(
         self,
         measurement_id: str,
         body: Union[Optional[Union[_models.FindDataStreamByLineageGraphRequestParameters, JSON, IO]]] = None,
@@ -4584,7 +4658,7 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_stream_get_lineage_graphs_by_lineage_request(
+                request = build_data_management_get_data_stream_lineage_graphs_by_lineage_request(
                     measurement_id=measurement_id,
                     api_version=self._config.api_version,
                     content_type=content_type,
@@ -4623,10 +4697,8 @@ class DataStreamClientOperationsMixin(DataStreamClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-
-class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
     @overload
-    async def create(
+    async def create_data_stream_storage(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -4655,7 +4727,7 @@ class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
         """
 
     @overload
-    async def create(
+    async def create_data_stream_storage(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -4684,7 +4756,7 @@ class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
         """
 
     @distributed_trace_async
-    async def create(
+    async def create_data_stream_storage(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -4734,7 +4806,7 @@ class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
             else:
                 _content = None
 
-        request = build_data_stream_storage_create_request(
+        request = build_data_management_create_data_stream_storage_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -4767,7 +4839,9 @@ class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def get_writable_uris(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.StorageBase:
+    async def get_data_stream_storage(
+        self, measurement_id: str, data_stream_id: str, **kwargs: Any
+    ) -> _models.StorageBase:
         """Returns the data-stream storage resource with SAS signed URIs that allow uploading to Azure
         Storage.
         The SAS token expires in 24 hours.
@@ -4793,7 +4867,7 @@ class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
 
         cls: ClsType[_models.StorageBase] = kwargs.pop("cls", None)
 
-        request = build_data_stream_storage_get_writable_uris_request(
+        request = build_data_management_get_data_stream_storage_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -4819,61 +4893,8 @@ class DataStreamStorageClientOperationsMixin(DataStreamStorageClientMixinABC):
 
         return deserialized  # type: ignore
 
-
-class DataStreamTagsClientOperationsMixin(DataStreamTagsClientMixinABC):
-    @distributed_trace_async
-    async def get(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.TagSet:
-        """Returns set of the data-stream tags.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :return: TagSet. The TagSet is compatible with MutableMapping
-        :rtype: ~adp.datamanagement.models.TagSet
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.TagSet] = kwargs.pop("cls", None)
-
-        request = build_data_stream_tags_get_request(
-            measurement_id=measurement_id,
-            data_stream_id=data_stream_id,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        deserialized = _deserialize(_models.TagSet, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
     @overload
-    async def create(
+    async def create_or_replace_data_stream_tags(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -4899,7 +4920,7 @@ class DataStreamTagsClientOperationsMixin(DataStreamTagsClientMixinABC):
         """
 
     @overload
-    async def create(
+    async def create_or_replace_data_stream_tags(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -4925,7 +4946,7 @@ class DataStreamTagsClientOperationsMixin(DataStreamTagsClientMixinABC):
         """
 
     @distributed_trace_async
-    async def create(
+    async def create_or_replace_data_stream_tags(
         self,
         measurement_id: str,
         data_stream_id: str,
@@ -4972,7 +4993,7 @@ class DataStreamTagsClientOperationsMixin(DataStreamTagsClientMixinABC):
             else:
                 _content = None
 
-        request = build_data_stream_tags_create_request(
+        request = build_data_management_create_or_replace_data_stream_tags_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -5004,10 +5025,181 @@ class DataStreamTagsClientOperationsMixin(DataStreamTagsClientMixinABC):
 
         return deserialized  # type: ignore
 
+    @distributed_trace_async
+    async def get_data_stream_tags(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> _models.TagSet:
+        """Returns set of the data-stream tags.
 
-class DataStreamFilesClientOperationsMixin(DataStreamFilesClientMixinABC):
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param data_stream_id: The data stream identifier. Required.
+        :type data_stream_id: str
+        :return: TagSet. The TagSet is compatible with MutableMapping
+        :rtype: ~adp.datamanagement.models.TagSet
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.TagSet] = kwargs.pop("cls", None)
+
+        request = build_data_management_get_data_stream_tags_request(
+            measurement_id=measurement_id,
+            data_stream_id=data_stream_id,
+            api_version=self._config.api_version,
+            headers=_headers,
+            params=_params,
+        )
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        deserialized = _deserialize(_models.TagSet, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    async def _generate_data_stream_files_initial(
+        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> Union[_models.DataStreamFile, _models.DefaultLroResponse]:
+        error_map = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[Union[_models.DataStreamFile, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
+
+        request = build_data_management_generate_data_stream_files_request(
+            measurement_id=measurement_id,
+            data_stream_id=data_stream_id,
+            api_version=self._config.api_version,
+            operation_id=operation_id,
+            headers=_headers,
+            params=_params,
+        )
+        request.url = self._client.format_url(request.url)
+
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            request, stream=False, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response)
+
+        response_headers = {}
+        if response.status_code == 200:
+            deserialized = _deserialize(_models.DataStreamFile, response.json())
+
+        if response.status_code == 202:
+            response_headers["Operation-Location"] = self._deserialize(
+                "str", response.headers.get("Operation-Location")
+            )
+
+            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def begin_generate_data_stream_files(
+        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncLROPoller[_models.DataStreamFile]:
+        """Initiates the process of generating SAS signed URIs for accessing the data-stream files.
+
+        :param measurement_id: The measurement identifier. Required.
+        :type measurement_id: str
+        :param data_stream_id: The data stream identifier. Required.
+        :type data_stream_id: str
+        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
+         string. Default value is None.
+        :paramtype operation_id: str
+        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
+        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
+         for this operation to not poll, or pass in your own initialized polling object for a personal
+         polling strategy.
+        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
+        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
+         Retry-After header is present.
+        :return: An instance of AsyncLROPoller that returns DataStreamFile or An instance of
+         AsyncLROPoller that returns DefaultLroResponse. The DataStreamFile is compatible with
+         MutableMapping
+        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DataStreamFile] or
+         ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.DataStreamFile] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._generate_data_stream_files_initial(
+                measurement_id=measurement_id,
+                data_stream_id=data_stream_id,
+                operation_id=operation_id,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response = pipeline_response.http_response
+            deserialized = _deserialize(_models.DataStreamFile, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, {})
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller.from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
     @distributed_trace
-    def list(self, measurement_id: str, data_stream_id: str, **kwargs: Any) -> AsyncIterable["_models.DataStreamFile"]:
+    def get_data_stream_files(
+        self, measurement_id: str, data_stream_id: str, **kwargs: Any
+    ) -> AsyncIterable["_models.DataStreamFile"]:
         """Returns SAS signed URIs for reading special files from Azure Storage.
 
         :param measurement_id: The measurement identifier. Required.
@@ -5035,7 +5227,7 @@ class DataStreamFilesClientOperationsMixin(DataStreamFilesClientMixinABC):
         def prepare_request(next_link=None):
             if not next_link:
 
-                request = build_data_stream_files_list_request(
+                request = build_data_management_get_data_stream_files_request(
                     measurement_id=measurement_id,
                     data_stream_id=data_stream_id,
                     api_version=self._config.api_version,
@@ -5073,183 +5265,8 @@ class DataStreamFilesClientOperationsMixin(DataStreamFilesClientMixinABC):
 
         return AsyncItemPaged(get_next, extract_data)
 
-    async def _generate_initial(
-        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> Union[_models._models.PagedDataStreamFile, _models.DefaultLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[Union[_models._models.PagedDataStreamFile, _models.DefaultLroResponse]] = kwargs.pop(
-            "cls", None
-        )  # pylint: disable=protected-access
-
-        request = build_data_stream_files_generate_request(
-            measurement_id=measurement_id,
-            data_stream_id=data_stream_id,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = _deserialize(_models._models.PagedDataStreamFile, response.json())
-
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
     @distributed_trace_async
-    async def begin_generate(
-        self, measurement_id: str, data_stream_id: str, *, operation_id: Optional[str] = None, **kwargs: Any
-    ) -> AsyncLROPoller[AsyncIterable["_models.DataStreamFile"]]:
-        """Initiates the process of generating SAS signed URIs for accessing the data-stream files.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of LROPoller that returns an iterator like instance of PagedDataStreamFile
-         or An instance of LROPoller that returns an iterator like instance of DefaultLroResponse. The
-         DataStreamFile is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.core.async_paging.AsyncItemPaged[~adp.datamanagement.models.DataStreamFile]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models._models.PagedDataStreamFile] = kwargs.pop("cls", None)  # pylint: disable=protected-access
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_data_stream_files_generate_request(
-                    measurement_id=measurement_id,
-                    data_stream_id=data_stream_id,
-                    api_version=self._config.api_version,
-                    operation_id=operation_id,
-                    headers=_headers,
-                    params=_params,
-                )
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request.url = self._client.format_url(request.url)
-
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = _deserialize(_models._models.PagedDataStreamFile, pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response)
-
-            return pipeline_response
-
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._generate_initial(
-                measurement_id=measurement_id,
-                data_stream_id=data_stream_id,
-                operation_id=operation_id,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            async def internal_get_next(next_link=None):
-                if next_link is None:
-                    return pipeline_response
-                return await get_next(next_link)
-
-            return AsyncItemPaged(internal_get_next, extract_data)
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-
-class DataStreamLogsContainerClientOperationsMixin(DataStreamLogsContainerClientMixinABC):
-    @distributed_trace_async
-    async def get_writable_uri(
+    async def get_data_stream_logs_container_location(
         self, measurement_id: str, data_stream_id: str, **kwargs: Any
     ) -> _models.DataStreamLogsContainerBase:
         """Returns SAS signed URI of the data-stream logs folder that allow uploading log files to Azure
@@ -5278,7 +5295,7 @@ class DataStreamLogsContainerClientOperationsMixin(DataStreamLogsContainerClient
 
         cls: ClsType[_models.DataStreamLogsContainerBase] = kwargs.pop("cls", None)
 
-        request = build_data_stream_logs_container_get_writable_uri_request(
+        request = build_data_management_get_data_stream_logs_container_location_request(
             measurement_id=measurement_id,
             data_stream_id=data_stream_id,
             api_version=self._config.api_version,
@@ -5303,509 +5320,3 @@ class DataStreamLogsContainerClientOperationsMixin(DataStreamLogsContainerClient
             return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
-
-
-class DataStreamClassificationsClientOperationsMixin(DataStreamClassificationsClientMixinABC):
-    @distributed_trace_async
-    async def get(
-        self, measurement_id: str, data_stream_id: str, schema_name: str, **kwargs: Any
-    ) -> _models.DataStreamClassification:
-        """Get classification by schema name.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :param schema_name: Classification schema name. Required.
-        :type schema_name: str
-        :return: DataStreamClassification. The DataStreamClassification is compatible with
-         MutableMapping
-        :rtype: ~adp.datamanagement.models.DataStreamClassification
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.DataStreamClassification] = kwargs.pop("cls", None)
-
-        request = build_data_stream_classifications_get_request(
-            measurement_id=measurement_id,
-            data_stream_id=data_stream_id,
-            schema_name=schema_name,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
-
-        deserialized = _deserialize(_models.DataStreamClassification, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    async def _create_initial(
-        self,
-        measurement_id: str,
-        data_stream_id: str,
-        body: Union[Optional[Union[_models.DataStreamClassification, JSON, IO]]] = None,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> Union[_models.DataStreamClassification, _models.DefaultLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Union[_models.DataStreamClassification, _models.DefaultLroResponse]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(body, (IO, bytes)):
-            _content = body
-        else:
-            if body is not None:
-                _content = json.dumps(body, cls=AzureJSONEncoder)
-            else:
-                _content = None
-
-        request = build_data_stream_classifications_create_request(
-            measurement_id=measurement_id,
-            data_stream_id=data_stream_id,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.CustomErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
-
-        response_headers = {}
-        if response.status_code == 200:
-            deserialized = _deserialize(_models.DataStreamClassification, response.json())
-
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    async def begin_create(
-        self,
-        measurement_id: str,
-        data_stream_id: str,
-        body: Union[Optional[_models.DataStreamClassification], JSON] = None,
-        *,
-        operation_id: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.DataStreamClassification]:
-        """Assigns the classification to the data-stream.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :param body: Parameter of type 'DataStreamClassificationCreationParameters' in the body.
-         Default value is None.
-        :type body: ~adp.datamanagement.models.DataStreamClassification or JSON
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns DataStreamClassification or An instance of
-         AsyncLROPoller that returns DefaultLroResponse. The DataStreamClassification is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DataStreamClassification]
-         or ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_create(
-        self,
-        measurement_id: str,
-        data_stream_id: str,
-        body: Optional[IO] = None,
-        *,
-        operation_id: Optional[str] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.DataStreamClassification]:
-        """Assigns the classification to the data-stream.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :param body: Parameter of type 'DataStreamClassificationCreationParameters' in the body.
-         Default value is None.
-        :type body: IO
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns DataStreamClassification or An instance of
-         AsyncLROPoller that returns DefaultLroResponse. The DataStreamClassification is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DataStreamClassification]
-         or ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def begin_create(
-        self,
-        measurement_id: str,
-        data_stream_id: str,
-        body: Union[Optional[Union[_models.DataStreamClassification, JSON, IO]]] = None,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.DataStreamClassification]:
-        """Assigns the classification to the data-stream.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :param body: Parameter of type 'DataStreamClassificationCreationParameters' in the body. Is
-         either a model type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.DataStreamClassification or JSON or IO
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
-         value is None.
-        :paramtype content_type: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns DataStreamClassification or An instance of
-         AsyncLROPoller that returns DefaultLroResponse. The DataStreamClassification is compatible with
-         MutableMapping
-        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DataStreamClassification]
-         or ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.DataStreamClassification] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._create_initial(
-                measurement_id=measurement_id,
-                data_stream_id=data_stream_id,
-                body=body,
-                operation_id=operation_id,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response = pipeline_response.http_response
-            deserialized = _deserialize(_models.DataStreamClassification, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, {})
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    async def _delete_initial(
-        self,
-        measurement_id: str,
-        data_stream_id: str,
-        schema_name: str,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> Optional[_models.DefaultLroResponse]:
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[Optional[_models.DefaultLroResponse]] = kwargs.pop("cls", None)
-
-        request = build_data_stream_classifications_delete_request(
-            measurement_id=measurement_id,
-            data_stream_id=data_stream_id,
-            schema_name=schema_name,
-            api_version=self._config.api_version,
-            operation_id=operation_id,
-            headers=_headers,
-            params=_params,
-        )
-        request.url = self._client.format_url(request.url)
-
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-            request, stream=False, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [202, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _deserialize(_models.CustomErrorResponse, response.json())
-            raise HttpResponseError(response=response, model=error)
-
-        deserialized = None
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)
-
-        return deserialized
-
-    @distributed_trace_async
-    async def begin_delete(
-        self,
-        measurement_id: str,
-        data_stream_id: str,
-        schema_name: str,
-        *,
-        operation_id: Optional[str] = None,
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.DefaultLroResponse]:
-        """Unassign the classification from the data-stream.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :param schema_name: Classification schema name. Required.
-        :type schema_name: str
-        :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
-         string. Default value is None.
-        :paramtype operation_id: str
-        :keyword str continuation_token: A continuation token to restart a poller from a saved state.
-        :keyword polling: By default, your polling method will be AsyncLROBasePolling. Pass in False
-         for this operation to not poll, or pass in your own initialized polling object for a personal
-         polling strategy.
-        :paramtype polling: bool or ~azure.core.polling.AsyncPollingMethod
-        :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
-         Retry-After header is present.
-        :return: An instance of AsyncLROPoller that returns DefaultLroResponse. The DefaultLroResponse
-         is compatible with MutableMapping
-        :rtype: ~azure.core.polling.AsyncLROPoller[~adp.datamanagement.models.DefaultLroResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.DefaultLroResponse] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._delete_initial(
-                measurement_id=measurement_id,
-                data_stream_id=data_stream_id,
-                schema_name=schema_name,
-                operation_id=operation_id,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Operation-Location"] = self._deserialize(
-                "str", response.headers.get("Operation-Location")
-            )
-
-            deserialized = _deserialize(_models.DefaultLroResponse, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncLROBasePolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller.from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller(self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    @distributed_trace
-    def list(
-        self, measurement_id: str, data_stream_id: str, **kwargs: Any
-    ) -> AsyncIterable["_models.DataStreamClassification"]:
-        """Lists the classifications assigned to the data-stream.
-
-        :param measurement_id: The measurement identifier. Required.
-        :type measurement_id: str
-        :param data_stream_id: The data stream identifier. Required.
-        :type data_stream_id: str
-        :return: An iterator like instance of DataStreamClassification. The DataStreamClassification is
-         compatible with MutableMapping
-        :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~adp.datamanagement.models.DataStreamClassification]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models._models.PagedDataStreamClassification] = kwargs.pop(
-            "cls", None
-        )  # pylint: disable=protected-access
-
-        error_map = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                request = build_data_stream_classifications_list_request(
-                    measurement_id=measurement_id,
-                    data_stream_id=data_stream_id,
-                    api_version=self._config.api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                request.url = self._client.format_url(request.url)
-
-            else:
-                request = HttpRequest("GET", next_link)
-                request.url = self._client.format_url(request.url)
-
-            return request
-
-        async def extract_data(pipeline_response):
-            deserialized = _deserialize(_models._models.PagedDataStreamClassification, pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            request = prepare_request(next_link)
-
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                request, stream=False, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)

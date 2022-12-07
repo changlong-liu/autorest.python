@@ -6,54 +6,14 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._operations import LongRunningOperationsClientOperationsMixin
-from ._operations import DiscoveryOperationsClientOperationsMixin
-from ._operations import DiscoverySpecialFilesClientOperationsMixin
-from ._operations import DiscoveryUploadsClientOperationsMixin
-from ._operations import UploadClientOperationsMixin
-from ._operations import UploadSpecialFilesClientOperationsMixin
-from ._operations import UploadDataFilesClientOperationsMixin
-from ._operations import UploadMeasurementsClientOperationsMixin
-from ._operations import ClassificationSchemaClientOperationsMixin
-from ._operations import MeasurementClientOperationsMixin
-from ._operations import MeasurementMetadataClientOperationsMixin
-from ._operations import MeasurementProcessingResultsClientOperationsMixin
-from ._operations import MeasurementStateMachineClientOperationsMixin
-from ._operations import MeasurementMetadataFileInfoClientOperationsMixin
-from ._operations import MeasurementMetadataSchemaFileInfoClientOperationsMixin
-from ._operations import DataStreamClientOperationsMixin
-from ._operations import DataStreamStorageClientOperationsMixin
-from ._operations import DataStreamTagsClientOperationsMixin
-from ._operations import DataStreamFilesClientOperationsMixin
-from ._operations import DataStreamLogsContainerClientOperationsMixin
-from ._operations import DataStreamClassificationsClientOperationsMixin
+from ._operations import DataManagementClientOperationsMixin
 
 from ._patch import __all__ as _patch_all
 from ._patch import *  # pylint: disable=unused-wildcard-import
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
-    "LongRunningOperationsClientOperationsMixin",
-    "DiscoveryOperationsClientOperationsMixin",
-    "DiscoverySpecialFilesClientOperationsMixin",
-    "DiscoveryUploadsClientOperationsMixin",
-    "UploadClientOperationsMixin",
-    "UploadSpecialFilesClientOperationsMixin",
-    "UploadDataFilesClientOperationsMixin",
-    "UploadMeasurementsClientOperationsMixin",
-    "ClassificationSchemaClientOperationsMixin",
-    "MeasurementClientOperationsMixin",
-    "MeasurementMetadataClientOperationsMixin",
-    "MeasurementProcessingResultsClientOperationsMixin",
-    "MeasurementStateMachineClientOperationsMixin",
-    "MeasurementMetadataFileInfoClientOperationsMixin",
-    "MeasurementMetadataSchemaFileInfoClientOperationsMixin",
-    "DataStreamClientOperationsMixin",
-    "DataStreamStorageClientOperationsMixin",
-    "DataStreamTagsClientOperationsMixin",
-    "DataStreamFilesClientOperationsMixin",
-    "DataStreamLogsContainerClientOperationsMixin",
-    "DataStreamClassificationsClientOperationsMixin",
+    "DataManagementClientOperationsMixin",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])
 _patch_sdk()

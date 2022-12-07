@@ -5,9 +5,8 @@ using Azure.Core.Foundations.Extensions;
 using OpenAPI;
 using Autorest;
 
-namespace Adp.DataManagement;
+namespace Adp.DataManagement.Measurement.Classification;
 
-@client(MeasurementClassificationClients.MeasurementClassificationsClient)
 @tag("Measurement Classification")
 interface MeasurementClassificationOperations {
   @doc("Get measurement classification by schema name.")
@@ -17,7 +16,7 @@ interface MeasurementClassificationOperations {
   @doc("Assigns classification to the measurement.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   create is CustomLongRunningResourceCreateUsingHttpPost<
     MeasurementClassification,
     CustomBodyWrapper<MeasurementClassificationCreationParameters>
@@ -27,10 +26,10 @@ interface MeasurementClassificationOperations {
   @doc("Unassign the classification from the measurement.")
   @extension("x-ms-long-running-operation", true)
   @asyncOperationOptions("location")
-  @pollingOperation(LongRunningOperations.getStatus)
+  @pollingOperation(LongRunningOperationStatus)
   delete is CustomLongRunningResourceDelete<MeasurementClassification>;
 
   #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "ADP data-plane API uses custom operation."
   @doc("Lists the classifications assigned to the measurement.")
-  list is CustomResourceList<MeasurementClassification>;
+  getAll is CustomResourceList<MeasurementClassification>;
 }
