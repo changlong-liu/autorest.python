@@ -51,6 +51,24 @@ class ClassificationSchema(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
+class ClassificationSchemaCreationParameters(_model_base.Model):
+    """ClassificationSchema resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar schema_definition: Classification schema definition (JSON schema as string). Required.
+    :vartype schema_definition: str
+    """
+
+    schema_definition: str = rest_field(name="schemaDefinition", readonly=True)
+    """Classification schema definition (JSON schema as string). Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
 class CustomErrorResponse(_model_base.Model):
     """Error response with 'x-ms-error-code' header.
 
@@ -122,6 +140,24 @@ class DataStream(_model_base.Model):
     """The data stream type. Required. Known values are: \"System\", \"Raw\", and \"Derived\"."""
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class DataStreamCreationParameters(_model_base.Model):
+    """DataStream resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar lineage: The data stream lineage information. Required.
+    :vartype lineage: ~adp.datamanagement.models.DataStreamLineage
+    """
+
+    lineage: "_models.DataStreamLineage" = rest_field(readonly=True)
+    """The data stream lineage information. Required. """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -567,6 +603,23 @@ This URI expires in 24 hours. """
     """The discovery status. Known values are: \"Created\", \"GeneratingSpecialFilesUploadInfo\", \"GeneratedSpecialFilesUploadInfo\", \"Completing\", \"Completed\", \"Aborting\", \"Aborted\", and \"Failed\"."""
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class DiscoveryCreationParameters(_model_base.Model):
+    """Discovery resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar external_package_id: ID of the external package (for example, the disk which contained
+     data) which was used upon the creation of upload.
+    :vartype external_package_id: str
+    """
+
+    external_package_id: Optional[str] = rest_field(name="externalPackageId", readonly=True)
+    """ID of the external package (for example, the disk which contained data) which was used upon the creation of upload. """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1116,6 +1169,28 @@ class MeasurementClassification(_model_base.Model):
     """Classification object model (JSON as string). Required. """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class MeasurementClassificationCreationParameters(_model_base.Model):
+    """MeasurementClassification resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar schema_name: Classification schema name. Required.
+    :vartype schema_name: str
+    :ivar classification_object: Classification object model (JSON as string). Required.
+    :vartype classification_object: str
+    """
+
+    schema_name: str = rest_field(name="schemaName", readonly=True)
+    """Classification schema name. Required. """
+    classification_object: str = rest_field(name="classificationObject", readonly=True)
+    """Classification object model (JSON as string). Required. """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -1796,77 +1871,6 @@ class StateMachineAction(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
-class Storage(_model_base.Model):
-    """A data-stream with non sharded storage resource.
-
-    Readonly variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar id: The data stream storage identifier.
-     Not in use as this is a singleton resource.
-     TODO: check with CADL team how to define a singleton child resource without key. Required.
-     "current"
-    :vartype id: str or ~adp.datamanagement.models.SingletonIdentifier
-    :ivar type: Storage type. Required.
-    :vartype type: str
-    :ivar rolling_information: The data stream rolling information.
-    :vartype rolling_information: ~adp.datamanagement.models.DataStreamRollingInformation
-    :ivar manifest_uri: SAS signed URI for downloading the data stream storage manifest file from
-     Azure Storage.
-     This URI expires in 24 hours. Required.
-    :vartype manifest_uri: str
-    :ivar data_folder_uri: SAS signed URI for accessing the data stream data stored on the Azure
-     Storage.
-     This URI expires in 24 hours.
-    :vartype data_folder_uri: str
-    :ivar shards: The list of shards associated with the data stream. Required.
-    :vartype shards: list[~adp.datamanagement.models.DataStreamShardAccessInformation]
-    :ivar etag: The entity tag for this resource. Required.
-    :vartype etag: str
-    """
-
-    id: Union[str, "_models.SingletonIdentifier"] = rest_field(readonly=True)
-    """The data stream storage identifier.
-Not in use as this is a singleton resource.
-TODO: check with CADL team how to define a singleton child resource without key. Required. \"current\""""
-    type: str = rest_field()
-    """Storage type. Required. """
-    rolling_information: Optional["_models.DataStreamRollingInformation"] = rest_field(
-        name="rollingInformation", readonly=True
-    )
-    """The data stream rolling information. """
-    manifest_uri: str = rest_field(name="manifestUri", readonly=True)
-    """SAS signed URI for downloading the data stream storage manifest file from Azure Storage.
-This URI expires in 24 hours. Required. """
-    data_folder_uri: Optional[str] = rest_field(name="dataFolderUri", readonly=True)
-    """SAS signed URI for accessing the data stream data stored on the Azure Storage.
-This URI expires in 24 hours. """
-    shards: List["_models.DataStreamShardAccessInformation"] = rest_field(readonly=True)
-    """The list of shards associated with the data stream. Required. """
-    etag: str = rest_field(readonly=True)
-    """The entity tag for this resource. Required. """
-
-    @overload
-    def __init__(
-        self,
-        *,
-        type: str,
-    ):
-        ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]):
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-        ...
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-
 class StorageBase(_model_base.Model):
     """Common data-stream storage model.
 
@@ -1908,6 +1912,46 @@ This URI expires in 24 hours. """
     """The list of shards associated with the data stream. Required. """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
+
+    @overload
+    def __init__(
+        self,
+        *,
+        type: str,
+    ):
+        ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]):
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+        ...
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class StorageCreationParameters(_model_base.Model):
+    """Storage resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar type: Storage type. Required.
+    :vartype type: str
+    :ivar rolling_information: The data stream rolling information.
+    :vartype rolling_information: ~adp.datamanagement.models.DataStreamRollingInformation
+    """
+
+    type: str = rest_field()
+    """Storage type. Required. """
+    rolling_information: Optional["_models.DataStreamRollingInformation"] = rest_field(
+        name="rollingInformation", readonly=True
+    )
+    """The data stream rolling information. """
 
     @overload
     def __init__(
@@ -2012,6 +2056,24 @@ class TagSetBase(_model_base.Model):
         super().__init__(*args, **kwargs)
 
 
+class TagSetCreationParameters(_model_base.Model):
+    """Storage resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :ivar tags: Set of data-stream tags. Required.
+    :vartype tags: list[~adp.datamanagement.models.Tag]
+    """
+
+    tags: List["_models.Tag"] = rest_field(readonly=True)
+    """Set of data-stream tags. Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
 class Upload(_model_base.Model):
     """An upload resource.
 
@@ -2059,6 +2121,27 @@ This URI expires in 24 hours. """
     """The endpoint uri of the owning resource. """
     etag: str = rest_field(readonly=True)
     """The entity tag for this resource. Required. """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class UploadCreationParameters(_model_base.Model):
+    """Upload resource creation parameters.
+
+    Readonly variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar external_package_id: ID of the external package (for example, the disk which contained
+     data) which was used upon the creation of upload.
+    :vartype external_package_id: str
+    :ivar discovery_id: The discovery identifier.
+    :vartype discovery_id: str
+    """
+
+    external_package_id: Optional[str] = rest_field(name="externalPackageId", readonly=True)
+    """ID of the external package (for example, the disk which contained data) which was used upon the creation of upload. """
+    discovery_id: Optional[str] = rest_field(name="discoveryId", readonly=True)
+    """The discovery identifier. """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

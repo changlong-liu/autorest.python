@@ -7,8 +7,10 @@
 # --------------------------------------------------------------------------
 
 from ._models import ClassificationSchema
+from ._models import ClassificationSchemaCreationParameters
 from ._models import CustomErrorResponse
 from ._models import DataStream
+from ._models import DataStreamCreationParameters
 from ._models import DataStreamFile
 from ._models import DataStreamInput
 from ._models import DataStreamLineage
@@ -20,6 +22,7 @@ from ._models import DataStreamsGraphListResponse
 from ._models import DefaultLroResponse
 from ._models import DerivedDataStreamFileInformation
 from ._models import Discovery
+from ._models import DiscoveryCreationParameters
 from ._models import DiscoveryLroResponse
 from ._models import DiscoverySpecialFile
 from ._models import DiscoveryUpload
@@ -32,6 +35,7 @@ from ._models import InnerError
 from ._models import LongRunningOperationWithResponseHeaders
 from ._models import Measurement
 from ._models import MeasurementClassification
+from ._models import MeasurementClassificationCreationParameters
 from ._models import MeasurementListRequestParameters
 from ._models import MeasurementMetadataBase
 from ._models import MeasurementMetadataSchemaFileInfoBase
@@ -42,12 +46,14 @@ from ._models import ProcessingObject
 from ._models import ProcessingObjectEdge
 from ._models import StateMachine
 from ._models import StateMachineAction
-from ._models import Storage
 from ._models import StorageBase
+from ._models import StorageCreationParameters
 from ._models import Tag
 from ._models import TagSet
 from ._models import TagSetBase
+from ._models import TagSetCreationParameters
 from ._models import Upload
+from ._models import UploadCreationParameters
 from ._models import UploadDataFile
 from ._models import UploadDerivedDataStreamFilesRequest
 from ._models import UploadDerivedDataStreamFilesResponse
@@ -72,8 +78,10 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "ClassificationSchema",
+    "ClassificationSchemaCreationParameters",
     "CustomErrorResponse",
     "DataStream",
+    "DataStreamCreationParameters",
     "DataStreamFile",
     "DataStreamInput",
     "DataStreamLineage",
@@ -85,6 +93,7 @@ __all__ = [
     "DefaultLroResponse",
     "DerivedDataStreamFileInformation",
     "Discovery",
+    "DiscoveryCreationParameters",
     "DiscoveryLroResponse",
     "DiscoverySpecialFile",
     "DiscoveryUpload",
@@ -97,6 +106,7 @@ __all__ = [
     "LongRunningOperationWithResponseHeaders",
     "Measurement",
     "MeasurementClassification",
+    "MeasurementClassificationCreationParameters",
     "MeasurementListRequestParameters",
     "MeasurementMetadataBase",
     "MeasurementMetadataSchemaFileInfoBase",
@@ -107,12 +117,14 @@ __all__ = [
     "ProcessingObjectEdge",
     "StateMachine",
     "StateMachineAction",
-    "Storage",
     "StorageBase",
+    "StorageCreationParameters",
     "Tag",
     "TagSet",
     "TagSetBase",
+    "TagSetCreationParameters",
     "Upload",
+    "UploadCreationParameters",
     "UploadDataFile",
     "UploadDerivedDataStreamFilesRequest",
     "UploadDerivedDataStreamFilesResponse",

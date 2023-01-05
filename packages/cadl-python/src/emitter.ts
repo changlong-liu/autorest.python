@@ -45,6 +45,7 @@ import {
     HttpOperationResponseContent,
     HttpServer,
     isStatusCode,
+    HttpOperation
 } from "@cadl-lang/rest/http";
 import { getAddedOn } from "@cadl-lang/versioning";
 import { execFileSync } from "child_process";
@@ -302,13 +303,53 @@ function emitParamBase(program: Program, parameter: ModelProperty | Type): Recor
     };
 }
 
+function getBodyType(
+    program: Program,
+    route: HttpOperation
+): Type {
+    let bodyModel = route.parameters.bodyType!;
+    if (bodyModel && bodyModel.kind === "Model" && route.operation) {
+        const resourceType = getResourceOperation(
+            program,
+            route.operation
+        )?.resourceType;
+        if (resourceType && route.responses && route.responses.length > 0) {
+            const resp = route.responses[0];
+            if (resp && resp.responses && resp.responses.length > 0) {
+                const responseBody = resp.responses[0]?.body;
+                if (responseBody?.type?.kind == "Model") {
+                    const bodyTypeInResponse = getEffectiveSchemaType(
+                        program,
+                        responseBody.type
+                    );
+                    // response body type is reosurce type, and request body type (if templated) contains resource type
+                    if (
+                        bodyTypeInResponse === resourceType &&
+                        bodyModel.templateArguments &&
+                        bodyModel.templateArguments.some((it) => {
+                            return it.kind === "Model" || it.kind === "Union"
+                                ? it === bodyTypeInResponse
+                                : false;
+                        })
+                    ) {
+                        bodyModel = resourceType;
+                    }
+                }
+            }
+        }
+        if (resourceType && bodyModel.name === "") {
+            bodyModel = resourceType;
+        }
+    }
+    return bodyModel;
+}
+
 function emitBodyParameter(
     program: Program,
-    bodyType: Type,
-    params: HttpOperationParameters,
-    operation: Operation,
+    httpOperation: HttpOperation,
 ): Record<string, any> {
-    const base = emitParamBase(program, params.bodyParameter ?? bodyType);
+    const params = httpOperation.parameters;
+    const base = emitParamBase(program, params.bodyParameter ?? httpOperation.parameters.bodyType!);
     const contentTypeParam = params.parameters.find((p) => p.type === "header" && p.name === "content-type");
     const contentTypes = contentTypeParam
         ? ignoreDiagnostics(getContentTypes(contentTypeParam.param))
@@ -317,14 +358,7 @@ function emitBodyParameter(
         throw Error("Currently only one kind of content-type!");
     }
     let type;
-    const resourceOperation = getResourceOperation(program, operation);
-    if (resourceOperation) {
-        type = getType(program, resourceOperation.resourceType);
-    } else if (params.bodyParameter) {
-        type = getType(program, params.bodyParameter.type, params.bodyParameter);
-    } else {
-        type = getType(program, bodyType);
-    }
+    type = getType(program, getBodyType(program, httpOperation), params.bodyParameter);
 
     return {
         contentTypes,
@@ -592,9 +626,7 @@ function emitBasicOperation(program: Program, operation: Operation, operationGro
     } else {
         bodyParameter = emitBodyParameter(
             program,
-            httpOperation.parameters.bodyType,
-            httpOperation.parameters,
-            operation,
+            httpOperation
         );
         if (parameters.filter((e) => e.restApiName.toLowerCase() === "content-type").length === 0) {
             parameters.push(emitContentTypeParameter(bodyParameter, isOverload, isOverriden));

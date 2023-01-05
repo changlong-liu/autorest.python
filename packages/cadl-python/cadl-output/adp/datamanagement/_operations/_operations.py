@@ -1481,7 +1481,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def create_or_replace_discovery(
         self,
         discovery_id: str,
-        body: Union[Optional[_models.Discovery], JSON] = None,
+        body: Union[Optional[_models.DiscoveryCreationParameters], JSON] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -1492,7 +1492,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type discovery_id: str
         :param body: Parameter of type 'DiscoveryCreationParameters' in the body. Default value is
          None.
-        :type body: ~adp.datamanagement.models.Discovery or JSON
+        :type body: ~adp.datamanagement.models.DiscoveryCreationParameters or JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -1522,7 +1522,10 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
     @distributed_trace
     def create_or_replace_discovery(
-        self, discovery_id: str, body: Union[Optional[Union[_models.Discovery, JSON, IO]]] = None, **kwargs: Any
+        self,
+        discovery_id: str,
+        body: Union[Optional[Union[_models.DiscoveryCreationParameters, JSON, IO]]] = None,
+        **kwargs: Any
     ) -> _models.Discovery:
         """Creates a new ingestion discovery instance.
 
@@ -1530,7 +1533,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type discovery_id: str
         :param body: Parameter of type 'DiscoveryCreationParameters' in the body. Is either a model
          type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.Discovery or JSON or IO
+        :type body: ~adp.datamanagement.models.DiscoveryCreationParameters or JSON or IO
         :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
          value is None.
         :paramtype content_type: str
@@ -2128,7 +2131,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def create_or_replace_upload(
         self,
         upload_id: str,
-        body: Union[Optional[_models.Upload], JSON] = None,
+        body: Union[Optional[_models.UploadCreationParameters], JSON] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -2138,7 +2141,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :param upload_id: The upload resource identifier. Required.
         :type upload_id: str
         :param body: Parameter of type 'UploadCreationParameters' in the body. Default value is None.
-        :type body: ~adp.datamanagement.models.Upload or JSON
+        :type body: ~adp.datamanagement.models.UploadCreationParameters or JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -2167,7 +2170,10 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
     @distributed_trace
     def create_or_replace_upload(
-        self, upload_id: str, body: Union[Optional[Union[_models.Upload, JSON, IO]]] = None, **kwargs: Any
+        self,
+        upload_id: str,
+        body: Union[Optional[Union[_models.UploadCreationParameters, JSON, IO]]] = None,
+        **kwargs: Any
     ) -> _models.Upload:
         """Creates a new ingestion upload instance.
 
@@ -2175,7 +2181,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type upload_id: str
         :param body: Parameter of type 'UploadCreationParameters' in the body. Is either a model type
          or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.Upload or JSON or IO
+        :type body: ~adp.datamanagement.models.UploadCreationParameters or JSON or IO
         :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
          value is None.
         :paramtype content_type: str
@@ -2998,7 +3004,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
     def _create_classification_schema_initial(
         self,
-        body: Union[Optional[Union[_models.ClassificationSchema, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.ClassificationSchemaCreationParameters, JSON, IO]]] = None,
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
@@ -3067,7 +3073,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     @overload
     def begin_create_classification_schema(
         self,
-        body: Union[Optional[_models.ClassificationSchema], JSON] = None,
+        body: Union[Optional[_models.ClassificationSchemaCreationParameters], JSON] = None,
         *,
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
@@ -3077,7 +3083,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Default
          value is None.
-        :type body: ~adp.datamanagement.models.ClassificationSchema or JSON
+        :type body: ~adp.datamanagement.models.ClassificationSchemaCreationParameters or JSON
         :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
          string. Default value is None.
         :paramtype operation_id: str
@@ -3135,7 +3141,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     @distributed_trace
     def begin_create_classification_schema(
         self,
-        body: Union[Optional[Union[_models.ClassificationSchema, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.ClassificationSchemaCreationParameters, JSON, IO]]] = None,
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
@@ -3144,7 +3150,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
 
         :param body: Parameter of type 'ClassificationSchemaCreationParameters' in the body. Is either
          a model type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.ClassificationSchema or JSON or IO
+        :type body: ~adp.datamanagement.models.ClassificationSchemaCreationParameters or JSON or IO
         :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
          string. Default value is None.
         :paramtype operation_id: str
@@ -4537,7 +4543,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def _create_measurement_classification_initial(
         self,
         measurement_id: str,
-        body: Union[Optional[Union[_models.MeasurementClassification, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.MeasurementClassificationCreationParameters, JSON, IO]]] = None,
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
@@ -4608,7 +4614,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def begin_create_measurement_classification(
         self,
         measurement_id: str,
-        body: Union[Optional[_models.MeasurementClassification], JSON] = None,
+        body: Union[Optional[_models.MeasurementClassificationCreationParameters], JSON] = None,
         *,
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
@@ -4620,7 +4626,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type measurement_id: str
         :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body.
          Default value is None.
-        :type body: ~adp.datamanagement.models.MeasurementClassification or JSON
+        :type body: ~adp.datamanagement.models.MeasurementClassificationCreationParameters or JSON
         :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
          string. Default value is None.
         :paramtype operation_id: str
@@ -4684,7 +4690,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def begin_create_measurement_classification(
         self,
         measurement_id: str,
-        body: Union[Optional[Union[_models.MeasurementClassification, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.MeasurementClassificationCreationParameters, JSON, IO]]] = None,
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
@@ -4695,7 +4701,8 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type measurement_id: str
         :param body: Parameter of type 'MeasurementClassificationCreationParameters' in the body. Is
          either a model type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.MeasurementClassification or JSON or IO
+        :type body: ~adp.datamanagement.models.MeasurementClassificationCreationParameters or JSON or
+         IO
         :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
          string. Default value is None.
         :paramtype operation_id: str
@@ -4762,7 +4769,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def _create_data_stream_initial(
         self,
         measurement_id: str,
-        body: Union[Optional[Union[_models.DataStream, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.DataStreamCreationParameters, JSON, IO]]] = None,
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
@@ -4833,7 +4840,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def begin_create_data_stream(
         self,
         measurement_id: str,
-        body: Union[Optional[_models.DataStream], JSON] = None,
+        body: Union[Optional[_models.DataStreamCreationParameters], JSON] = None,
         *,
         operation_id: Optional[str] = None,
         content_type: str = "application/json",
@@ -4845,7 +4852,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type measurement_id: str
         :param body: Parameter of type 'DataStreamCreationParameters' in the body. Default value is
          None.
-        :type body: ~adp.datamanagement.models.DataStream or JSON
+        :type body: ~adp.datamanagement.models.DataStreamCreationParameters or JSON
         :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
          string. Default value is None.
         :paramtype operation_id: str
@@ -4907,7 +4914,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
     def begin_create_data_stream(
         self,
         measurement_id: str,
-        body: Union[Optional[Union[_models.DataStream, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.DataStreamCreationParameters, JSON, IO]]] = None,
         *,
         operation_id: Optional[str] = None,
         **kwargs: Any
@@ -4918,7 +4925,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type measurement_id: str
         :param body: Parameter of type 'DataStreamCreationParameters' in the body. Is either a model
          type or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.DataStream or JSON or IO
+        :type body: ~adp.datamanagement.models.DataStreamCreationParameters or JSON or IO
         :keyword operation_id: The long running operation identifier. Operation-Id should be valid UUID
          string. Default value is None.
         :paramtype operation_id: str
@@ -6005,7 +6012,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         self,
         measurement_id: str,
         data_stream_id: str,
-        body: Union[Optional[_models.Storage], JSON] = None,
+        body: Union[Optional[_models.StorageCreationParameters], JSON] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -6020,7 +6027,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :param data_stream_id: The data stream identifier. Required.
         :type data_stream_id: str
         :param body: Parameter of type 'StorageCreationParameters' in the body. Default value is None.
-        :type body: ~adp.datamanagement.models.Storage or JSON
+        :type body: ~adp.datamanagement.models.StorageCreationParameters or JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -6063,7 +6070,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         self,
         measurement_id: str,
         data_stream_id: str,
-        body: Union[Optional[Union[_models.Storage, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.StorageCreationParameters, JSON, IO]]] = None,
         **kwargs: Any
     ) -> _models.StorageBase:
         """Create or replace storage information of the data-stream.
@@ -6077,7 +6084,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type data_stream_id: str
         :param body: Parameter of type 'StorageCreationParameters' in the body. Is either a model type
          or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.Storage or JSON or IO
+        :type body: ~adp.datamanagement.models.StorageCreationParameters or JSON or IO
         :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
          value is None.
         :paramtype content_type: str
@@ -6199,7 +6206,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         self,
         measurement_id: str,
         data_stream_id: str,
-        body: Union[Optional[_models.TagSet], JSON] = None,
+        body: Union[Optional[_models.TagSetCreationParameters], JSON] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -6211,7 +6218,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :param data_stream_id: The data stream identifier. Required.
         :type data_stream_id: str
         :param body: Parameter of type 'TagSetCreationParameters' in the body. Default value is None.
-        :type body: ~adp.datamanagement.models.TagSet or JSON
+        :type body: ~adp.datamanagement.models.TagSetCreationParameters or JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -6251,7 +6258,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         self,
         measurement_id: str,
         data_stream_id: str,
-        body: Union[Optional[Union[_models.TagSet, JSON, IO]]] = None,
+        body: Union[Optional[Union[_models.TagSetCreationParameters, JSON, IO]]] = None,
         **kwargs: Any
     ) -> _models.TagSetBase:
         """Create or replace all tags at once.
@@ -6262,7 +6269,7 @@ class DataManagementClientOperationsMixin(DataManagementClientMixinABC):  # pyli
         :type data_stream_id: str
         :param body: Parameter of type 'TagSetCreationParameters' in the body. Is either a model type
          or a IO type. Default value is None.
-        :type body: ~adp.datamanagement.models.TagSet or JSON or IO
+        :type body: ~adp.datamanagement.models.TagSetCreationParameters or JSON or IO
         :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
          value is None.
         :paramtype content_type: str
